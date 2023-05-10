@@ -17,7 +17,8 @@ struct LoginPage: View {
         ZStack {
             Color(hex: "67C587")
                 .ignoresSafeArea()
-
+            
+            
             VStack(spacing: 20){
                 HStack{
                     Text(("Welcome to"))
@@ -34,33 +35,46 @@ struct LoginPage: View {
                         .font(.custom("Avenir-Oblique", size: 32))
                         .fontWeight(.black)
                         .foregroundColor(Color(hex: "1B463C"))
-                }
+                }.padding(.top, 250)
+                
+                
                 
                 
 
                 TextField("username", text: $username)
-                    .padding()
+                    .padding(.horizontal, 15)
+                    .fontWeight(.bold)
+                    .padding(.vertical, 10)
                     .background(Color(hex: "D9D9D9"))
-                    .cornerRadius(5.0)
-                    .padding(.horizontal, 20)
+                    .cornerRadius(15.0)
+                    .padding(.horizontal, 25)
+                    .font(.custom("Avenir", size: 20))
 
                 SecureField("password", text: $password)
-                    .padding()
+                    .padding(.horizontal, 15)
+                    .fontWeight(.bold)
+                    .padding(.vertical, 10)
                     .background(Color(hex: "D9D9D9"))
-                    .cornerRadius(5.0)
-                    .padding(.horizontal, 20)
+                    .cornerRadius(14.0)
+                    .padding(.horizontal, 25)
+                    .font(.custom("Avenir", size: 20))
 
+                Spacer()
+                
                 Button(action: {
+                    
                     // Perform login action
                 }, label: {
-                    Text("Login")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
+                    Text("login")
+                        .font(.custom("Avenir", size: 20))
+                        .fontWeight(.bold)
+                        .foregroundColor(Color (hex: "D9D9D9"))
                         .frame(width: 220, height: 60)
-                        .background(Color.blue)
-                        .cornerRadius(15.0)
+                        .background(Color(hex: "1B463C"))
+                        .cornerRadius(14.0)
+                        .padding(.bottom, 50)
                 })
+                
             }
         }
     }
