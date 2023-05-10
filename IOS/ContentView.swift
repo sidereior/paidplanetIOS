@@ -66,7 +66,7 @@ struct LoginPage: View {
                     // Perform login action
                 }, label: {
                     Text("login")
-                        .font(.custom("Avenir", size: 20))
+                        .font(.custom("Avenir", size: 25))
                         .fontWeight(.bold)
                         .foregroundColor(Color (hex: "D9D9D9"))
                         .frame(width: 220, height: 60)
