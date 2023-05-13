@@ -100,10 +100,25 @@ struct LoginPage: View {
                 
             }
             }
-            
         }
     }
 
+func loginUser(email: String, password: String, completion: @escaping (AuthDataResult?, Error?) -> Void) {
+    Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+        completion(authResult, error)
+    }
+}
+
+
+func registerUser(email: String, password: String, completion: @escaping (Error?) -> Void) {
+    Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+        if let error = error {
+            completion(error)
+        } else {
+            completion(nil)
+        }
+    }
+}
 
 struct LoginPage_Previews: PreviewProvider {
     static var previews: some View {
