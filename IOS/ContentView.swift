@@ -13,6 +13,8 @@ struct LoginPage: View {
     @State private var username = ""
     @State private var password = ""
 
+    
+    
     var body: some View {
         ZStack {
             Color(hex: "67C587")
@@ -46,7 +48,7 @@ struct LoginPage: View {
                     .fontWeight(.bold)
                     .padding(.vertical, 10)
                     .background(Color(hex: "D9D9D9"))
-                    .cornerRadius(15.0)
+                    .cornerRadius(14.0)
                     .padding(.horizontal, 25)
                     .font(.custom("Avenir", size: 20))
 
@@ -66,7 +68,7 @@ struct LoginPage: View {
                     // Perform login action
                 }, label: {
                     Text("login")
-                        .font(.custom("Avenir", size: 25))
+                        .font(.custom("Avenir", size: 20))
                         .fontWeight(.bold)
                         .foregroundColor(Color (hex: "D9D9D9"))
                         .frame(width: 220, height: 60)
