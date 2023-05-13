@@ -11,10 +11,25 @@ import Firebase
 
 
 struct LoginPage: View {
-    @State private var username = ""
-    @State private var password = ""
-
     
+    @State private var email = ""
+    @State private var password = ""
+    func loginUser() {
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            if error != nil {
+                print(error!.localizedDescription)
+            }
+                
+        }
+    }
+
+    func registerUser() {
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if error != nil {
+                print(error!.localizedDescription)
+            }
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -44,7 +59,7 @@ struct LoginPage: View {
                 
                 
 
-                TextField("username", text: $username)
+                TextField("email", text: $email)
                     .padding(.horizontal, 15)
                     .fontWeight(.bold)
                     .padding(.vertical, 10)
@@ -65,8 +80,7 @@ struct LoginPage: View {
                 Spacer()
                 
                 Button(action: {
-                    
-                    // Perform login action
+                    loginUser()
                 }, label: {
                     Text("login")
                         .font(.custom("Avenir", size: 20))
@@ -78,8 +92,7 @@ struct LoginPage: View {
                         .padding(.bottom, 50)
                 })
                 Button(action: {
-                    
-                    // Perform signup action
+                    registerUser()
                 }, label: {
                     Text(("New to PaidPlanet? Sign up here"))
                         .font(.custom("Avenir", size: 20))
@@ -103,22 +116,7 @@ struct LoginPage: View {
         }
     }
 
-func loginUser(email: String, password: String, completion: @escaping (AuthDataResult?, Error?) -> Void) {
-    Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-        completion(authResult, error)
-    }
-}
 
-
-func registerUser(email: String, password: String, completion: @escaping (Error?) -> Void) {
-    Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-        if let error = error {
-            completion(error)
-        } else {
-            completion(nil)
-        }
-    }
-}
 
 struct LoginPage_Previews: PreviewProvider {
     static var previews: some View {
