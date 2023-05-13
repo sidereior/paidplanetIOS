@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AuthenticationServices
+import Firebase
 
 
 struct LoginPage: View {
@@ -76,11 +77,33 @@ struct LoginPage: View {
                         .cornerRadius(14.0)
                         .padding(.bottom, 50)
                 })
+                Button(action: {
+                    
+                    // Perform signup action
+                }, label: {
+                    Text(("New to PaidPlanet? Sign up here"))
+                        .font(.custom("Avenir", size: 20))
+                        .fontWeight(.black)
+                        .foregroundColor(Color (hex: "D9D9D9"))
+                        .overlay(
+                            Text(("New to PaidPlanet? Sign up here"))
+                                .font(.custom("Avenir", size: 20))
+                                .fontWeight(.black)
+                                .foregroundColor(.black)
+                                .offset(x:1,y:1))
+                        .font(.custom("Avenir", size: 20))
+                        .fontWeight(.bold)
+                        .foregroundColor(Color (hex: "D9D9D9"))
+                        .cornerRadius(14.0)
+                        .padding(.bottom, 50)
+                })
                 
             }
+            }
+            
         }
     }
-}
+
 
 struct LoginPage_Previews: PreviewProvider {
     static var previews: some View {
