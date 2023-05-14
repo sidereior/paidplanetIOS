@@ -20,6 +20,11 @@ struct LoginPage: View {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if error != nil {
                 print(error!.localizedDescription)
+                //make it so that it shows that the user is not logged in
+            }
+            else
+            {
+                userIsLoggedIn = true;
             }
                 
         }
@@ -30,18 +35,26 @@ struct LoginPage: View {
             if error != nil {
                 print(error!.localizedDescription)
             }
+            else
+            {
+                userIsLoggedIn = true;
+            }
         }
     }
+    
     
     var body: some View {
         if userIsLoggedIn {
+            FontsView()
         }
+        
         else {
-            content
+            unLogged
         }
     }
     
-    var content: some View {
+    //view for when the user is not logged in
+    var unLogged: some View {
         ZStack {
             Color(hex: "67C587")
                 .ignoresSafeArea()
@@ -66,6 +79,7 @@ struct LoginPage: View {
                 }.padding(.top, 250)
 
                 TextField("email", text: $email)
+                    .autocapitalization(.none)
                     .padding(.horizontal, 15)
                     .fontWeight(.bold)
                     .padding(.vertical, 10)
@@ -75,6 +89,7 @@ struct LoginPage: View {
                     .font(.custom("Avenir", size: 20))
 
                 SecureField("password", text: $password)
+                    .autocapitalization(.none)
                     .padding(.horizontal, 15)
                     .fontWeight(.bold)
                     .padding(.vertical, 10)
@@ -87,7 +102,7 @@ struct LoginPage: View {
                 
                 Button(action: {
                     loginUser()
-                    userIsLoggedIn = true;
+                    
                 }, label: {
                     Text("login")
                         .font(.custom("Avenir", size: 20))
@@ -120,6 +135,7 @@ struct LoginPage: View {
                 
             }
             .ignoresSafeArea()
+            /*
             .onAppear{
                 Auth.auth().addStateDidChangeListener { auth, user in
                     if user != nil {
@@ -127,6 +143,9 @@ struct LoginPage: View {
                     }
                 }
             }
+            */
+            
+            
             }
         }
     }
