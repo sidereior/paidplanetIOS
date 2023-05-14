@@ -14,6 +14,8 @@ struct LoginPage: View {
     
     @State private var email = ""
     @State private var password = ""
+    @State private var userIsLoggedIn = false
+    
     func loginUser() {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if error != nil {
@@ -32,6 +34,14 @@ struct LoginPage: View {
     }
     
     var body: some View {
+        if userIsLoggedIn {
+        }
+        else {
+            content
+        }
+    }
+    
+    var content: some View {
         ZStack {
             Color(hex: "67C587")
                 .ignoresSafeArea()
@@ -54,10 +64,6 @@ struct LoginPage: View {
                         .fontWeight(.black)
                         .foregroundColor(Color(hex: "1B463C"))
                 }.padding(.top, 250)
-                
-                
-                
-                
 
                 TextField("email", text: $email)
                     .padding(.horizontal, 15)
@@ -81,6 +87,7 @@ struct LoginPage: View {
                 
                 Button(action: {
                     loginUser()
+                    userIsLoggedIn = true;
                 }, label: {
                     Text("login")
                         .font(.custom("Avenir", size: 20))
@@ -112,11 +119,17 @@ struct LoginPage: View {
                 })
                 
             }
+            .ignoresSafeArea()
+            .onAppear{
+                Auth.auth().addStateDidChangeListener { auth, user in
+                    if user != nil {
+                        userIsLoggedIn.toggle()
+                    }
+                }
+            }
             }
         }
     }
-
-
 
 struct LoginPage_Previews: PreviewProvider {
     static var previews: some View {
@@ -128,9 +141,8 @@ extension Color {
     init(hex: String) {
         let scanner = Scanner(string: hex)
         var rgbValue: UInt64 = 0
-
         scanner.scanHexInt64(&rgbValue)
-
+        
         let red = Double((rgbValue & 0xFF0000) >> 16) / 255.0
         let green = Double((rgbValue & 0x00FF00) >> 8) / 255.0
         let blue = Double(rgbValue & 0x0000FF) / 255.0
