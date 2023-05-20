@@ -43,6 +43,7 @@
 		063D83172A0C382B002449F4 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 063D83162A0C382B002449F4 /* FirebaseStorage */; };
 		063D83192A0C382B002449F4 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 063D83182A0C382B002449F4 /* FirebaseStorageCombine-Community */; };
 		063D831B2A0F455C002449F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 063D831A2A0F455C002449F4 /* GoogleService-Info.plist */; };
+		063D831F2A12CB2E002449F4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063D831E2A12CB2E002449F4 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		063D82D42A0AFFE5002449F4 /* IOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		063D82E12A0B02E4002449F4 /* fontviewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fontviewer.swift; sourceTree = "<group>"; };
 		063D831A2A0F455C002449F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		063D831E2A12CB2E002449F4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 				063D82B72A0AFFE4002449F4 /* IOSApp.swift */,
 				063D82B92A0AFFE4002449F4 /* ContentView.swift */,
 				063D82E12A0B02E4002449F4 /* fontviewer.swift */,
+				063D831E2A12CB2E002449F4 /* HomeView.swift */,
 				063D82BB2A0AFFE5002449F4 /* Assets.xcassets */,
 				063D82BD2A0AFFE5002449F4 /* Preview Content */,
 			);
@@ -351,6 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				063D82BA2A0AFFE4002449F4 /* ContentView.swift in Sources */,
+				063D831F2A12CB2E002449F4 /* HomeView.swift in Sources */,
 				063D82B82A0AFFE4002449F4 /* IOSApp.swift in Sources */,
 				063D82E22A0B02E4002449F4 /* fontviewer.swift in Sources */,
 			);
@@ -513,6 +517,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"IOS/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = PaidPlanet;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -541,6 +547,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"IOS/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = PaidPlanet;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

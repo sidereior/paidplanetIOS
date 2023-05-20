@@ -1,13 +1,14 @@
-//
 //  ContentView.swift
 //  IOS
-//
 //  Created by Alexander Nanda on 5/9/23.
-//
 
 import SwiftUI
 import AuthenticationServices
 import Firebase
+
+//todo: add in secure password
+// when username and password are not correct handle that
+
 
 
 struct LoginPage: View {
@@ -15,16 +16,17 @@ struct LoginPage: View {
     @State private var email = ""
     @State private var password = ""
     @State private var userIsLoggedIn = false
+    @State private var shake = false
     
     func loginUser() {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if error != nil {
                 print(error!.localizedDescription)
-                //make it so that it shows that the user is not logged in
+                shake=true
             }
-            else
-            {
-                userIsLoggedIn = true;
+            else{
+                userIsLoggedIn = true
+                shake=false
             }
                 
         }
@@ -35,8 +37,7 @@ struct LoginPage: View {
             if error != nil {
                 print(error!.localizedDescription)
             }
-            else
-            {
+            else{
                 userIsLoggedIn = true;
             }
         }
@@ -45,20 +46,19 @@ struct LoginPage: View {
     
     var body: some View {
         if userIsLoggedIn {
-            FontsView()
+            //replace this with the
+            HomeView()
         }
-        
         else {
             unLogged
         }
     }
-    
+
     //view for when the user is not logged in
     var unLogged: some View {
         ZStack {
             Color(hex: "67C587")
                 .ignoresSafeArea()
-            
             
             VStack(spacing: 20){
                 HStack{
@@ -113,6 +113,8 @@ struct LoginPage: View {
                         .cornerRadius(14.0)
                         .padding(.bottom, 50)
                 })
+                .shakeEffect()
+                
                 Button(action: {
                     registerUser()
                 }, label: {
@@ -135,6 +137,8 @@ struct LoginPage: View {
                 
             }
             .ignoresSafeArea()
+            //i dont think this is needed??
+            
             /*
             .onAppear{
                 Auth.auth().addStateDidChangeListener { auth, user in
@@ -150,12 +154,15 @@ struct LoginPage: View {
         }
     }
 
+//for xcode preview
+
 struct LoginPage_Previews: PreviewProvider {
     static var previews: some View {
         LoginPage()
     }
 }
 
+//convert hex to color
 extension Color {
     init(hex: String) {
         let scanner = Scanner(string: hex)
@@ -167,5 +174,30 @@ extension Color {
         let blue = Double(rgbValue & 0x0000FF) / 255.0
 
         self.init(red: red, green: green, blue: blue)
+    }
+}
+
+
+//shake effect modifier
+extension View {
+    func shakeEffect() -> some View {
+        self.modifier(ShakeEffect())
+    }
+}
+
+struct ShakeEffect: GeometryEffect {
+    var amount: CGFloat = 10
+    var shakesPerUnit = 2
+    var animatableData: CGFloat
+
+    init() {
+        self.animatableData = 0
+    }
+
+    func effectValue(size: CGSize) -> ProjectionTransform {
+        let unit = size.width / 100
+        let progress = animatableData * CGFloat(shakesPerUnit)
+        let position = sin(progress * .pi * 2) * amount * unit
+        return ProjectionTransform(CGAffineTransform(translationX: position, y: 0))
     }
 }
