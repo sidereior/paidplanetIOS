@@ -7,7 +7,7 @@ import AuthenticationServices
 import Firebase
 
 //todo: add in secure password
-// when username and password are not correct handle that
+// when username and password are not correct make it show some animation
 
 
 
@@ -113,7 +113,7 @@ struct LoginPage: View {
                         .cornerRadius(14.0)
                         .padding(.bottom, 50)
                 })
-                .shakeEffect()
+              
                 
                 Button(action: {
                     registerUser()
@@ -179,25 +179,19 @@ extension Color {
 
 
 //shake effect modifier
-extension View {
-    func shakeEffect() -> some View {
-        self.modifier(ShakeEffect())
-    }
-}
-
-struct ShakeEffect: GeometryEffect {
-    var amount: CGFloat = 10
-    var shakesPerUnit = 2
-    var animatableData: CGFloat
-
-    init() {
-        self.animatableData = 0
-    }
-
-    func effectValue(size: CGSize) -> ProjectionTransform {
-        let unit = size.width / 100
-        let progress = animatableData * CGFloat(shakesPerUnit)
-        let position = sin(progress * .pi * 2) * amount * unit
-        return ProjectionTransform(CGAffineTransform(translationX: position, y: 0))
+struct ShakeModifier: ViewModifier {
+    @State var shake: Bool
+    
+    func body(content: Content) -> some View {
+        content
+            .offset(x: shake ? -10 : 0, y: 0)
+            .animation(Animation.default.repeatCount(5).speed(10))
+            .onChange(of: shake) { shake in
+                if shake {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.shake = false
+                    }
+                }
+            }
     }
 }
