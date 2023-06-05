@@ -101,11 +101,11 @@ struct HomeTab: View {
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                             .padding(.leading, 15)
                         
-                        Spacer()
                         
+                        //recent transaction view
                         Rectangle()
                             .fill(Color(hex: "1B463C"))
-                            .frame(width: 360, height: 330)
+                            .frame(width: 360, height: 350)
                             .cornerRadius(14.0)
                             .overlay(
                                 VStack(alignment: .leading) {
@@ -126,17 +126,46 @@ struct HomeTab: View {
                                
                                     
                                     VStack(alignment: .leading, spacing: 10) {
+                                        //change these later to recent transaction view
                                         TransactionBox(date: "5/27/23", status: "Completed", amount: "approx. $50.23")
                                         TransactionBox(date: "5/20/23", status: "Complete", amount: "approx. $35.23")
                                         TransactionBox(date: "5/26/23", status: "Pending", amount: "approx. $30.34")
                                     }
                                     .padding(.horizontal, 15)
                                     .padding(.top, 5)
-                                    Spacer(minLength: 0)
+                                    
+                                    RoundedRectangle(cornerRadius: 14)
+                                            .fill(Color.white)
+                                            .frame(width: 330, height: 30)
+                                            .overlay(
+                                                    VStack(alignment: .leading) {
+                                                        Text("All Transactions")
+                                                    .font(.custom("Avenir", size: 20))
+                                                    .fontWeight(.bold)
+                                                    .foregroundColor(Color(hex: "1B463C"))
+                                                    .padding(.top, 5)
+                                                    .padding(.leading, 15)
+                                                                                   
+                                                // Add your content for displaying all transactions here
+                                                                                   
+                                                    Spacer()
+                                                        }
+                                                        )
+                                                    .padding(.horizontal, 15)
+                                                            .padding(.bottom, 5)
                                 }
                             )
                         
+                        Rectangle()
+                            .fill(Color(hex: "67C587"))
+                            .frame(width: 360, height: 220)
+                            .cornerRadius(14.0)
+                        
+                        
+                        
                         Spacer(minLength: 0)
+                        
+                        
                     }
                 }
                 
