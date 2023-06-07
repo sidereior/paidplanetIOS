@@ -105,7 +105,7 @@ struct HomeTab: View {
                         //recent transaction view
                         Rectangle()
                             .fill(Color(hex: "1B463C"))
-                            .frame(width: 360, height: 350)
+                            .frame(width: 360, height: 285)
                             .cornerRadius(14.0)
                             .overlay(
                                 VStack(alignment: .leading) {
@@ -115,12 +115,12 @@ struct HomeTab: View {
                                         .fontWeight(.black)
                                         .foregroundColor(.white)
                                         .frame(minWidth: 0, maxWidth: .infinity)
-                                        .padding(.top, 5)
                                     
                                     Rectangle()
                                         .fill(Color.white)
                                         .frame(height: 2)
                                         .padding(.horizontal, 15)
+                                    //change this later so not such big gap
                                     
                                     
                                
@@ -128,22 +128,22 @@ struct HomeTab: View {
                                     VStack(alignment: .leading, spacing: 10) {
                                         //change these later to recent transaction view
                                         TransactionBox(date: "5/27/23", status: "Completed", amount: "approx. $50.23")
-                                        TransactionBox(date: "5/20/23", status: "Complete", amount: "approx. $35.23")
+                                        TransactionBox(date: "5/20/23", status: "Completed", amount: "approx. $35.23")
                                         TransactionBox(date: "5/26/23", status: "Pending", amount: "approx. $30.34")
                                     }
                                     .padding(.horizontal, 15)
-                                    .padding(.top, 5)
+                                    
                                     
                                     RoundedRectangle(cornerRadius: 14)
                                             .fill(Color.white)
-                                            .frame(width: 330, height: 30)
+                                            .frame(width: 330, height: 35)
                                             .overlay(
                                                     VStack(alignment: .leading) {
-                                                        Text("All Transactions")
-                                                    .font(.custom("Avenir", size: 20))
+                                                        Text("View All Transactions")
+                                                    .font(.custom("Avenir", size: 23))
                                                     .fontWeight(.bold)
                                                     .foregroundColor(Color(hex: "1B463C"))
-                                                    .padding(.top, 5)
+                                                    .padding(.top, 11)
                                                     .padding(.leading, 15)
                                                                                    
                                                 // Add your content for displaying all transactions here
@@ -152,17 +152,32 @@ struct HomeTab: View {
                                                         }
                                                         )
                                                     .padding(.horizontal, 15)
-                                                            .padding(.bottom, 5)
+                                                            
                                 }
                             )
                         
+                        Spacer()
+                            .frame(height: 15)
+                        
                         Rectangle()
                             .fill(Color(hex: "67C587"))
-                            .frame(width: 360, height: 220)
+                            .frame(width: 360, height: 85)
                             .cornerRadius(14.0)
+                            .overlay(
+                                VStack(alignment: .leading) {
+                                    Text("Need Help with PaidPlanet?")
+                                        .font(.custom("Avenir", size: 25))
+                                        .fontWeight(.black)
+                                        .foregroundColor(Color(hex: "1B463C"))
+                                     
+                                    Text("Learn more here.")
+                                        .font(.custom("Avenir", size: 20))
+                                        .foregroundColor(Color(hex: "1B463C"))
+                                        .padding(.leading, 5)
+                                        //todo: make this into a button
+                                })
                         
-                        
-                        
+
                         Spacer(minLength: 0)
                         
                         
@@ -186,19 +201,19 @@ struct TransactionBox: View {
         VStack(alignment: .leading) {
             HStack {
                 Text(date)
-                    .font(.headline)
+                    .font(.custom("Avenir", size: 16))
                     .foregroundColor(.white)
                 
                 Spacer()
                 
                 Text(status)
-                    .font(.headline)
+                    .font(.custom("Avenir", size: 16))
                     .foregroundColor(.white)
                 
                 Spacer()
                 
                 Text(amount)
-                    .font(.headline)
+                    .font(.custom("Avenir", size: 16))
                     .foregroundColor(.white)
             }
             
