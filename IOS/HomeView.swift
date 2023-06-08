@@ -181,10 +181,32 @@ struct HomeTab: View {
                         Spacer(minLength: 0)
                         
                         
+                        Rectangle()
+                            .fill(Color(hex: "67C587"))
+                            .frame(width: 360, height: 85)
+                            .cornerRadius(14.0)
+                            .overlay(
+                                VStack(alignment: .leading) {
+                                    Text("Pounds of CO2 Removed.")
+                                        .font(.custom("Avenir", size: 25))
+                                        .fontWeight(.black)
+                                        .foregroundColor(Color(hex: "1B463C"))
+                                     
+                                    Text("Learn more here.")
+                                        .font(.custom("Avenir", size: 20))
+                                        .foregroundColor(Color(hex: "1B463C"))
+                                        .padding(.leading, 5)
+                                        //todo: make this into a button
+                                })
+                        
+
+                        Spacer(minLength: 0)
+                        
+                        
                     }
                 }
                 
-                // Divider
+                // todo fix divider later
                 Color.white
                     .frame(height: 1)
             }
