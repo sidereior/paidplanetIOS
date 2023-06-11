@@ -17,9 +17,7 @@ struct IOSApp: App {
     
   var body: some Scene {
     WindowGroup {
-      NavigationView {
         LoginPage()
-      }
     }
   }
 }

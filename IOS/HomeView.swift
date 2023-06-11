@@ -105,8 +105,9 @@ struct HomeTab: View {
                         //recent transaction view
                         Rectangle()
                             .fill(Color(hex: "1B463C"))
-                            .frame(width: 360, height: 285)
+                            .frame( height: 285)
                             .cornerRadius(14.0)
+                            .padding(.horizontal)
                             .overlay(
                                 VStack(alignment: .leading) {
                                     Text("Recent Transactions")
@@ -136,7 +137,7 @@ struct HomeTab: View {
                                     
                                     RoundedRectangle(cornerRadius: 14)
                                             .fill(Color.white)
-                                            .frame(width: 330, height: 35)
+                                            .frame(height: 35)
                                             .overlay(
                                                     VStack(alignment: .leading) {
                                                         Text("View All Transactions")
@@ -144,7 +145,7 @@ struct HomeTab: View {
                                                     .fontWeight(.bold)
                                                     .foregroundColor(Color(hex: "1B463C"))
                                                     .padding(.top, 11)
-                                                    .padding(.leading, 15)
+                                                    .padding(.leading, 25)
                                                                                    
                                                 // Add your content for displaying all transactions here
                                                                                    
@@ -161,8 +162,10 @@ struct HomeTab: View {
                         
                         Rectangle()
                             .fill(Color(hex: "67C587"))
-                            .frame(width: 360, height: 85)
+                            .frame(height: 85)
                             .cornerRadius(14.0)
+                            .padding(.horizontal, 15)
+                            
                             .overlay(
                                 VStack(alignment: .leading) {
                                     Text("Need Help with PaidPlanet?")
@@ -174,6 +177,7 @@ struct HomeTab: View {
                                         .font(.custom("Avenir", size: 20))
                                         .foregroundColor(Color(hex: "1B463C"))
                                         .padding(.leading, 5)
+                                       
                                         //todo: make this into a button
                                 })
                         
@@ -185,6 +189,7 @@ struct HomeTab: View {
                             .fill(Color(hex: "67C587"))
                             .frame(width: 360, height: 85)
                             .cornerRadius(14.0)
+                            .padding(.horizontal, 15)
                             .overlay(
                                 VStack(alignment: .leading) {
                                     Text("Pounds of CO2 Removed.")

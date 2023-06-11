@@ -50,8 +50,8 @@ struct LoginPage: View {
                 .aspectRatio(contentMode: .fill)
                 .opacity(0.5) // Adjust the opacity as needed for the green tint
                 .ignoresSafeArea()
-            
             VStack(spacing: 20) {
+                Spacer()
                 HStack {
                     Text(("Welcome to"))
                         .font(.custom("Avenir", size: 32))
@@ -91,7 +91,7 @@ struct LoginPage: View {
                     .padding(.horizontal, 25)
                     .font(.custom("Avenir", size: 20))
                 
-                Spacer()
+                
                 
                 Button(action: {
                     loginUser()
@@ -126,6 +126,8 @@ struct LoginPage: View {
                         .cornerRadius(14.0)
                         .padding(.bottom, 50)
                 })
+                
+                Spacer()
                 
             }
             .padding()
