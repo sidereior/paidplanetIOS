@@ -105,22 +105,26 @@ struct HomeTab: View {
                         //recent transaction view
                         Rectangle()
                             .fill(Color(hex: "1B463C"))
-                            .frame( height: 285)
+                            .frame( height: 265)
                             .cornerRadius(14.0)
                             .padding(.horizontal)
                             .overlay(
-                                VStack(alignment: .leading) {
-                                    Text("Recent Transactions")
-                                        .font(.custom("Avenir", size: 35))
-                                        .font(.title)
-                                        .fontWeight(.black)
-                                        .foregroundColor(.white)
-                                        .frame(minWidth: 0, maxWidth: .infinity)
+                                VStack() {
+                                    
+                                        Text("Recent Transactions")
+                                            .font(.custom("Avenir", size: 35))
+                                            .font(.title)
+                                            .fontWeight(.black)
+                                            .foregroundColor(.white)
+                                            .frame(minWidth: 0, maxWidth: .infinity)
+                                    
                                     
                                     Rectangle()
                                         .fill(Color.white)
                                         .frame(height: 2)
-                                        .padding(.horizontal, 15)
+                                        .padding(.horizontal, 35)
+                                        .padding(.top, -25)
+                                    
                                     //change this later so not such big gap
                                     
                                     
@@ -132,7 +136,8 @@ struct HomeTab: View {
                                         TransactionBox(date: "5/20/23", status: "Completed", amount: "approx. $35.23")
                                         TransactionBox(date: "5/26/23", status: "Pending", amount: "approx. $30.34")
                                     }
-                                    .padding(.horizontal, 15)
+                                    .padding(.horizontal, 35)
+                                    .padding(.top, -20)
                                     
                                     
                                     RoundedRectangle(cornerRadius: 14)
@@ -152,7 +157,8 @@ struct HomeTab: View {
                                                     Spacer()
                                                         }
                                                         )
-                                                    .padding(.horizontal, 15)
+                                            .padding(.horizontal, 35)
+                                    
                                                             
                                 }
                             )
@@ -165,21 +171,27 @@ struct HomeTab: View {
                             .frame(height: 85)
                             .cornerRadius(14.0)
                             .padding(.horizontal, 15)
-                            
                             .overlay(
                                 VStack(alignment: .leading) {
-                                    Text("Need Help with PaidPlanet?")
-                                        .font(.custom("Avenir", size: 25))
-                                        .fontWeight(.black)
-                                        .foregroundColor(Color(hex: "1B463C"))
-                                     
-                                    Text("Learn more here.")
-                                        .font(.custom("Avenir", size: 20))
-                                        .foregroundColor(Color(hex: "1B463C"))
-                                        .padding(.leading, 5)
-                                       
-                                        //todo: make this into a button
-                                })
+                                    Button(action: {
+                                        // Handle button tap
+                                    }) {
+                                        Text("Need Help with PaidPlanet?")
+                                            .font(.custom("Avenir", size: 25))
+                                            .fontWeight(.black)
+                                            .foregroundColor(Color(hex: "1B463C"))
+                                    }
+                                    
+                                    Button(action: {
+                                        // Handle button tap
+                                    }) {
+                                        Text("Learn more here.")
+                                            .font(.custom("Avenir", size: 20))
+                                            .foregroundColor(Color(hex: "1B463C"))
+                                            .padding(.leading, 5)
+                                    }
+                                }
+                            )
                         
 
                         Spacer(minLength: 0)
@@ -230,18 +242,21 @@ struct TransactionBox: View {
                 Text(date)
                     .font(.custom("Avenir", size: 16))
                     .foregroundColor(.white)
+                    .fontWeight(.bold)
                 
                 Spacer()
                 
                 Text(status)
                     .font(.custom("Avenir", size: 16))
                     .foregroundColor(.white)
+                    .fontWeight(.bold)
                 
                 Spacer()
                 
                 Text(amount)
                     .font(.custom("Avenir", size: 16))
                     .foregroundColor(.white)
+                    .fontWeight(.bold)
             }
             
             Rectangle()
