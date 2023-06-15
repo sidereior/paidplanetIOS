@@ -18,7 +18,8 @@ struct HomeView: View {
                         Text("Home")
                     }
                 
-                AddTab()
+                // Custom center tab item view
+                AddView()
                     .tabItem {
                         VStack {
                             Image(systemName: "plus.circle.fill")
@@ -28,20 +29,21 @@ struct HomeView: View {
                             Text("Add")
                                 .foregroundColor(.white)
                         }
+                        .frame(maxWidth: .infinity)
+                        .background(
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(Color(hex: "1B463C"))
+                                .frame(height: 60)
+                                .padding(.horizontal)
+                        )
+                       
                     }
-                    .background(
-                        RoundedRectangle(cornerRadius: 16)
-                            .fill(Color(hex: "1B463C"))
-                            .frame(height: 60)
-                            .padding(.horizontal)
-                    )
                 
-                ProfileTab()
+                ProfileView()
                     .tabItem {
                         Image(systemName: "person.fill")
                         Text("Profile")
                     }
-                
             }
             .accentColor(Color(hex: "1B463C"))
         }
@@ -81,10 +83,14 @@ struct HomeTab: View {
                                 .padding(.leading, 12)
                                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                             
-                            Image(systemName: "person.circle")
-                                .font(.title)
-                                .padding(.trailing, 15)
-                                .foregroundColor(Color(hex: "1B463C"))
+                            Button(action: {
+                               ProfileView()
+                            }) {
+                                Image(systemName: "person.circle")
+                                    .font(.title)
+                                    .padding(.trailing, 15)
+                                    .foregroundColor(Color(hex: "1B463C"))
+                            }
                         }
                         
                         Text(greeting)
@@ -124,11 +130,7 @@ struct HomeTab: View {
                                         .frame(height: 2)
                                         .padding(.horizontal, 35)
                                         .padding(.top, -25)
-                                    
-                                    //change this later so not such big gap
-                                    
-                                    
-                               
+                                
                                     
                                     VStack(alignment: .leading, spacing: 10) {
                                         //change these later to recent transaction view
@@ -152,19 +154,49 @@ struct HomeTab: View {
                                                     .padding(.top, 11)
                                                     .padding(.leading, 25)
                                                                                    
-                                                // Add your content for displaying all transactions here
-                                                                                   
                                                     Spacer()
                                                         }
                                                         )
                                             .padding(.horizontal, 35)
-                                    
                                                             
                                 }
                             )
                         
                         Spacer()
                             .frame(height: 15)
+                        
+                       
+                        Rectangle()
+                            .fill(Color(hex: "67C587"))
+                            .frame(height: 85)
+                            .cornerRadius(14.0)
+                            .padding(.horizontal, 15)
+                            .overlay(
+                                VStack(alignment: .center) { // Updated alignment to center
+                                    Button(action: {
+                                        // Handle button tap
+                                    }) {
+                                        Text("Need Help with PaidPlanet?")
+                                            .font(.custom("Avenir", size: 25))
+                                            .fontWeight(.black)
+                                            .foregroundColor(Color(hex: "1B463C"))
+                                    }
+                                    
+                                    Button(action: {
+                                        // Handle button tap
+                                    }) {
+                                        Text("Learn more here.")
+                                            .font(.custom("Avenir", size: 20))
+                                            .foregroundColor(Color(hex: "1B463C"))
+                                            .padding(.leading, 5)
+                                    }
+                                }
+                            )
+
+                        
+
+                        Spacer().frame(height: 15)
+                        
                         
                         Rectangle()
                             .fill(Color(hex: "67C587"))
@@ -176,7 +208,7 @@ struct HomeTab: View {
                                     Button(action: {
                                         // Handle button tap
                                     }) {
-                                        Text("Need Help with PaidPlanet?")
+                                        Text("View your sustainability score")
                                             .font(.custom("Avenir", size: 25))
                                             .fontWeight(.black)
                                             .foregroundColor(Color(hex: "1B463C"))
@@ -197,33 +229,11 @@ struct HomeTab: View {
                         Spacer(minLength: 0)
                         
                         
-                        Rectangle()
-                            .fill(Color(hex: "67C587"))
-                            .frame(width: 360, height: 85)
-                            .cornerRadius(14.0)
-                            .padding(.horizontal, 15)
-                            .overlay(
-                                VStack(alignment: .leading) {
-                                    Text("Pounds of CO2 Removed.")
-                                        .font(.custom("Avenir", size: 25))
-                                        .fontWeight(.black)
-                                        .foregroundColor(Color(hex: "1B463C"))
-                                     
-                                    Text("Learn more here.")
-                                        .font(.custom("Avenir", size: 20))
-                                        .foregroundColor(Color(hex: "1B463C"))
-                                        .padding(.leading, 5)
-                                        //todo: make this into a button
-                                })
-                        
-
-                        Spacer(minLength: 0)
-                        
-                        
                     }
                 }
                 
                 // todo fix divider later
+                //make it so that the taskbar at the bottom has the add tab standout
                 Color.white
                     .frame(height: 1)
             }
@@ -266,7 +276,7 @@ struct TransactionBox: View {
     }
 }
 
-struct AddTab: View {
+struct AddView: View {
     var body: some View {
         VStack {
             Spacer()
@@ -275,10 +285,12 @@ struct AddTab: View {
                 .fontWeight(.bold)
             Spacer()
         }
+        .background(Color.white) // Add a background color to make the tab visible
     }
 }
 
-struct ProfileTab: View {
+
+struct ProfileView: View {
     var body: some View {
         Text("Profile Tab")
     }
@@ -287,5 +299,27 @@ struct ProfileTab: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+    }
+}
+
+struct CenterTabButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        VStack {
+            Image(systemName: "plus.circle.fill")
+                .font(.system(size: 30))
+                .foregroundColor(.white)
+            
+            Text("Add")
+                .foregroundColor(.white)
+        }
+        .frame(maxWidth: .infinity)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(hex: "1B463C"))
+                .frame(height: 60)
+                .padding(.horizontal)
+        )
+        .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+        .opacity(configuration.isPressed ? 0.8 : 1.0)
     }
 }

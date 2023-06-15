@@ -132,25 +132,6 @@ struct LoginPage: View {
             }
             .padding()
         }
-        .modifier(ShakeModifier(shake: shake))
-    }
-}
-
-// Shake effect modifier
-struct ShakeModifier: ViewModifier {
-    @State var shake: Bool
-    
-    func body(content: Content) -> some View {
-        content
-            .offset(x: shake ? -10 : 0, y: 0)
-            .animation(Animation.default.repeatCount(5).speed(10))
-            .onChange(of: shake) { shake in
-                if shake {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        self.shake = false
-                    }
-                }
-            }
     }
 }
 
