@@ -45,6 +45,7 @@
 		063D831B2A0F455C002449F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 063D831A2A0F455C002449F4 /* GoogleService-Info.plist */; };
 		063D831F2A12CB2E002449F4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063D831E2A12CB2E002449F4 /* HomeView.swift */; };
 		067A81E82A3165FD0031E1DC /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 067A81E72A3165FD0031E1DC /* background.jpg */; };
+		06858B5D2A3E113800B2D5C1 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06858B5C2A3E113800B2D5C1 /* TestView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		063D831A2A0F455C002449F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		063D831E2A12CB2E002449F4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		067A81E72A3165FD0031E1DC /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = background.jpg; path = ../../../Downloads/background.jpg; sourceTree = "<group>"; };
+		06858B5C2A3E113800B2D5C1 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 				063D82B92A0AFFE4002449F4 /* ContentView.swift */,
 				063D82E12A0B02E4002449F4 /* fontviewer.swift */,
 				063D831E2A12CB2E002449F4 /* HomeView.swift */,
+				06858B5C2A3E113800B2D5C1 /* TestView.swift */,
 				063D82BB2A0AFFE5002449F4 /* Assets.xcassets */,
 				067A81E72A3165FD0031E1DC /* background.jpg */,
 				063D82BD2A0AFFE5002449F4 /* Preview Content */,
@@ -358,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				063D82BA2A0AFFE4002449F4 /* ContentView.swift in Sources */,
+				06858B5D2A3E113800B2D5C1 /* TestView.swift in Sources */,
 				063D831F2A12CB2E002449F4 /* HomeView.swift in Sources */,
 				063D82B82A0AFFE4002449F4 /* IOSApp.swift in Sources */,
 				063D82E22A0B02E4002449F4 /* fontviewer.swift in Sources */,
