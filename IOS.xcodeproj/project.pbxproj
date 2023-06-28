@@ -43,9 +43,12 @@
 		063D83172A0C382B002449F4 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 063D83162A0C382B002449F4 /* FirebaseStorage */; };
 		063D83192A0C382B002449F4 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 063D83182A0C382B002449F4 /* FirebaseStorageCombine-Community */; };
 		063D831B2A0F455C002449F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 063D831A2A0F455C002449F4 /* GoogleService-Info.plist */; };
-		063D831F2A12CB2E002449F4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063D831E2A12CB2E002449F4 /* HomeView.swift */; };
 		067A81E82A3165FD0031E1DC /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 067A81E72A3165FD0031E1DC /* background.jpg */; };
-		06858B5D2A3E113800B2D5C1 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06858B5C2A3E113800B2D5C1 /* TestView.swift */; };
+		06858B632A3F491700B2D5C1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06858B622A3F491700B2D5C1 /* HomeView.swift */; };
+		06AFF8482A3FF7F300914586 /* AddTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AFF8472A3FF7F300914586 /* AddTabView.swift */; };
+		06C668632A46754000746229 /* TabBar in Frameworks */ = {isa = PBXBuildFile; productRef = 06C668622A46754000746229 /* TabBar */; };
+		06C668792A4BD7BD00746229 /* CITTopTabBar in Frameworks */ = {isa = PBXBuildFile; productRef = 06C668782A4BD7BD00746229 /* CITTopTabBar */; };
+		06C6687B2A4BD7D300746229 /* SwipeTabTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C6687A2A4BD7D300746229 /* SwipeTabTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,9 +81,10 @@
 		063D82D42A0AFFE5002449F4 /* IOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		063D82E12A0B02E4002449F4 /* fontviewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fontviewer.swift; sourceTree = "<group>"; };
 		063D831A2A0F455C002449F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		063D831E2A12CB2E002449F4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		067A81E72A3165FD0031E1DC /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = background.jpg; path = ../../../Downloads/background.jpg; sourceTree = "<group>"; };
-		06858B5C2A3E113800B2D5C1 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		06858B622A3F491700B2D5C1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		06AFF8472A3FF7F300914586 /* AddTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTabView.swift; sourceTree = "<group>"; };
+		06C6687A2A4BD7D300746229 /* SwipeTabTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTabTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,7 @@
 			files = (
 				063D82F72A0C382B002449F4 /* FirebaseDatabase in Frameworks */,
 				063D83052A0C382B002449F4 /* FirebaseFunctionsCombine-Community in Frameworks */,
+				06C668632A46754000746229 /* TabBar in Frameworks */,
 				063D82FD2A0C382B002449F4 /* FirebaseFirestore in Frameworks */,
 				063D82E92A0C382B002449F4 /* FirebaseAnalyticsSwift in Frameworks */,
 				063D82E52A0C382B002449F4 /* FirebaseAnalytics in Frameworks */,
@@ -107,6 +112,7 @@
 				063D83192A0C382B002449F4 /* FirebaseStorageCombine-Community in Frameworks */,
 				063D83132A0C382B002449F4 /* FirebaseRemoteConfig in Frameworks */,
 				063D82EF2A0C382B002449F4 /* FirebaseAppDistribution-Beta in Frameworks */,
+				06C668792A4BD7BD00746229 /* CITTopTabBar in Frameworks */,
 				063D82F32A0C382B002449F4 /* FirebaseAuthCombine-Community in Frameworks */,
 				063D83112A0C382B002449F4 /* FirebasePerformance in Frameworks */,
 				063D83092A0C382B002449F4 /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
@@ -161,9 +167,10 @@
 				063D831A2A0F455C002449F4 /* GoogleService-Info.plist */,
 				063D82B72A0AFFE4002449F4 /* IOSApp.swift */,
 				063D82B92A0AFFE4002449F4 /* ContentView.swift */,
+				06858B622A3F491700B2D5C1 /* HomeView.swift */,
+				06AFF8472A3FF7F300914586 /* AddTabView.swift */,
 				063D82E12A0B02E4002449F4 /* fontviewer.swift */,
-				063D831E2A12CB2E002449F4 /* HomeView.swift */,
-				06858B5C2A3E113800B2D5C1 /* TestView.swift */,
+				06C6687A2A4BD7D300746229 /* SwipeTabTest.swift */,
 				063D82BB2A0AFFE5002449F4 /* Assets.xcassets */,
 				067A81E72A3165FD0031E1DC /* background.jpg */,
 				063D82BD2A0AFFE5002449F4 /* Preview Content */,
@@ -240,6 +247,8 @@
 				063D83142A0C382B002449F4 /* FirebaseRemoteConfigSwift */,
 				063D83162A0C382B002449F4 /* FirebaseStorage */,
 				063D83182A0C382B002449F4 /* FirebaseStorageCombine-Community */,
+				06C668622A46754000746229 /* TabBar */,
+				06C668782A4BD7BD00746229 /* CITTopTabBar */,
 			);
 			productName = IOS;
 			productReference = 063D82B42A0AFFE4002449F4 /* IOS.app */;
@@ -315,6 +324,8 @@
 			mainGroup = 063D82AB2A0AFFE4002449F4;
 			packageReferences = (
 				063D82E32A0C382B002449F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				06C668612A46754000746229 /* XCRemoteSwiftPackageReference "TabBar" */,
+				06C668772A4BD7BD00746229 /* XCRemoteSwiftPackageReference "TopTabBar-iOS-Component" */,
 			);
 			productRefGroup = 063D82B52A0AFFE4002449F4 /* Products */;
 			projectDirPath = "";
@@ -360,10 +371,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06C6687B2A4BD7D300746229 /* SwipeTabTest.swift in Sources */,
+				06AFF8482A3FF7F300914586 /* AddTabView.swift in Sources */,
 				063D82BA2A0AFFE4002449F4 /* ContentView.swift in Sources */,
-				06858B5D2A3E113800B2D5C1 /* TestView.swift in Sources */,
-				063D831F2A12CB2E002449F4 /* HomeView.swift in Sources */,
 				063D82B82A0AFFE4002449F4 /* IOSApp.swift in Sources */,
+				06858B632A3F491700B2D5C1 /* HomeView.swift in Sources */,
 				063D82E22A0B02E4002449F4 /* fontviewer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -699,6 +711,22 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		06C668612A46754000746229 /* XCRemoteSwiftPackageReference "TabBar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onl1ner/TabBar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		06C668772A4BD7BD00746229 /* XCRemoteSwiftPackageReference "TopTabBar-iOS-Component" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Coffee-IT-Development/TopTabBar-iOS-Component";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -836,6 +864,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 063D82E32A0C382B002449F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		06C668622A46754000746229 /* TabBar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 06C668612A46754000746229 /* XCRemoteSwiftPackageReference "TabBar" */;
+			productName = TabBar;
+		};
+		06C668782A4BD7BD00746229 /* CITTopTabBar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 06C668772A4BD7BD00746229 /* XCRemoteSwiftPackageReference "TopTabBar-iOS-Component" */;
+			productName = CITTopTabBar;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

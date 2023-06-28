@@ -8,7 +8,7 @@
 import SwiftUI
 import Firebase
 
-
+@main
 struct IOSApp: App {
 
     init() {

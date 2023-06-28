@@ -44,7 +44,6 @@ struct LoginPage: View {
     
     var unLogged: some View {
         ZStack {
-            // Background Image with Green Tint
             Image("background")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -91,8 +90,6 @@ struct LoginPage: View {
                     .padding(.horizontal, 25)
                     .font(.custom("Avenir", size: 20))
                 
-                
-                
                 Button(action: {
                     loginUser()
                 }, label: {
@@ -126,9 +123,7 @@ struct LoginPage: View {
                         .cornerRadius(14.0)
                         .padding(.bottom, 50)
                 })
-                
                 Spacer()
-                
             }
             .padding()
         }

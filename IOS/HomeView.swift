@@ -2,15 +2,15 @@ import Foundation
 import SwiftUI
 import Firebase
 
+
 //todo: make the settings button functional with a logout button
 
 struct HomeView: View {
+    
+    
+    
     var body: some View {
         VStack(spacing: 0) {
-            Rectangle()
-                .fill(Color(hex: "C9EAD4"))
-                .frame(height: 1)
-            
             TabView {
                 HomeTab()
                     .tabItem {
@@ -45,7 +45,7 @@ struct HomeView: View {
                         Text("Profile")
                     }
             }
-            .accentColor(Color(hex: "1B463C"))
+            .accentColor(Color(hex: "1B4qw63C"))
         }
         .background(Color(hex: "C9EAD4"))
         .ignoresSafeArea(edges: .bottom)
