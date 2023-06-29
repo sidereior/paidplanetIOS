@@ -41,7 +41,7 @@ struct CITTopTabBarExampleView: View {
         var example: CITTopTabBarView.Configuration = .exampleUnderlined
         example.textColor = .white
         example.backgroundColor = .black
-        example.font = Font.custom("Avenir", size: 14).bold() // Set the desired font here
+        example.font = Font.custom("Avenir", size: 16).bold() // Set the desired font here
         example.iconSize = CGSize(width: 30, height: 30) // Set the desired icon size here
         return example
     }
