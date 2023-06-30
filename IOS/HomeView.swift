@@ -232,7 +232,7 @@ struct HomeTab: View {
                                             .aspectRatio(contentMode: .fit)
                                             .cornerRadius(14.0)
                                             .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
-                                        Image("download")
+                                        Image("GM")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .cornerRadius(14.0)

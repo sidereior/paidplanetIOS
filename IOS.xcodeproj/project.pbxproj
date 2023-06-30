@@ -48,6 +48,7 @@
 		06AFF8482A3FF7F300914586 /* AddTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AFF8472A3FF7F300914586 /* AddTabView.swift */; };
 		06C668632A46754000746229 /* TabBar in Frameworks */ = {isa = PBXBuildFile; productRef = 06C668622A46754000746229 /* TabBar */; };
 		06C668792A4BD7BD00746229 /* CITTopTabBar in Frameworks */ = {isa = PBXBuildFile; productRef = 06C668782A4BD7BD00746229 /* CITTopTabBar */; };
+		06C668812A4E8F8000746229 /* General-Motors-GM-Logo-Brandmark-Blue-2021-720x720.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 06C668802A4E8F8000746229 /* General-Motors-GM-Logo-Brandmark-Blue-2021-720x720.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		067A81E72A3165FD0031E1DC /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = background.jpg; path = ../../../Downloads/background.jpg; sourceTree = "<group>"; };
 		06858B622A3F491700B2D5C1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		06AFF8472A3FF7F300914586 /* AddTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTabView.swift; sourceTree = "<group>"; };
+		06C668802A4E8F8000746229 /* General-Motors-GM-Logo-Brandmark-Blue-2021-720x720.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "General-Motors-GM-Logo-Brandmark-Blue-2021-720x720.jpg"; path = "../../../Downloads/General-Motors-GM-Logo-Brandmark-Blue-2021-720x720.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				06AFF8472A3FF7F300914586 /* AddTabView.swift */,
 				063D82E12A0B02E4002449F4 /* fontviewer.swift */,
 				063D82BB2A0AFFE5002449F4 /* Assets.xcassets */,
+				06C668802A4E8F8000746229 /* General-Motors-GM-Logo-Brandmark-Blue-2021-720x720.jpg */,
 				067A81E72A3165FD0031E1DC /* background.jpg */,
 				063D82BD2A0AFFE5002449F4 /* Preview Content */,
 			);
@@ -343,6 +346,7 @@
 				063D82BF2A0AFFE5002449F4 /* Preview Assets.xcassets in Resources */,
 				067A81E82A3165FD0031E1DC /* background.jpg in Resources */,
 				063D82BC2A0AFFE5002449F4 /* Assets.xcassets in Resources */,
+				06C668812A4E8F8000746229 /* General-Motors-GM-Logo-Brandmark-Blue-2021-720x720.jpg in Resources */,
 				063D831B2A0F455C002449F4 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
