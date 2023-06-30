@@ -255,6 +255,7 @@ struct HomeTab: View {
                         
                         
                     }
+                    .padding(.top, 5)
                 }
                 // todo fix divider later
                 //make it so that the taskbar at the bottom has the add tab standout
