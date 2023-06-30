@@ -213,32 +213,42 @@ struct HomeTab: View {
 
                         Spacer().frame(height: 15)
                         
-                        
+                         
                         Rectangle()
                             .fill(Color(hex: "67C587"))
-                            .frame(height: 85)
+                            .frame(height: 210)
                             .cornerRadius(14.0)
                             .padding(.horizontal, 15)
                             .overlay(
-                                VStack() {
-                                    Button(action: {
-                                        // Handle button tap
-                                    }) {
-                                        Text("Our Sponsors:")
-                                            .font(.custom("Avenir", size: 25))
-                                            .fontWeight(.black)
-                                            .foregroundColor(Color(hex: "1B463C"))
-                                    }
+                                VStack(spacing: 10) {
+                                    Text("Our Sponsors:")
+                                        .font(.custom("Avenir", size: 25))
+                                        .fontWeight(.black)
+                                        .foregroundColor(Color(hex: "1B463C"))
                                     
-                                    Button(action: {
-                                        // Handle button tap
-                                    }) {
-                                        Rectangle()
-                                            .padding(.horizontal, 15)
-                                            )
+                                    HStack(spacing: 10) {
+                                        Image("VCSSymbol")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .cornerRadius(14.0)
+                                            .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
+                                        Image("download")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .cornerRadius(14.0)
+                                            .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
+                                        Image("tesla-motors")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .cornerRadius(14.0)
+                                            .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
+                                            
+                                
                                     }
                                 }
+                                .padding(.horizontal, 15)
                             )
+
                         
 
                         Spacer(minLength: 0)
