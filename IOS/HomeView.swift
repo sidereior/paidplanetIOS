@@ -14,35 +14,43 @@ struct HomeView: View {
         .init(
             title: "Home" ,
             icon: .init(systemName: "house.fill"),
-            iconColorOverride: .white,
-            selectedIconColorOverride: .green
+            iconColorOverride: Color(hex: "1B463C"),
+            selectedIconColorOverride: Color(hex: "67C587")
         ),
         .init(
             title: "Scan" ,
             icon: .init(systemName: "camera.viewfinder"),
-            iconColorOverride: .white,
-            selectedIconColorOverride: .green
+            iconColorOverride: Color(hex: "1B463C"),
+            selectedIconColorOverride: Color(hex: "67C587")
         ),
         .init(
             title: "Transactions",
             icon: .init(systemName: "archivebox.fill"),
-            iconColorOverride: .white,
-            selectedIconColorOverride: .green
+            iconColorOverride: Color(hex: "1B463C"),
+            selectedIconColorOverride: Color(hex: "67C587")
         ),
         .init(
             title: "Profile",
             icon: .init(systemName: "person.crop.square.fill"),
-            iconColorOverride: .white,
-            selectedIconColorOverride: .green
+            iconColorOverride: Color(hex: "1B463C"),
+            selectedIconColorOverride: Color(hex: "67C587")
         )
     ]
 
     var config: CITTopTabBarView.Configuration {
         var example: CITTopTabBarView.Configuration = .exampleUnderlined
-        example.textColor = .white
-        example.backgroundColor = .black
-        example.font = Font.custom("Avenir", size: 16).bold() // Set the desired font here
-        example.iconSize = CGSize(width: 30, height: 30) // Set the desired icon size here
+        example.textColor = Color(hex: "1B463C")
+        example.backgroundColor = Color.white.opacity(0.0)
+        example.underlineColor = Color(hex: "67C587")
+        example.selectedTextColor = Color(hex: "67C587")
+        example.selectedIconColor = Color(hex: "67C587")
+        example.font = Font.custom("Avenir", size: 16).bold()
+        example.iconSize = CGSize(width: 30, height: 30)
+        example.showUnderline = true
+        example.showBorderWhileUnselected = false
+        example.selectedInsets = .init(top: 0, leading: 0, bottom: 10, trailing: 0)
+        example.underlineHeight = 3
+        
         return example
     }
 
@@ -67,7 +75,7 @@ struct HomeView: View {
             .tabViewStyle(.page(indexDisplayMode: .never))
             .edgesIgnoringSafeArea(.all)
         }
-        .background(Color.green)
+        .background( Color(hex: "C9EAD4"))
         .preferredColorScheme(.dark)
         .edgesIgnoringSafeArea(.all)
     }
@@ -101,27 +109,8 @@ struct HomeTab: View {
                 ZStack {
                     Color(hex: "C9EAD4")
                     VStack {
-                        HStack {
-                            Text("PaidPlanet")
-                                .font(.custom("Avenir", size: 38))
-                                .fontWeight(.black)
-                                .kerning(0.5)
-                                .foregroundColor(Color(hex: "1B463C"))
-                                .padding(.leading, 12)
-                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                            
-                            Button(action: {
-                               ProfileView()
-                            }) {
-                                Image(systemName: "person.circle")
-                                    .font(.title)
-                                    .padding(.trailing, 15)
-                                    .foregroundColor(Color(hex: "1B463C"))
-                            }
-                        }
-                        
                         Text(greeting)
-                            .font(.custom("Avenir", size: 25))
+                            .font(.custom("Avenir", size: 25) .bold())
                             .font(.title)
                             .foregroundColor(Color(hex: "1B463C"))
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
@@ -231,11 +220,11 @@ struct HomeTab: View {
                             .cornerRadius(14.0)
                             .padding(.horizontal, 15)
                             .overlay(
-                                VStack(alignment: .leading) {
+                                VStack() {
                                     Button(action: {
                                         // Handle button tap
                                     }) {
-                                        Text("View your sustainability score")
+                                        Text("Our Sponsors:")
                                             .font(.custom("Avenir", size: 25))
                                             .fontWeight(.black)
                                             .foregroundColor(Color(hex: "1B463C"))
@@ -244,10 +233,9 @@ struct HomeTab: View {
                                     Button(action: {
                                         // Handle button tap
                                     }) {
-                                        Text("Learn more here.")
-                                            .font(.custom("Avenir", size: 20))
-                                            .foregroundColor(Color(hex: "1B463C"))
-                                            .padding(.leading, 5)
+                                        Rectangle()
+                                            .padding(.horizontal, 15)
+                                            )
                                     }
                                 }
                             )
@@ -258,11 +246,8 @@ struct HomeTab: View {
                         
                     }
                 }
-                
                 // todo fix divider later
                 //make it so that the taskbar at the bottom has the add tab standout
-                Color.white
-                    .frame(height: 1)
             }
         }
     }
