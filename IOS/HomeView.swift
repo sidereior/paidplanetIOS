@@ -260,7 +260,7 @@ struct HomeTab: View {
                             .shadow(radius: 3, x: 0, y: 3)
                             .padding(.horizontal, 15)
                             .overlay(
-                                VStack(alignment: .center) { // Updated alignment to center
+                                VStack() { // Updated alignment to center
                                     Button(action: {
                                         // Handle button tap
                                     }) {
@@ -268,6 +268,7 @@ struct HomeTab: View {
                                             .font(.custom("Avenir", size: 25))
                                             .fontWeight(.black)
                                             .foregroundColor(Color(hex: "1B463C"))
+                                            .frame(alignment: .center)
                                     }
                                     
                                     Button(action: {
@@ -277,6 +278,7 @@ struct HomeTab: View {
                                             .font(.custom("Avenir", size: 20))
                                             .foregroundColor(Color(hex: "1B463C"))
                                             .padding(.leading, 5)
+                                            .frame(alignment: .leading)
                                     }
                                 }
                             )

@@ -20,10 +20,10 @@ struct AddView: View {
             VStack{
                 Rectangle()
                     .fill(Color(hex: "67C587"))
-                    .frame(height: 85)
+                    .frame(height: 150)
                     .cornerRadius(14.0)
                     .shadow(radius: 3, x: 0, y: 3)
-                    .padding(.horizontal, 15)
+                    .padding(.horizontal, 20)
                     .overlay(
                         VStack(alignment: .center) { // Updated alignment to center
                             Button(action: {
