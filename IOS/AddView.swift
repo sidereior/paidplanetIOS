@@ -13,13 +13,63 @@ import Firebase
 
 struct AddView: View {
     var body: some View {
-        VStack {
-            Spacer()
-            Text("Add Tab")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-            Spacer()
+        ZStack {
+            Color(hex: "C9EAD4")
+                .ignoresSafeArea()
+            
+            VStack{
+                Rectangle()
+                    .fill(Color(hex: "67C587"))
+                    .frame(height: 85)
+                    .cornerRadius(14.0)
+                    .shadow(radius: 3, x: 0, y: 3)
+                    .padding(.horizontal, 15)
+                    .overlay(
+                        VStack(alignment: .center) { // Updated alignment to center
+                            Button(action: {
+                                // Handle button tap
+                            }) {
+                                Text("Have you recently")
+                                    .font(.custom("Avenir", size: 25))
+                                    .fontWeight(.black)
+                                    .foregroundColor(Color(hex: "1B463C"))
+                            }
+                            
+                            Button(action: {
+                                // Handle button tap
+                            }) {
+                                Text("Solar Panels ICON")
+                                    .font(.custom("Avenir", size: 20))
+                                    .foregroundColor(Color(hex: "1B463C"))
+                                    .padding(.leading, 5)
+                            }
+                            
+                            Button(action: {
+                                // Handle button tap
+                            }) {
+                                Text("Electric Cars ICON")
+                                    .font(.custom("Avenir", size: 20))
+                                    .foregroundColor(Color(hex: "1B463C"))
+                                    .padding(.leading, 5)
+                            }
+                            
+                            Button(action: {
+                                // Handle button tap
+                            }) {
+                                Text("Electric Stoves ICON")
+                                    .font(.custom("Avenir", size: 20))
+                                    .foregroundColor(Color(hex: "1B463C"))
+                                    .padding(.leading, 5)
+                            }
+                        }
+                    )
+            }
         }
-        .background(Color.white) // Add a background color to make the tab visible
+    }
+}
+
+struct AddView_Previews: PreviewProvider {
+    static var previews: some View {
+        AddView()
     }
 }

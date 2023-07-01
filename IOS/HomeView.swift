@@ -128,7 +128,7 @@ struct HomeTab: View {
                             .frame(height: 30)
                         
                         
-                        Text("Have you installed:")
+                        Text("Do you use:")
                             .font(.custom("Avenir", size: 20))
                             .font(.title)
                             .foregroundColor(Color(hex: "1B463C"))
@@ -148,7 +148,7 @@ struct HomeTab: View {
                                             Text("Solar Panels")
                                                 .font(.custom("Avenir", size: 15))
                                                 .fontWeight(.black)
-                                                .foregroundColor(Color.white)
+                                                .foregroundColor(Color(hex: "1B463C"))
                                         }
                                         )
                                         Rectangle()
@@ -160,10 +160,10 @@ struct HomeTab: View {
                                         Button(action: {
                                             // Handle button tap
                                         }) {
-                                            Text("Electric Car")
+                                            Text("Electric Cars")
                                                 .font(.custom("Avenir", size: 15))
                                                 .fontWeight(.black)
-                                                .foregroundColor(Color.white)
+                                                .foregroundColor(Color(hex: "1B463C"))
                                         }
                                         )
                                         
@@ -176,10 +176,10 @@ struct HomeTab: View {
                                         Button(action: {
                                             // Handle button tap
                                         }) {
-                                            Text("Electric Stove")
+                                            Text("Electric Stoves")
                                                 .font(.custom("Avenir", size: 15))
                                                 .fontWeight(.black)
-                                                .foregroundColor(Color.white)
+                                                .foregroundColor(Color(hex: "1B463C"))
                                         }
                                         )
                                     }
