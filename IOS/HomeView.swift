@@ -127,6 +127,13 @@ struct HomeTab: View {
                         Spacer()
                             .frame(height: 30)
                         
+                        
+                        Text("Have you installed:")
+                            .font(.custom("Avenir", size: 20))
+                            .font(.title)
+                            .foregroundColor(Color(hex: "1B463C"))
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading, 15)
                        
                                 VStack(alignment: .center) { // Updated alignment to center
                                     HStack{
@@ -178,8 +185,10 @@ struct HomeTab: View {
                                     }
                                 }
                                 .padding(.horizontal, 15)
+                                .padding(.top, -10)
                             
-                        
+                        Spacer()
+                            .frame(height: 15)
                         
                         
                         Group {
