@@ -104,7 +104,8 @@ struct HomeTab: View {
         ZStack {
             Color(hex: "C9EAD4")
                 .ignoresSafeArea()
-            
+            ScrollView{
+                
             VStack {
                 ZStack {
                     Color(hex: "C9EAD4")
@@ -123,7 +124,8 @@ struct HomeTab: View {
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                             .padding(.leading, 15)
                         
-                        
+                        Spacer()
+                            .frame(height: 30)
                         //recent transaction view
                         Rectangle()
                             .fill(Color(hex: "1B463C"))
@@ -179,7 +181,7 @@ struct HomeTab: View {
                             )
                         
                         Spacer()
-                            .frame(height: 15)
+                            .frame(height: 30)
                         
                        
                         Rectangle()
@@ -211,7 +213,7 @@ struct HomeTab: View {
 
                         
 
-                        Spacer().frame(height: 15)
+                        Spacer().frame(height: 30)
                         
                          
                         Rectangle()
@@ -249,13 +251,42 @@ struct HomeTab: View {
                                 .padding(.horizontal, 15)
                             )
 
+                        Spacer()
+                            .frame(height: 30)
                         
-
-                        Spacer(minLength: 0)
+                        Rectangle()
+                            .fill(Color(hex: "67C587"))
+                            .frame(height: 85)
+                            .cornerRadius(14.0)
+                            .padding(.horizontal, 15)
+                            .overlay(
+                                VStack(alignment: .center) { // Updated alignment to center
+                                    Button(action: {
+                                        // Handle button tap
+                                    }) {
+                                        Text("Need Help with PaidPlanet?")
+                                            .font(.custom("Avenir", size: 25))
+                                            .fontWeight(.black)
+                                            .foregroundColor(Color(hex: "1B463C"))
+                                    }
+                                    
+                                    Button(action: {
+                                        // Handle button tap
+                                    }) {
+                                        Text("Learn more here.")
+                                            .font(.custom("Avenir", size: 20))
+                                            .foregroundColor(Color(hex: "1B463C"))
+                                            .padding(.leading, 5)
+                                    }
+                                }
+                            )
+                        
                         
                         
                     }
                     .padding(.top, 5)
+                    
+                }
                 }
                 // todo fix divider later
                 //make it so that the taskbar at the bottom has the add tab standout
