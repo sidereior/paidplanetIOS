@@ -134,7 +134,7 @@ struct HomeTab: View {
                                             .fill(Color(hex: "59DB84"))
                                             .frame(height: 35)
                                             .cornerRadius(14.0)
-                                            .overlay(
+                                            .shadow(radius: 3, x: 0, y: 3)                                            .overlay(
                                         Button(action: {
                                             // Handle button tap
                                         }) {
@@ -148,6 +148,7 @@ struct HomeTab: View {
                                             .fill(Color(hex: "59DB84"))
                                             .frame(height: 35)
                                             .cornerRadius(14.0)
+                                            .shadow(radius: 3, x: 0, y: 3)
                                             .overlay(
                                         Button(action: {
                                             // Handle button tap
@@ -163,6 +164,7 @@ struct HomeTab: View {
                                             .fill(Color(hex: "59DB84"))
                                             .frame(height: 35)
                                             .cornerRadius(14.0)
+                                            .shadow(radius: 3, x: 0, y: 3)
                                             .overlay(
                                         Button(action: {
                                             // Handle button tap
@@ -189,6 +191,7 @@ struct HomeTab: View {
                             .frame( height: 265)
                             .cornerRadius(14.0)
                             .padding(.horizontal)
+                            .shadow(radius: 3, x: 0, y: 3)
                             .overlay(
                                 VStack() {
                                     
@@ -245,6 +248,7 @@ struct HomeTab: View {
                             .fill(Color(hex: "67C587"))
                             .frame(height: 85)
                             .cornerRadius(14.0)
+                            .shadow(radius: 3, x: 0, y: 3)
                             .padding(.horizontal, 15)
                             .overlay(
                                 VStack(alignment: .center) { // Updated alignment to center
@@ -277,6 +281,7 @@ struct HomeTab: View {
                             .fill(Color(hex: "67C587"))
                             .frame(height: 210)
                             .cornerRadius(14.0)
+                            .shadow(radius: 3, x: 0, y: 3)
                             .padding(.horizontal, 15)
                             .overlay(
                                 VStack(spacing: 10) {
@@ -322,6 +327,7 @@ struct HomeTab: View {
                                 .fill(Color(hex: "67C587"))
                                 .frame(height: 85)
                                 .cornerRadius(14.0)
+                                .shadow(radius: 3, x: 0, y: 3)
                                 .padding(.horizontal, 15)
                                 .overlay(
                                     VStack(alignment: .center) { // Updated alignment to center
