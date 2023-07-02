@@ -18,22 +18,20 @@ struct AddView: View {
                 .ignoresSafeArea()
             
             VStack{
+                
+                
+                    Text("Do you own:")
+                        .font(.custom("Avenir", size: 25))
+                        .fontWeight(.bold)
+                        .foregroundColor(Color(hex: "1B463C"))
                 Rectangle()
-                    .fill(Color(hex: "67C587"))
-                    .frame(height: 275)
+                    .fill(Color(hex: "59DB84"))
+                    .frame(height: 500)
                     .cornerRadius(14.0)
                     .shadow(radius: 3, x: 0, y: 3)
                     .padding(.horizontal, 20)
                     .overlay(
                         VStack(alignment: .center) { // Updated alignment to center
-                            Button(action: {
-                                // Handle button tap
-                            }) {
-                                Text("Do you own:")
-                                    .font(.custom("Avenir", size: 25))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(Color(hex: "1B463C"))
-                            }
                             
                         
                             Spacer()
@@ -47,13 +45,16 @@ struct AddView: View {
                                     .foregroundColor(Color(hex: "1B463C"))
                                     .fontWeight(.black)
                                     .padding(.leading, 5)
+                                Spacer()
+                                    .frame(width: 10)
+                                
+                                Image("solar")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .cornerRadius(14.0)
+                                    .frame(width: UIScreen.main.bounds.width / 5, height: 135)
                             }
                             
-                            Image("solar")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .cornerRadius(14.0)
-                                .frame(width: UIScreen.main.bounds.width / 5, height: 135)
                             
                             
                             Spacer()
@@ -68,13 +69,18 @@ struct AddView: View {
                                     .foregroundColor(Color(hex: "1B463C"))
                                     .fontWeight(.black)
                                     .padding(.leading, 5)
+                                
+                                Spacer()
+                                    .frame(width: 10)
+                                
+                                Image("car")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .cornerRadius(14.0)
+                                    .frame(width: UIScreen.main.bounds.width / 5, height: 135)
                             }
                             
-                            Image("car")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .cornerRadius(14.0)
-                                .frame(width: UIScreen.main.bounds.width / 5, height: 135)
+                            
                             
                             
                             Spacer()
@@ -88,6 +94,15 @@ struct AddView: View {
                                     .foregroundColor(Color(hex: "1B463C"))
                                     .fontWeight(.black)
                                     .padding(.leading, 5)
+                                
+                                Spacer()
+                                    .frame(width: 10)
+                                
+                                Image("stove")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .cornerRadius(14.0)
+                                    .frame(width: UIScreen.main.bounds.width / 5, height: 135)
                             }
                         }
                     )
