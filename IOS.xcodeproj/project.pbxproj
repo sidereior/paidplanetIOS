@@ -48,6 +48,7 @@
 		06C668632A46754000746229 /* TabBar in Frameworks */ = {isa = PBXBuildFile; productRef = 06C668622A46754000746229 /* TabBar */; };
 		06C668792A4BD7BD00746229 /* CITTopTabBar in Frameworks */ = {isa = PBXBuildFile; productRef = 06C668782A4BD7BD00746229 /* CITTopTabBar */; };
 		06C668832A50A7BB00746229 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C668822A50A7BB00746229 /* AddView.swift */; };
+		06C668872A510B2500746229 /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C668862A510B2400746229 /* car.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		06858B622A3F491700B2D5C1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		06AFF8472A3FF7F300914586 /* AddTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTabView.swift; sourceTree = "<group>"; };
 		06C668822A50A7BB00746229 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
+		06C668862A510B2400746229 /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = car.png; path = ../../../Downloads/car.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 				06AFF8472A3FF7F300914586 /* AddTabView.swift */,
 				063D82E12A0B02E4002449F4 /* fontviewer.swift */,
 				063D82BB2A0AFFE5002449F4 /* Assets.xcassets */,
+				06C668862A510B2400746229 /* car.png */,
 				063D82BD2A0AFFE5002449F4 /* Preview Content */,
 			);
 			path = IOS;
@@ -340,6 +343,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06C668872A510B2500746229 /* car.png in Resources */,
 				063D82BF2A0AFFE5002449F4 /* Preview Assets.xcassets in Resources */,
 				063D82BC2A0AFFE5002449F4 /* Assets.xcassets in Resources */,
 				063D831B2A0F455C002449F4 /* GoogleService-Info.plist in Resources */,

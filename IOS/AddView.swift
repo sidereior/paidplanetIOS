@@ -20,7 +20,7 @@ struct AddView: View {
             VStack{
                 Rectangle()
                     .fill(Color(hex: "67C587"))
-                    .frame(height: 150)
+                    .frame(height: 275)
                     .cornerRadius(14.0)
                     .shadow(radius: 3, x: 0, y: 3)
                     .padding(.horizontal, 20)
@@ -29,36 +29,64 @@ struct AddView: View {
                             Button(action: {
                                 // Handle button tap
                             }) {
-                                Text("Have you recently")
+                                Text("Do you own:")
                                     .font(.custom("Avenir", size: 25))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color(hex: "1B463C"))
+                            }
+                            
+                        
+                            Spacer()
+                                .frame(height: 30)
+                            
+                            Button(action: {
+                                // Handle button tap
+                            }) {
+                                Text("Solar Panels")
+                                    .font(.custom("Avenir", size: 30))
+                                    .foregroundColor(Color(hex: "1B463C"))
                                     .fontWeight(.black)
-                                    .foregroundColor(Color(hex: "1B463C"))
-                            }
-                            
-                            Button(action: {
-                                // Handle button tap
-                            }) {
-                                Text("Solar Panels ICON")
-                                    .font(.custom("Avenir", size: 20))
-                                    .foregroundColor(Color(hex: "1B463C"))
                                     .padding(.leading, 5)
                             }
                             
-                            Button(action: {
-                                // Handle button tap
-                            }) {
-                                Text("Electric Cars ICON")
-                                    .font(.custom("Avenir", size: 20))
-                                    .foregroundColor(Color(hex: "1B463C"))
-                                    .padding(.leading, 5)
-                            }
+                            Image("solar")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .cornerRadius(14.0)
+                                .frame(width: UIScreen.main.bounds.width / 5, height: 135)
+                            
+                            
+                            Spacer()
+                                .frame(height: 30)
+                            
                             
                             Button(action: {
                                 // Handle button tap
                             }) {
-                                Text("Electric Stoves ICON")
-                                    .font(.custom("Avenir", size: 20))
+                                Text("Electric Cars")
+                                    .font(.custom("Avenir", size: 30))
                                     .foregroundColor(Color(hex: "1B463C"))
+                                    .fontWeight(.black)
+                                    .padding(.leading, 5)
+                            }
+                            
+                            Image("car")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .cornerRadius(14.0)
+                                .frame(width: UIScreen.main.bounds.width / 5, height: 135)
+                            
+                            
+                            Spacer()
+                                .frame(height: 30)
+                            
+                            Button(action: {
+                                // Handle button tap
+                            }) {
+                                Text("Electric Stoves")
+                                    .font(.custom("Avenir", size: 30))
+                                    .foregroundColor(Color(hex: "1B463C"))
+                                    .fontWeight(.black)
                                     .padding(.leading, 5)
                             }
                         }

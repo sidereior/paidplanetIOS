@@ -128,7 +128,7 @@ struct HomeTab: View {
                             .frame(height: 30)
                         
                         
-                        Text("Do you use:")
+                        Text("Do you own:")
                             .font(.custom("Avenir", size: 20))
                             .font(.title)
                             .foregroundColor(Color(hex: "1B463C"))
