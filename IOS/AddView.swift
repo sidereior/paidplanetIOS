@@ -20,8 +20,8 @@ struct AddView: View {
             VStack{
                 
                 
-                    Text("Do you own:")
-                        .font(.custom("Avenir", size: 25))
+                    Text("Do you own and use:")
+                        .font(.custom("Avenir", size: 30))
                         .fontWeight(.bold)
                         .foregroundColor(Color(hex: "1B463C"))
                 Rectangle()
