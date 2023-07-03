@@ -11,8 +11,33 @@ import Firebase
 
 
 struct SolarPanelView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
-        Text("SolarPanels")
+        VStack {
+            HStack {
+                Spacer()
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Text("Cancel")
+                        .font(.custom("Avenir", size: 20))
+                        .foregroundColor(.red)
+                        .fontWeight(.bold)
+                        .padding(5)
+                        .background(Color.white)
+                        .cornerRadius(14)
+                }
+                .padding(.top, 20)
+                .padding(.trailing, 20)
+            }
+            
+            Spacer()
+            
+            Text("solar panel View")
+            
+            Spacer()
+        }
     }
 }
 

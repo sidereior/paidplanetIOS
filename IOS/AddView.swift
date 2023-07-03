@@ -10,16 +10,19 @@ import SwiftUI
 import Firebase
 
 
+import SwiftUI
 
 struct AddView: View {
+    @State private var isShowingSolarPanels = false
+    @State private var isShowingElectricCars = false
+    @State private var isShowingElectricStoves = false
+    
     var body: some View {
         ZStack {
             Color(hex: "C9EAD4")
                 .ignoresSafeArea()
-            ScrollView{
-                VStack{
-                    
-                    
+            ScrollView {
+                VStack {
                     Text("Do you own and use:")
                         .font(.custom("Avenir", size: 30))
                         .fontWeight(.bold)
@@ -31,78 +34,68 @@ struct AddView: View {
                         .shadow(radius: 3, x: 0, y: 3)
                         .padding(.horizontal, 20)
                         .overlay(
-                            VStack(alignment: .center) { // Updated alignment to center
-                                
-                                
-                                Spacer()
-                                    .frame(height: 30)
+                            VStack(alignment: .center) {
+                                Spacer().frame(height: 30)
                                 
                                 Button(action: {
-                                    // Handle button tap
+                                    isShowingSolarPanels = true
                                 }) {
                                     Text("Solar Panels")
                                         .font(.custom("Avenir", size: 30))
                                         .foregroundColor(Color(hex: "1B463C"))
                                         .fontWeight(.black)
                                         .padding(.leading, 5)
-                                    Spacer()
-                                        .frame(width: 10)
-                                    
+                                    Spacer().frame(width: 10)
                                     Image("solar")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .cornerRadius(14.0)
                                         .frame(width: UIScreen.main.bounds.width / 5, height: 135)
                                 }
+                                .sheet(isPresented: $isShowingSolarPanels) {
+                                    SolarPanelView()
+                                }
                                 
-                                
-                                
-                                Spacer()
-                                    .frame(height: 30)
-                                
+                                Spacer().frame(height: 30)
                                 
                                 Button(action: {
-                                    // Handle button tap
+                                    isShowingElectricCars = true
                                 }) {
                                     Text("Electric Cars")
                                         .font(.custom("Avenir", size: 30))
                                         .foregroundColor(Color(hex: "1B463C"))
                                         .fontWeight(.black)
                                         .padding(.leading, 5)
-                                    
-                                    Spacer()
-                                        .frame(width: 10)
-                                    
+                                    Spacer().frame(width: 10)
                                     Image("car")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .cornerRadius(14.0)
                                         .frame(width: UIScreen.main.bounds.width / 5, height: 135)
                                 }
+                                .sheet(isPresented: $isShowingElectricCars) {
+                                    ElectricCarView()
+                                }
                                 
-                                
-                                
-                                
-                                Spacer()
-                                    .frame(height: 30)
+                                Spacer().frame(height: 30)
                                 
                                 Button(action: {
-                                    // Handle button tap
+                                    isShowingElectricStoves = true
                                 }) {
                                     Text("Electric Stoves")
                                         .font(.custom("Avenir", size: 30))
                                         .foregroundColor(Color(hex: "1B463C"))
                                         .fontWeight(.black)
                                         .padding(.leading, 5)
-                                    
-                                    Spacer()
-                                        .frame(width: 10)
-                                    
+                                    Spacer().frame(width: 10)
                                     Image("stove")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .cornerRadius(14.0)
                                         .frame(width: UIScreen.main.bounds.width / 5, height: 135)
+                                }
+                                .sheet(isPresented: $isShowingElectricStoves) {
+                                    ElectricStoveView()
                                 }
                             }
                         )
