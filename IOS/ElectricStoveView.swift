@@ -13,7 +13,6 @@ import Firebase
 struct ElectricStoveView: View {
     @Environment(\.presentationMode) var presentationMode
     
-    
     var body: some View {
         VStack {
             HStack {
