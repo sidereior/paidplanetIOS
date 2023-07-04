@@ -13,6 +13,7 @@ struct LoginPage: View {
     @State private var shake = false
     
     func loginUser() {
+        print("test")
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if error != nil {
                 print(error!.localizedDescription)
@@ -25,6 +26,7 @@ struct LoginPage: View {
     }
     
     func registerUser() {
+        
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if error != nil {
                 print(error!.localizedDescription)
@@ -35,6 +37,7 @@ struct LoginPage: View {
     }
     
     var body: some View {
+       
         if userIsLoggedIn {
             HomeView()
         } else {
