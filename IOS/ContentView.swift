@@ -5,11 +5,13 @@ import Firebase
 struct LoginPage: View {
    
     @State private var email = ""
-    @State private var confirmPassword = ""
     @State private var password = ""
     @State private var name = ""
     @State private var userIsLoggedIn = false
     @State private var shake = false
+    @State private var confirmEmail = ""
+    @State private var confirmPassword = ""
+
     
     @State private var isSignUpMode = false
     
@@ -81,9 +83,11 @@ struct LoginPage: View {
                     .cornerRadius(14.0)
                     .padding(.horizontal, 25)
                     .font(.custom("Avenir", size: 20))
+                /*
                     .opacity(isSignUpMode ? 1.0 : 0.0)
                     .padding(.bottom, isSignUpMode ? 20 : 0)
                     .disabled(!isSignUpMode)
+                 */
                 
                 if isSignUpMode {
                     TextField("Confirm Email", text: $confirmEmail)
@@ -122,7 +126,7 @@ struct LoginPage: View {
                 }
                 
                 if isSignUpMode {
-                    TextField("Name", text: $name)
+                    TextField("What would you like to be called?", text: $name)
                         .autocapitalization(.none)
                         .padding(.horizontal, 15)
                         .font(.footnote.weight(.bold))
@@ -144,11 +148,13 @@ struct LoginPage: View {
                                 registerUser()
                             } else {
                                 // Show password mismatch error
-                                print("Password and Confirm Password do not match.")
+                                //come back to this later!
+                                print("Your passwords do not match.")
                             }
                         } else {
                             // Show email mismatch error
-                            print("Email and Confirm Email do not match.")
+                            
+                            print("Your email do not match.")
                         }
                     } else {
                         // Login user
