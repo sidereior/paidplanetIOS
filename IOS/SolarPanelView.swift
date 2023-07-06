@@ -63,6 +63,8 @@ struct SolarPanelView: View {
         
         let storage = Storage.storage() // Get reference to the Firebase Storage
         let storageRef = storage.reference() // Get the root reference
+
+        
         
         let imageRef = storageRef.child("images/\(UUID().uuidString).jpg") // Create a reference to the image file with a unique filename
         
@@ -139,3 +141,5 @@ struct ImagePicker: UIViewControllerRepresentable {
         }
     }
 }
+
+
