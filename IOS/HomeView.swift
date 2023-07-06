@@ -1,10 +1,12 @@
 import Foundation
 import SwiftUI
 import Firebase
+import FirebaseFirestore
 
 
 //todo: make the settings button functional with a logout button
 import CITTopTabBar
+
 struct HomeView: View {
     @State var selectedTab: Int = 0
     @State var tabs: [CITTopTab] = [
@@ -51,28 +53,27 @@ struct HomeView: View {
         return example
     }
 
-
     var body: some View {
         VStack {
             CITTopTabBarView(selectedTab: $selectedTab, tabs: $tabs, config: config)
 
             TabView(selection: $selectedTab) {
-                            HomeTab()
-                                .tag(0)
+                HomeTab()
+                    .tag(0)
 
-                            AddView()
-                                .tag(1)
+                AddView()
+                    .tag(1)
 
-                            TransactionsView()
-                                .tag(2)
+                TransactionsView()
+                    .tag(2)
 
-                            ProfileView()
-                                .tag(3)
-                        }
+                ProfileView()
+                    .tag(3)
+            }
             .tabViewStyle(.page(indexDisplayMode: .never))
             .edgesIgnoringSafeArea(.all)
         }
-        .background( Color(hex: "C9EAD4"))
+        .background(Color(hex: "C9EAD4"))
         .preferredColorScheme(.dark)
         .edgesIgnoringSafeArea(.all)
     }
@@ -85,6 +86,8 @@ struct TransactionsView: View {
 }
 
 struct HomeTab: View {
+    @State private var userName: String = ""
+    
     var greeting: String {
         let hour = Calendar.current.component(.hour, from: Date())
         
@@ -94,6 +97,26 @@ struct HomeTab: View {
             return "Good Afternoon"
         } else {
             return "Good Evening"
+        }
+    }
+    
+    private func fetchUserName() {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let db = Firestore.firestore()
+      
+        let userRef = db.collection("users").document(uid)
+        
+        userRef.getDocument { document, error in
+            if let document = document, document.exists {
+                if let userName = document.data()?["name"] as? String {
+                    self.userName = userName
+                }
+            } else {
+                print("User document does not exist")
+            }
         }
     }
     
@@ -108,7 +131,7 @@ struct HomeTab: View {
                 ZStack {
                     Color(hex: "C9EAD4")
                     VStack {
-                        Text(greeting + ", Username")
+                        Text(greeting + ", \(userName)")
                             .font(.custom("Avenir", size: 25) .bold())
                             .font(.title)
                             .foregroundColor(Color(hex: "1B463C"))
@@ -136,37 +159,23 @@ struct HomeTab: View {
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                             .padding(.leading, 15)
                        
-                                VStack(alignment: .center) { // Updated alignment to center
+                                VStack(alignment: .center) {
                                     HStack{
-                                        Rectangle()
-                                            .fill(Color(hex: "59DB84"))
-                                            .frame(height: 35)
-                                            .cornerRadius(14.0)
-                                            .shadow(radius: 3, x: 0, y: 3)                                            .overlay(
-                                        Button(action: {
-                                            // Handle button tap
-                                        }) {
-                                            Text("Solar Panels")
-                                                .font(.custom("Avenir", size: 15))
-                                                .fontWeight(.black)
-                                                .foregroundColor(Color(hex: "1B463C"))
-                                        }
-                                        )
                                         Rectangle()
                                             .fill(Color(hex: "59DB84"))
                                             .frame(height: 35)
                                             .cornerRadius(14.0)
                                             .shadow(radius: 3, x: 0, y: 3)
                                             .overlay(
-                                        Button(action: {
-                                            // Handle button tap
-                                        }) {
-                                            Text("Electric Cars")
-                                                .font(.custom("Avenir", size: 15))
-                                                .fontWeight(.black)
-                                                .foregroundColor(Color(hex: "1B463C"))
-                                        }
-                                        )
+                                                Button(action: {
+                                                    // Handle button tap
+                                                }) {
+                                                    Text("Solar Panels")
+                                                        .font(.custom("Avenir", size: 15))
+                                                        .fontWeight(.black)
+                                                        .foregroundColor(Color(hex: "1B463C"))
+                                                }
+                                            )
                                         
                                         Rectangle()
                                             .fill(Color(hex: "59DB84"))
@@ -174,15 +183,31 @@ struct HomeTab: View {
                                             .cornerRadius(14.0)
                                             .shadow(radius: 3, x: 0, y: 3)
                                             .overlay(
-                                        Button(action: {
-                                            // Handle button tap
-                                        }) {
-                                            Text("Electric Stoves")
-                                                .font(.custom("Avenir", size: 15))
-                                                .fontWeight(.black)
-                                                .foregroundColor(Color(hex: "1B463C"))
-                                        }
-                                        )
+                                                Button(action: {
+                                                    // Handle button tap
+                                                }) {
+                                                    Text("Electric Cars")
+                                                        .font(.custom("Avenir", size: 15))
+                                                        .fontWeight(.black)
+                                                        .foregroundColor(Color(hex: "1B463C"))
+                                                }
+                                            )
+                                        
+                                        Rectangle()
+                                            .fill(Color(hex: "59DB84"))
+                                            .frame(height: 35)
+                                            .cornerRadius(14.0)
+                                            .shadow(radius: 3, x: 0, y: 3)
+                                            .overlay(
+                                                Button(action: {
+                                                    // Handle button tap
+                                                }) {
+                                                    Text("Electric Stoves")
+                                                        .font(.custom("Avenir", size: 15))
+                                                        .fontWeight(.black)
+                                                        .foregroundColor(Color(hex: "1B463C"))
+                                                }
+                                            )
                                     }
                                 }
                                 .padding(.horizontal, 15)
@@ -193,147 +218,57 @@ struct HomeTab: View {
                         
                         
                         Group {
-                        //recent transaction view
-                            
-                        
-                        Rectangle()
-                            .fill(Color(hex: "1B463C"))
-                            .frame( height: 265)
-                            .cornerRadius(14.0)
-                            .padding(.horizontal)
-                            .shadow(radius: 3, x: 0, y: 3)
-                            .overlay(
-                                VStack() {
-                                    
+                            //recent transaction view
+                            Rectangle()
+                                .fill(Color(hex: "1B463C"))
+                                .frame(height: 265)
+                                .cornerRadius(14.0)
+                                .padding(.horizontal)
+                                .shadow(radius: 3, x: 0, y: 3)
+                                .overlay(
+                                    VStack() {
                                         Text("Recent Transactions")
                                             .font(.custom("Avenir", size: 35))
                                             .font(.title)
                                             .fontWeight(.black)
                                             .foregroundColor(.white)
                                             .frame(minWidth: 0, maxWidth: .infinity)
+                                        
+                                        Rectangle()
+                                            .fill(Color.white)
+                                            .frame(height: 2)
+                                            .padding(.horizontal, 35)
+                                            .padding(.top, -25)
                                     
-                                    
-                                    Rectangle()
-                                        .fill(Color.white)
-                                        .frame(height: 2)
+                                        VStack(alignment: .leading, spacing: 10) {
+                                            //change these later to recent transaction view
+                                            TransactionBox(date: "5/27/23", status: "Completed", amount: "approx. $50.23")
+                                            TransactionBox(date: "5/20/23", status: "Completed", amount: "approx. $35.23")
+                                            TransactionBox(date: "5/26/23", status: "Pending", amount: "approx. $30.34")
+                                        }
                                         .padding(.horizontal, 35)
-                                        .padding(.top, -25)
-                                
-                                    
-                                    VStack(alignment: .leading, spacing: 10) {
-                                        //change these later to recent transaction view
-                                        TransactionBox(date: "5/27/23", status: "Completed", amount: "approx. $50.23")
-                                        TransactionBox(date: "5/20/23", status: "Completed", amount: "approx. $35.23")
-                                        TransactionBox(date: "5/26/23", status: "Pending", amount: "approx. $30.34")
-                                    }
-                                    .padding(.horizontal, 35)
-                                    .padding(.top, -20)
-                                    
-                                    
-                                    RoundedRectangle(cornerRadius: 14)
+                                        .padding(.top, -20)
+                                        
+                                        RoundedRectangle(cornerRadius: 14)
                                             .fill(Color.white)
                                             .frame(height: 35)
                                             .overlay(
-                                                    VStack(alignment: .leading) {
-                                                        Text("View All Transactions")
-                                                    .font(.custom("Avenir", size: 23))
-                                                    .fontWeight(.bold)
-                                                    .foregroundColor(Color(hex: "1B463C"))
-                                                    .padding(.top, 11)
-                                                    .padding(.leading, 25)
-                                                                                   
+                                                VStack(alignment: .leading) {
+                                                    Text("View All Transactions")
+                                                        .font(.custom("Avenir", size: 23))
+                                                        .fontWeight(.bold)
+                                                        .foregroundColor(Color(hex: "1B463C"))
+                                                        .padding(.top, 11)
+                                                        .padding(.leading, 25)
                                                     Spacer()
-                                                        }
-                                                        )
+                                                }
+                                            )
                                             .padding(.horizontal, 35)
-                                                            
                                 }
-                            )
-                        
-                        Spacer()
-                            .frame(height: 30)
-                        
-                       
-                        Rectangle()
-                            .fill(Color(hex: "67C587"))
-                            .frame(height: 85)
-                            .cornerRadius(14.0)
-                            .shadow(radius: 3, x: 0, y: 3)
-                            .padding(.horizontal, 15)
-                            .overlay(
-                                VStack() { // Updated alignment to center
-                                    Button(action: {
-                                        // Handle button tap
-                                    }) {
-                                        Text("Need Help with PaidPlanet?")
-                                            .font(.custom("Avenir", size: 25))
-                                            .fontWeight(.black)
-                                            .foregroundColor(Color(hex: "1B463C"))
-                                            .frame(alignment: .center)
-                                    }
-                                    
-                                    Button(action: {
-                                        // Handle button tap
-                                    }) {
-                                        Text("Learn more here.")
-                                            .font(.custom("Avenir", size: 20))
-                                            .foregroundColor(Color(hex: "1B463C"))
-                                            .padding(.leading, 5)
-                                            .frame(alignment: .leading)
-                                    }
-                                }
-                            )
-
-                        
-
-                        Spacer().frame(height: 30)
-                        
-                         
-                        Rectangle()
-                            .fill(Color(hex: "67C587"))
-                            .frame(height: 210)
-                            .cornerRadius(14.0)
-                            .shadow(radius: 3, x: 0, y: 3)
-                            .padding(.horizontal, 15)
-                            .overlay(
-                                VStack(spacing: 10) {
-                                    Text("Our Sponsors:")
-                                        .font(.custom("Avenir", size: 25))
-                                        .fontWeight(.black)
-                                        .foregroundColor(Color(hex: "1B463C"))
-                                    
-                                    HStack(spacing: 10) {
-                                        
-                                        Image("tesla-motors")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .cornerRadius(14.0)
-                                            .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
-                                        
-                                        Image("oneshot")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .cornerRadius(14.0)
-                                            .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
-                                        Image("GM")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .cornerRadius(14.0)
-                                            .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
-                                       
-                                            
-                                
-                                    }
-                                }
-                                .padding(.horizontal, 15)
-                            )
-                        }
-
-                    
-                        Group{
+                                )
+                            
                             Spacer()
                                 .frame(height: 30)
-                            
                             
                             Rectangle()
                                 .fill(Color(hex: "67C587"))
@@ -342,7 +277,7 @@ struct HomeTab: View {
                                 .shadow(radius: 3, x: 0, y: 3)
                                 .padding(.horizontal, 15)
                                 .overlay(
-                                    VStack(alignment: .center) { // Updated alignment to center
+                                    VStack() {
                                         Button(action: {
                                             // Handle button tap
                                         }) {
@@ -350,6 +285,7 @@ struct HomeTab: View {
                                                 .font(.custom("Avenir", size: 25))
                                                 .fontWeight(.black)
                                                 .foregroundColor(Color(hex: "1B463C"))
+                                                .frame(alignment: .center)
                                         }
                                         
                                         Button(action: {
@@ -358,23 +294,19 @@ struct HomeTab: View {
                                             Text("Learn more here.")
                                                 .font(.custom("Avenir", size: 20))
                                                 .foregroundColor(Color(hex: "1B463C"))
-                                                .padding(.leading, 5)
+                                                .padding(.leading, 10)
                                         }
                                     }
                                 )
                         }
-                        
-                        
-                        
                     }
-                    .padding(.top, 5)
-                    
                 }
-                }
-                // todo fix divider later
-                //make it so that the taskbar at the bottom has the add tab standout
             }
         }
+        .onAppear {
+            fetchUserName()
+        }
+    }
 }
 
 struct TransactionBox: View {
@@ -411,7 +343,6 @@ struct TransactionBox: View {
         }
     }
 }
-
  
 
 struct ProfileView: View {
