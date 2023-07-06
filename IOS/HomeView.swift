@@ -101,9 +101,10 @@ struct HomeTab: View {
         ZStack {
             Color(hex: "C9EAD4")
                 .ignoresSafeArea()
-            ScrollView{
+           
                 
             VStack {
+                
                 ZStack {
                     Color(hex: "C9EAD4")
                     VStack {
@@ -374,7 +375,6 @@ struct HomeTab: View {
                 //make it so that the taskbar at the bottom has the add tab standout
             }
         }
-    }
 }
 
 struct TransactionBox: View {
@@ -412,7 +412,7 @@ struct TransactionBox: View {
     }
 }
 
-
+ 
 
 struct ProfileView: View {
     var body: some View {
