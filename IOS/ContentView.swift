@@ -1,6 +1,9 @@
 import SwiftUI
 import AuthenticationServices
 import Firebase
+import FirebaseDatabase
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 struct LoginPage: View {
    
@@ -26,16 +29,33 @@ struct LoginPage: View {
             }
         }
     }
-    
     func registerUser() {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            if error != nil {
-                print(error!.localizedDescription)
-            } else {
-                userIsLoggedIn = true
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let authResult = authResult {
+                // Create a dictionary with user data
+                let userData: [String: Any] = [
+                    "name": name,
+                    // Add other fields as needed
+                ]
+                
+                // Initialize the Firestore database
+                let db = Firestore.firestore()
+                
+                // Set user data in the Firestore database
+                db.collection("users").document(authResult.user.uid).setData(userData) { error in
+                    if let error = error {
+                        print("Error setting user data: \(error.localizedDescription)")
+                    } else {
+                        userIsLoggedIn = true
+                    }
+                }
             }
         }
     }
+
+
     
     var body: some View {
         if userIsLoggedIn {
