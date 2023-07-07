@@ -10,6 +10,9 @@ import SwiftUI
 import Firebase
 struct ElectricCarView: View {
     @Environment(\.presentationMode) var presentationMode
+        @State private var isShowingImagePicker = false
+        @State private var selectedImage: UIImage?
+       
     
     var body: some View {
         VStack {
