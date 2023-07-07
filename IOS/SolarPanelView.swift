@@ -9,49 +9,53 @@ struct SolarPanelView: View {
     @State private var selectedImage: UIImage?
     
     var body: some View {
-        VStack {
-            HStack {
+        ZStack{
+            Color(hex: "1B463C")
+                .ignoresSafeArea()
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Text("Cancel")
+                            .font(.custom("Avenir", size: 20))
+                            .foregroundColor(.red)
+                            .fontWeight(.bold)
+                            .padding(5)
+                            .background(Color.white)
+                            .cornerRadius(14)
+                    }
+                    .padding(.top, 20)
+                    .padding(.trailing, 20)
+                }
+                
                 Spacer()
+                
+                if let image = selectedImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                } else {
+                    Text("No Image Selected")
+                }
+                
                 Button(action: {
-                    presentationMode.wrappedValue.dismiss()
+                    isShowingImagePicker = true
                 }) {
-                    Text("Cancel")
+                    Text("Upload Photo")
                         .font(.custom("Avenir", size: 20))
-                        .foregroundColor(.red)
+                        .foregroundColor(.blue)
                         .fontWeight(.bold)
-                        .padding(5)
+                        .padding()
                         .background(Color.white)
                         .cornerRadius(14)
                 }
-                .padding(.top, 20)
-                .padding(.trailing, 20)
             }
-            
-            Spacer()
-            
-            if let image = selectedImage {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 200, height: 200)
-            } else {
-                Text("No Image Selected")
+            .sheet(isPresented: $isShowingImagePicker, onDismiss: uploadImage) {
+                ImagePicker(selectedImage: $selectedImage)
             }
-            
-            Button(action: {
-                isShowingImagePicker = true
-            }) {
-                Text("Upload Photo")
-                    .font(.custom("Avenir", size: 20))
-                    .foregroundColor(.blue)
-                    .fontWeight(.bold)
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(14)
-            }
-        }
-        .sheet(isPresented: $isShowingImagePicker, onDismiss: uploadImage) {
-            ImagePicker(selectedImage: $selectedImage)
         }
     }
     
