@@ -191,6 +191,7 @@ func uploadImage(selectedImage: UIImage?, firstName: String, lastName: String) {
             case .failure(let error):
                 print("Error downloading URL: \(error.localizedDescription)")
             }
+            //test
         }
     }
 }
