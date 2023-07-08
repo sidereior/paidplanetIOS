@@ -1,15 +1,32 @@
 import SwiftUI
 import Firebase
 import FirebaseStorage
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 import UIKit
+
+struct Transaction: Codable {
+    var firstName: String
+    var lastName: String
+    var imagePath1: String
+    var imagePath2: String
+    var imagePath3: String
+    var imagePath4: String
+    var transactionDate: Date
+}
 
 struct SolarPanelView: View {
     @Environment(\.presentationMode) var presentationMode
+    @State private var isShowingImagePicker = false
     @State private var selectedImage: UIImage?
-    @State private var firstName: String = ""
-    @State private var lastName: String = ""
-    
-    
+    @State private var firstName = ""
+    @State private var lastName = ""
+    @State private var imagePath1: String?
+    @State private var imagePath2: String?
+    @State private var imagePath3: String?
+    @State private var imagePath4: String?
+    @State private var currentImageNumber = 1
+
     var body: some View {
         ZStack{
             Color(hex: "1B463C")
@@ -30,42 +47,18 @@ struct SolarPanelView: View {
                     }
                     .padding(.top, 20)
                     .padding(.trailing, 20)
-<<<<<<< HEAD
                 }
                 
                 Spacer()
                 
-                
-                TextField("First Name", text: $firstName)
-                    .font(.custom("Avenir", size: 20))
-                    .foregroundColor(.white)
+                TextField("First name", text: $firstName)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
-                    .background(Color.white)
-                    .cornerRadius(14)
-                    .padding(.horizontal)
-                    .autocapitalization(.words)
-                
-                TextField("Last Name", text: $lastName)
-                    .font(.custom("Avenir", size: 20))
-                    .foregroundColor(.white)
+
+                TextField("Last name", text: $lastName)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
-                    .background(Color.white)
-                    .cornerRadius(14)
-                    .padding(.horizontal)
-                    .autocapitalization(.words)
-                
-                if let image = selectedImage {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200, height: 200)
-                } else {
-                    Text("No Image Selected")
-=======
-                }
-                
-                Spacer()
-                
+
                 if let image = selectedImage {
                     Image(uiImage: image)
                         .resizable()
@@ -76,9 +69,35 @@ struct SolarPanelView: View {
                 }
                 
                 Button(action: {
+                    currentImageNumber = 1
                     isShowingImagePicker = true
                 }) {
-                    Text("Upload Photo")
+                    Text("Upload Photo 1")
+                        .font(.custom("Avenir", size: 20))
+                        .foregroundColor(.blue)
+                        .fontWeight(.bold)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(14)
+                }
+
+                Button(action: {
+                    currentImageNumber = 2
+                    isShowingImagePicker = true
+                }) {
+                    Text("Upload Photo 2")
+                        .font(.custom("Avenir", size: 20))
+                        .foregroundColor(.blue)
+                        .fontWeight(.bold)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(14)
+                }
+
+                // ... and so on for buttons 3 and 4
+
+                Button(action: uploadTransaction) {
+                    Text("Confirm Transaction")
                         .font(.custom("Avenir", size: 20))
                         .foregroundColor(.blue)
                         .fontWeight(.bold)
@@ -102,9 +121,8 @@ struct SolarPanelView: View {
         let storage = Storage.storage() // Get reference to the Firebase Storage
         let storageRef = storage.reference() // Get the root reference
 
-        
-        
-        let imageRef = storageRef.child("images/\(UUID().uuidString).jpg") // Create a reference to the image file with a unique filename
+        let imageName = "\(UUID().uuidString).jpg"
+        let imageRef = storageRef.child("images/\(imageName)") // Create a reference to the image file with a unique filename
         
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
@@ -126,24 +144,43 @@ struct SolarPanelView: View {
                         print("Error getting download URL: \(error.localizedDescription)")
                     }
                     return
->>>>>>> refs/remotes/origin/main
                 }
                 
-                
-                Button(action: {
-                    uploadImage(selectedImage: selectedImage, firstName: firstName, lastName: lastName)
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("Upload Photo")
-                        .font(.custom("Avenir", size: 20))
-                        .foregroundColor(.blue)
-                        .fontWeight(.bold)
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(14)
+                // Use the download URL for further operations (e.g., save it to a database)
+                let urlString = downloadURL.absoluteString
+                print("Download URL: \(urlString)")
+                if currentImageNumber == 1 {
+                    imagePath1 = urlString
                 }
+                else if currentImageNumber == 2 {
+                    imagePath2 = urlString
+                }
+                // and so on for image paths 3 and 4
             }
         }
+    }
+
+    func uploadTransaction() {
+        let db = Firestore.firestore()
+        let transaction = Transaction(firstName: firstName,
+                          lastName: lastName,
+                          imagePath1: imagePath1 ?? "",
+                          imagePath2: imagePath2 ?? "",
+                          imagePath3: imagePath3 ?? "",
+                          imagePath4: imagePath4 ?? "",
+                          transactionDate: Date())
+        
+        do {
+            try db.collection("transactions").addDocument(from: transaction)
+        } catch let error {
+            print("Error writing transaction to Firestore: \(error)")
+        }
+    }
+}
+
+struct SolarPanelView_Previews: PreviewProvider {
+    static var previews: some View {
+        SolarPanelView()
     }
 }
 
@@ -181,84 +218,6 @@ struct ImagePicker: UIViewControllerRepresentable {
         
         func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
             parent.presentationMode.wrappedValue.dismiss()
-        }
-    }
-}
-
-
-struct Transaction {
-    let transactionID: String
-    let userID: String
-    let firstName: String
-    let lastName: String
-    let uploadedImages: [String]
-    
-    var dictionary: [String: Any] {
-        return [
-            "transactionID": transactionID,
-            "userID": userID,
-            "firstName": firstName,
-            "lastName": lastName,
-            "uploadedImages": uploadedImages
-        ]
-    }
-}
-
-
-
-func uploadImage(selectedImage: UIImage?, firstName: String, lastName: String) {
-    guard let image = selectedImage,
-        let imageData = image.jpegData(compressionQuality: 0.8) else {
-        return
-    }
-    
-    let storage = Storage.storage() // Get reference to the Firebase Storage
-    let storageRef = storage.reference() // Get the root reference
-
-    let imageRef = storageRef.child("images/\(UUID().uuidString).jpg") // Create a reference to the image file with a unique filename
-    
-    let metadata = StorageMetadata()
-    metadata.contentType = "image/jpeg"
-    
-    // Upload the image data to Firebase Storage
-    imageRef.putData(imageData, metadata: metadata) { (_, error) in
-        if let error = error {
-            print("Error uploading image: \(error.localizedDescription)")
-            return
-        }
-        
-        // Image uploaded successfully
-        print("Image uploaded successfully")
-        
-        // Get the download URL for the uploaded image
-        imageRef.downloadURL { (result) in
-            switch result {
-            case .success(let url):
-                let urlString = url.absoluteString
-                print("Download URL: \(urlString)")
-                
-                // Create a new transaction object with the entered data
-                let transaction = Transaction(transactionID: UUID().uuidString,
-                                          userID: "", // Replace with the actual user ID
-                                          firstName: firstName,
-                                          lastName: lastName,
-                                          uploadedImages: [urlString]) // Store the image URL in the uploadedImages array
-                
-                // Save the transaction to Firebase
-                let database = Firestore.firestore() // Get reference to the Firebase Firestore database
-                let transactionsCollection = database.collection("transactions") // Reference to the "transactions" collection
-
-                transactionsCollection.document(transaction.transactionID).setData(transaction.dictionary) { error in
-                    if let error = error {
-                        print("Error saving transaction: \(error.localizedDescription)")
-                    } else {
-                        print("Transaction saved successfully")
-                    }
-                }
-            case .failure(let error):
-                print("Error downloading URL: \(error.localizedDescription)")
-            }
-            //test
         }
     }
 }
