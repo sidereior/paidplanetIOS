@@ -5,10 +5,11 @@ import UIKit
 
 struct SolarPanelView: View {
     @Environment(\.presentationMode) var presentationMode
-    @Binding var selectedImage: UIImage?
-    @Binding var firstName: String
-    @Binding var lastName: String
-
+    @State private var selectedImage: UIImage?
+    @State private var firstName: String = ""
+    @State private var lastName: String = ""
+    
+    
     var body: some View {
         ZStack{
             Color(hex: "1B463C")
@@ -79,12 +80,6 @@ struct SolarPanelView: View {
     }
 }
 
-struct SolarPanelView_Previews: PreviewProvider {
-    static var previews: some View {
-        SolarPanelView(selectedImage: .constant(nil), firstName: .constant(""), lastName: .constant(""))
-    }
-}
-
 struct ImagePicker: UIViewControllerRepresentable {
     @Environment(\.presentationMode) var presentationMode
     @Binding var selectedImage: UIImage?
@@ -130,13 +125,23 @@ struct Transaction {
     let firstName: String
     let lastName: String
     let uploadedImages: [String]
+    
+    var dictionary: [String: Any] {
+        return [
+            "transactionID": transactionID,
+            "userID": userID,
+            "firstName": firstName,
+            "lastName": lastName,
+            "uploadedImages": uploadedImages
+        ]
+    }
 }
 
 
 
 func uploadImage(selectedImage: UIImage?, firstName: String, lastName: String) {
     guard let image = selectedImage,
-          let imageData = image.jpegData(compressionQuality: 0.8) else {
+        let imageData = image.jpegData(compressionQuality: 0.8) else {
         return
     }
     
@@ -149,7 +154,7 @@ func uploadImage(selectedImage: UIImage?, firstName: String, lastName: String) {
     metadata.contentType = "image/jpeg"
     
     // Upload the image data to Firebase Storage
-    let _ = imageRef.putData(imageData, metadata: metadata) { (_, error) in
+    imageRef.putData(imageData, metadata: metadata) { (_, error) in
         if let error = error {
             print("Error uploading image: \(error.localizedDescription)")
             return
@@ -159,29 +164,33 @@ func uploadImage(selectedImage: UIImage?, firstName: String, lastName: String) {
         print("Image uploaded successfully")
         
         // Get the download URL for the uploaded image
-       
-            
-            // Use the download URL for further operations (e.g., save it to a database)
-            let urlString = imageRef.downloadURL.absoluteString
-            print("Download URL: \(urlString)")
-            
-            // Create a new transaction object with the entered data
-            let transaction = Transaction(transactionID: UUID().uuidString,
+        imageRef.downloadURL { (result) in
+            switch result {
+            case .success(let url):
+                let urlString = url.absoluteString
+                print("Download URL: \(urlString)")
+                
+                // Create a new transaction object with the entered data
+                let transaction = Transaction(transactionID: UUID().uuidString,
                                           userID: "", // Replace with the actual user ID
                                           firstName: firstName,
                                           lastName: lastName,
                                           uploadedImages: [urlString]) // Store the image URL in the uploadedImages array
-            
-            // Save the transaction to Firebase
-            let database = Firestore.firestore() // Get reference to the Firebase Firestore database
-            let transactionsCollection = database.collection("transactions") // Reference to the "transactions" collection
+                
+                // Save the transaction to Firebase
+                let database = Firestore.firestore() // Get reference to the Firebase Firestore database
+                let transactionsCollection = database.collection("transactions") // Reference to the "transactions" collection
 
-            transactionsCollection.document(transaction.transactionID).setData(transaction.dictionary) { error in
-                if let error = error {
-                    print("Error saving transaction: \(error.localizedDescription)")
-                } else {
-                    print("Transaction saved successfully")
+                transactionsCollection.document(transaction.transactionID).setData(transaction.dictionary) { error in
+                    if let error = error {
+                        print("Error saving transaction: \(error.localizedDescription)")
+                    } else {
+                        print("Transaction saved successfully")
+                    }
                 }
+            case .failure(let error):
+                print("Error downloading URL: \(error.localizedDescription)")
             }
+        }
     }
 }

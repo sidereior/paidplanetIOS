@@ -45,6 +45,6 @@ struct ElectricStoveView: View {
 
 struct ElectricStoveView_Previews: PreviewProvider {
     static var previews: some View {
-       SolarPanelView()
+       ElectricStoveView()
     }
 }
