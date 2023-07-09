@@ -75,7 +75,8 @@ struct LoginPage: View {
             
             VStack(spacing: 20) {
                 Spacer()
-                HStack {
+                    .frame(height: 250)
+              
                     Text(("Welcome to"))
                         .font(.custom("Avenir", size: 32))
                         .fontWeight(.black)
@@ -91,8 +92,7 @@ struct LoginPage: View {
                         .font(.custom("Avenir-Oblique", size: 32))
                         .fontWeight(.black)
                         .foregroundColor(Color(hex: "1B463C"))
-                }
-                .padding(.top, 250)
+                
                 
                 TextField("Email", text: $email)
                     .autocapitalization(.none)
@@ -211,7 +211,7 @@ struct LoginPage: View {
                         .cornerRadius(14.0)
                         .padding(.bottom, 50)
                 })
-                Spacer()
+               
             }
             .padding()
         }

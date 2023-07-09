@@ -125,179 +125,227 @@ struct HomeTab: View {
             Color(hex: "C9EAD4")
                 .ignoresSafeArea()
            
+            ScrollView
+            {
                 
-            VStack {
-                
-                ZStack {
-                    Color(hex: "C9EAD4")
-                    VStack {
-                        Text(greeting + ", \(userName)")
-                            .font(.custom("Avenir", size: 25) .bold())
-                            .font(.title)
-                            .foregroundColor(Color(hex: "1B463C"))
-                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading, 15)
-                        
-                        Spacer()
-                            .frame(height: 3)
-                        
-                        Text(Date(), style: .date)
-                            .font(.custom("Avenir", size: 20))
-                            .font(.title)
-                            .foregroundColor(Color(hex: "1B463C"))
-                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading, 15)
-                        
-                        Spacer()
-                            .frame(height: 30)
-                        
-                        
-                        Text("Do you own:")
-                            .font(.custom("Avenir", size: 20))
-                            .font(.title)
-                            .foregroundColor(Color(hex: "1B463C"))
-                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading, 15)
-                       
-                                VStack(alignment: .center) {
-                                    HStack{
-                                        Rectangle()
-                                            .fill(Color(hex: "59DB84"))
-                                            .frame(height: 35)
-                                            .cornerRadius(14.0)
-                                            .shadow(radius: 3, x: 0, y: 3)
-                                            .overlay(
-                                                Button(action: {
-                                                    // Handle button tap
-                                                }) {
-                                                    Text("Solar Panels")
-                                                        .font(.custom("Avenir", size: 15))
-                                                        .fontWeight(.black)
-                                                        .foregroundColor(Color(hex: "1B463C"))
-                                                }
-                                            )
-                                        
-                                        Rectangle()
-                                            .fill(Color(hex: "59DB84"))
-                                            .frame(height: 35)
-                                            .cornerRadius(14.0)
-                                            .shadow(radius: 3, x: 0, y: 3)
-                                            .overlay(
-                                                Button(action: {
-                                                    // Handle button tap
-                                                }) {
-                                                    Text("Electric Cars")
-                                                        .font(.custom("Avenir", size: 15))
-                                                        .fontWeight(.black)
-                                                        .foregroundColor(Color(hex: "1B463C"))
-                                                }
-                                            )
-                                        
-                                        Rectangle()
-                                            .fill(Color(hex: "59DB84"))
-                                            .frame(height: 35)
-                                            .cornerRadius(14.0)
-                                            .shadow(radius: 3, x: 0, y: 3)
-                                            .overlay(
-                                                Button(action: {
-                                                    // Handle button tap
-                                                }) {
-                                                    Text("Electric Stoves")
-                                                        .font(.custom("Avenir", size: 15))
-                                                        .fontWeight(.black)
-                                                        .foregroundColor(Color(hex: "1B463C"))
-                                                }
-                                            )
-                                    }
-                                }
-                                .padding(.horizontal, 15)
-                                .padding(.top, -10)
+                VStack {
+                    
+                    ZStack {
+                        Color(hex: "C9EAD4")
+                        VStack {
+                            Text(greeting + ", \(userName)")
+                                .font(.custom("Avenir", size: 25) .bold())
+                                .font(.title)
+                                .foregroundColor(Color(hex: "1B463C"))
+                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                .padding(.leading, 15)
                             
-                        Spacer()
-                            .frame(height: 15)
-                        
-                        
-                        Group {
-                            //recent transaction view
-                            Rectangle()
-                                .fill(Color(hex: "1B463C"))
-                                .frame(height: 265)
-                                .cornerRadius(14.0)
-                                .padding(.horizontal)
-                                .shadow(radius: 3, x: 0, y: 3)
-                                .overlay(
-                                    VStack() {
-                                        Text("Recent Transactions")
-                                            .font(.custom("Avenir", size: 35))
-                                            .font(.title)
-                                            .fontWeight(.black)
-                                            .foregroundColor(.white)
-                                            .frame(minWidth: 0, maxWidth: .infinity)
-                                        
-                                        Rectangle()
-                                            .fill(Color.white)
-                                            .frame(height: 2)
-                                            .padding(.horizontal, 35)
-                                            .padding(.top, -25)
-                                    
-                                        VStack(alignment: .leading, spacing: 10) {
-                                            //change these later to recent transaction view
-                                            TransactionBox(date: "5/27/23", status: "Completed", amount: "approx. $50.23")
-                                            TransactionBox(date: "5/20/23", status: "Completed", amount: "approx. $35.23")
-                                            TransactionBox(date: "5/26/23", status: "Pending", amount: "approx. $30.34")
-                                        }
-                                        .padding(.horizontal, 35)
-                                        .padding(.top, -20)
-                                        
-                                        RoundedRectangle(cornerRadius: 14)
-                                            .fill(Color.white)
-                                            .frame(height: 35)
-                                            .overlay(
-                                                VStack(alignment: .leading) {
-                                                    Text("View All Transactions")
-                                                        .font(.custom("Avenir", size: 23))
-                                                        .fontWeight(.bold)
-                                                        .foregroundColor(Color(hex: "1B463C"))
-                                                        .padding(.top, 11)
-                                                        .padding(.leading, 25)
-                                                    Spacer()
-                                                }
-                                            )
-                                            .padding(.horizontal, 35)
-                                }
-                                )
+                            Spacer()
+                                .frame(height: 3)
+                            
+                            Text(Date(), style: .date)
+                                .font(.custom("Avenir", size: 20))
+                                .font(.title)
+                                .foregroundColor(Color(hex: "1B463C"))
+                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                .padding(.leading, 15)
                             
                             Spacer()
                                 .frame(height: 30)
                             
-                            Rectangle()
-                                .fill(Color(hex: "67C587"))
-                                .frame(height: 85)
-                                .cornerRadius(14.0)
-                                .shadow(radius: 3, x: 0, y: 3)
-                                .padding(.horizontal, 15)
-                                .overlay(
-                                    VStack() {
-                                        Button(action: {
-                                            // Handle button tap
-                                        }) {
-                                            Text("Need Help with PaidPlanet?")
+                            
+                            Text("Do you own:")
+                                .font(.custom("Avenir", size: 20))
+                                .font(.title)
+                                .foregroundColor(Color(hex: "1B463C"))
+                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                .padding(.leading, 15)
+                            
+                            VStack(alignment: .center) {
+                                HStack{
+                                    Rectangle()
+                                        .fill(Color(hex: "59DB84"))
+                                        .frame(height: 35)
+                                        .cornerRadius(14.0)
+                                        .shadow(radius: 3, x: 0, y: 3)
+                                        .overlay(
+                                            Button(action: {
+                                                // Handle button tap
+                                            }) {
+                                                Text("Solar Panels")
+                                                    .font(.custom("Avenir", size: 15))
+                                                    .fontWeight(.black)
+                                                    .foregroundColor(Color(hex: "1B463C"))
+                                            }
+                                        )
+                                    
+                                    Rectangle()
+                                        .fill(Color(hex: "59DB84"))
+                                        .frame(height: 35)
+                                        .cornerRadius(14.0)
+                                        .shadow(radius: 3, x: 0, y: 3)
+                                        .overlay(
+                                            Button(action: {
+                                                // Handle button tap
+                                            }) {
+                                                Text("Electric Cars")
+                                                    .font(.custom("Avenir", size: 15))
+                                                    .fontWeight(.black)
+                                                    .foregroundColor(Color(hex: "1B463C"))
+                                            }
+                                        )
+                                    
+                                    Rectangle()
+                                        .fill(Color(hex: "59DB84"))
+                                        .frame(height: 35)
+                                        .cornerRadius(14.0)
+                                        .shadow(radius: 3, x: 0, y: 3)
+                                        .overlay(
+                                            Button(action: {
+                                                // Handle button tap
+                                            }) {
+                                                Text("Electric Stoves")
+                                                    .font(.custom("Avenir", size: 15))
+                                                    .fontWeight(.black)
+                                                    .foregroundColor(Color(hex: "1B463C"))
+                                            }
+                                        )
+                                }
+                            }
+                            .padding(.horizontal, 15)
+                            .padding(.top, -10)
+                            
+                            Spacer()
+                                .frame(height: 15)
+                            
+                            
+                            Group {
+                                //recent transaction view
+                                Rectangle()
+                                    .fill(Color(hex: "1B463C"))
+                                    .frame(height: 265)
+                                    .cornerRadius(14.0)
+                                    .padding(.horizontal)
+                                    .shadow(radius: 3, x: 0, y: 3)
+                                    .overlay(
+                                        VStack() {
+                                            Text("Recent Transactions")
+                                                .font(.custom("Avenir", size: 35))
+                                                .font(.title)
+                                                .fontWeight(.black)
+                                                .foregroundColor(.white)
+                                                .frame(minWidth: 0, maxWidth: .infinity)
+                                            
+                                            Rectangle()
+                                                .fill(Color.white)
+                                                .frame(height: 2)
+                                                .padding(.horizontal, 35)
+                                                .padding(.top, -25)
+                                            
+                                            VStack(alignment: .leading, spacing: 10) {
+                                                //change these later to recent transaction view
+                                                TransactionBox(date: "5/27/23", status: "Completed", amount: "approx. $50.23")
+                                                TransactionBox(date: "5/20/23", status: "Completed", amount: "approx. $35.23")
+                                                TransactionBox(date: "5/26/23", status: "Pending", amount: "approx. $30.34")
+                                            }
+                                            .padding(.horizontal, 35)
+                                            .padding(.top, -20)
+                                            
+                                            RoundedRectangle(cornerRadius: 14)
+                                                .fill(Color.white)
+                                                .frame(height: 35)
+                                                .overlay(
+                                                    VStack(alignment: .leading) {
+                                                        Text("View All Transactions")
+                                                            .font(.custom("Avenir", size: 23))
+                                                            .fontWeight(.bold)
+                                                            .foregroundColor(Color(hex: "1B463C"))
+                                                            .padding(.top, 11)
+                                                            .padding(.leading, 25)
+                                                        Spacer()
+                                                    }
+                                                )
+                                                .padding(.horizontal, 35)
+                                        }
+                                    )
+                                
+                                Spacer()
+                                    .frame(height: 30)
+                                
+                                
+                                Rectangle()
+                                    .fill(Color(hex: "67C587"))
+                                    .frame(height: 210)
+                                    .cornerRadius(14.0)
+                                    .shadow(radius: 3, x: 0, y: 3)
+                                    .padding(.horizontal, 15)
+                                    .overlay(
+                                        VStack(spacing: 10) {
+                                            Text("Our Sponsors:")
                                                 .font(.custom("Avenir", size: 25))
                                                 .fontWeight(.black)
                                                 .foregroundColor(Color(hex: "1B463C"))
-                                                .frame(alignment: .center)
+                                            
+                                            HStack(spacing: 10) {
+                                                
+                                                Image("tesla-motors")
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .cornerRadius(14.0)
+                                                    .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
+                                                
+                                                Image("oneshot")
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .cornerRadius(14.0)
+                                                    .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
+                                                Image("GM")
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .cornerRadius(14.0)
+                                                    .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
+                                                
+                                                
+                                                
+                                            }
                                         }
-                                        
-                                        Button(action: {
-                                            // Handle button tap
-                                        }) {
-                                            Text("Learn more here.")
-                                                .font(.custom("Avenir", size: 20))
-                                                .foregroundColor(Color(hex: "1B463C"))
-                                                .padding(.leading, 10)
+                                            .padding(.horizontal, 15)
+                                    )
+                                
+                                
+                                Spacer()
+                                    .frame(height: 30)
+                                
+                                
+                                Rectangle()
+                                    .fill(Color(hex: "67C587"))
+                                    .frame(height: 85)
+                                    .cornerRadius(14.0)
+                                    .shadow(radius: 3, x: 0, y: 3)
+                                    .padding(.horizontal, 15)
+                                    .overlay(
+                                        VStack() {
+                                            Button(action: {
+                                                // Handle button tap
+                                            }) {
+                                                Text("Need Help with PaidPlanet?")
+                                                    .font(.custom("Avenir", size: 25))
+                                                    .fontWeight(.black)
+                                                    .foregroundColor(Color(hex: "1B463C"))
+                                                    .frame(alignment: .center)
+                                            }
+                                            
+                                            Button(action: {
+                                                // Handle button tap
+                                            }) {
+                                                Text("Learn more here.")
+                                                    .font(.custom("Avenir", size: 20))
+                                                    .foregroundColor(Color(hex: "1B463C"))
+                                                    .padding(.leading, 10)
+                                            }
                                         }
-                                    }
-                                )
+                                    )
+                            }
                         }
                     }
                 }

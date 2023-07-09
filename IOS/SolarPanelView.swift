@@ -93,8 +93,32 @@ struct SolarPanelView: View {
                         .background(Color.white)
                         .cornerRadius(14)
                 }
-
-                // ... and so on for buttons 3 and 4
+                
+                Button(action: {
+                    currentImageNumber = 3
+                    isShowingImagePicker = true
+                }) {
+                    Text("Upload Photo 3")
+                        .font(.custom("Avenir", size: 20))
+                        .foregroundColor(.blue)
+                        .fontWeight(.bold)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(14)
+                }
+                
+                Button(action: {
+                    currentImageNumber = 4
+                    isShowingImagePicker = true
+                }) {
+                    Text("Upload Photo 4")
+                        .font(.custom("Avenir", size: 20))
+                        .foregroundColor(.blue)
+                        .fontWeight(.bold)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(14)
+                }
 
                 Button(action: uploadTransaction) {
                     Text("Confirm Transaction")
