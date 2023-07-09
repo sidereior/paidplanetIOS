@@ -32,6 +32,8 @@ struct SolarPanelView: View {
             Color(hex: "1B463C")
                 .ignoresSafeArea()
             VStack {
+                ScrollView{
+                    
                 HStack {
                     Spacer()
                     Button(action: {
@@ -132,6 +134,8 @@ struct SolarPanelView: View {
             }
             .sheet(isPresented: $isShowingImagePicker, onDismiss: uploadImage) {
                 ImagePicker(selectedImage: $selectedImage)
+                
+            }
             }
         }
     }
@@ -152,7 +156,7 @@ struct SolarPanelView: View {
         metadata.contentType = "image/jpeg"
         
         // Upload the image data to Firebase Storage
-        let _ = imageRef.putData(imageData, metadata: metadata) { (metadata, error) in
+        let uploadTask = imageRef.putData(imageData, metadata: metadata) { (metadata, error) in
             guard error == nil else {
                 print("Error uploading image: \(error!.localizedDescription)")
                 return
@@ -179,8 +183,20 @@ struct SolarPanelView: View {
                 else if currentImageNumber == 2 {
                     imagePath2 = urlString
                 }
-                // and so on for image paths 3 and 4
+                else if currentImageNumber == 3 {
+                    imagePath3 = urlString
+                }
+                else if currentImageNumber == 4 {
+                    imagePath4 = urlString
+                }
             }
+        }
+        
+        // Add a progress observer to track the upload progress
+        uploadTask.observe(.progress) { snapshot in
+            guard let progress = snapshot.progress else { return }
+            let percentComplete = Double(progress.completedUnitCount) / Double(progress.totalUnitCount) * 100
+            print("Upload progress for image \(currentImageNumber): \(percentComplete)%")
         }
     }
 
