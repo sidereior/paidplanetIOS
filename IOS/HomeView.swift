@@ -23,7 +23,7 @@ struct HomeView: View {
             selectedIconColorOverride: Color(hex: "67C587")
         ),
         .init(
-            title: "Transactions",
+            title: "Greenbacks",
             icon: .init(systemName: "archivebox.fill"),
             iconColorOverride: Color(hex: "1B463C"),
             selectedIconColorOverride: Color(hex: "67C587")
@@ -81,7 +81,7 @@ struct HomeView: View {
 
 struct TransactionsView: View {
     var body: some View {
-        Text("Transactions View")
+        Text("Greenback View")
     }
 }
 
@@ -154,7 +154,7 @@ struct HomeTab: View {
                                 .frame(height: 30)
                             
                             
-                            Text("Do you own:")
+                            Text("Do you frequently use:")
                                 .font(.custom("Avenir", size: 20))
                                 .font(.title)
                                 .foregroundColor(Color(hex: "1B463C"))
@@ -229,7 +229,7 @@ struct HomeTab: View {
                                     .shadow(radius: 3, x: 0, y: 3)
                                     .overlay(
                                         VStack() {
-                                            Text("Recent Transactions")
+                                            Text("Recent Greenbacks")
                                                 .font(.custom("Avenir", size: 35))
                                                 .font(.title)
                                                 .fontWeight(.black)
@@ -256,7 +256,7 @@ struct HomeTab: View {
                                                 .frame(height: 35)
                                                 .overlay(
                                                     VStack(alignment: .leading) {
-                                                        Text("View All Transactions")
+                                                        Text("View All Greenbacks")
                                                             .font(.custom("Avenir", size: 23))
                                                             .fontWeight(.bold)
                                                             .foregroundColor(Color(hex: "1B463C"))
