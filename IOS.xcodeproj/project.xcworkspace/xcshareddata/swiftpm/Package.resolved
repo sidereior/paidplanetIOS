@@ -100,6 +100,15 @@
       }
     },
     {
+      "identity" : "swiftuix",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwiftUIX/SwiftUIX",
+      "state" : {
+        "revision" : "75d5be2c85ec1e3ccbd9d99d321dd3abb5955e8d",
+        "version" : "0.1.5"
+      }
+    },
+    {
       "identity" : "tabbar",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onl1ner/TabBar.git",

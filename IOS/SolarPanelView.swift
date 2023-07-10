@@ -12,8 +12,10 @@ struct Transaction: Codable {
     var imagePath2: String
     var imagePath3: String
     var imagePath4: String
+    var imagePath5: String
     var transactionDate: Date
 }
+
 
 struct SolarPanelView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -25,6 +27,7 @@ struct SolarPanelView: View {
     @State private var imagePath2: String?
     @State private var imagePath3: String?
     @State private var imagePath4: String?
+    @State private var imagePath5: String?
     @State private var currentImageNumber = 1
     @State private var isShowingNextView = false
 
@@ -100,7 +103,8 @@ struct SolarPanelView: View {
                                             imagePath1: $imagePath1,
                                             imagePath2: $imagePath2,
                                             imagePath3: $imagePath3,
-                                            imagePath4: $imagePath4)
+                                            imagePath4: $imagePath4,
+                                            imagePath5: $imagePath5)
                         }
                     }
                     /*
@@ -233,6 +237,8 @@ struct SolarPanelView: View {
                     imagePath3 = urlString
                 } else if currentImageNumber == 4 {
                     imagePath4 = urlString
+                } else if currentImageNumber == 5 {
+                    imagePath5 = urlString
                 }
             }
         }
@@ -247,22 +253,7 @@ struct SolarPanelView: View {
     
     
     
-    func uploadTransaction() {
-        let db = Firestore.firestore()
-        let transaction = Transaction(firstName: firstName,
-                                      lastName: lastName,
-                                      imagePath1: imagePath1 ?? "",
-                                      imagePath2: imagePath2 ?? "",
-                                      imagePath3: imagePath3 ?? "",
-                                      imagePath4: imagePath4 ?? "",
-                                      transactionDate: Date())
-        
-        do {
-            try db.collection("transactions").addDocument(from: transaction)
-        } catch let error {
-            print("Error writing transaction to Firestore: \(error)")
-        }
-    }
+    
 }
 
 
@@ -274,6 +265,7 @@ struct PhotoUploadView: View {
     @Binding var imagePath2: String?
     @Binding var imagePath3: String?
     @Binding var imagePath4: String?
+    @Binding var imagePath5: String?
     @State private var selectedImage: UIImage?
     @State private var isShowingImagePicker = false
     @State private var currentImageNumber = 1
@@ -353,7 +345,8 @@ struct PhotoUploadView: View {
                                          imagePath1: $imagePath1,
                                          imagePath2: $imagePath2,
                                          imagePath3: $imagePath3,
-                                         imagePath4: $imagePath4)
+                                         imagePath4: $imagePath4,
+                                         imagePath5: $imagePath5)
                     }
                 }
                 
@@ -407,6 +400,8 @@ struct PhotoUploadView: View {
                     imagePath3 = urlString
                 } else if currentImageNumber == 4 {
                     imagePath4 = urlString
+                } else if currentImageNumber == 5 {
+                    imagePath5 = urlString
                 }
             }
         }
@@ -418,7 +413,6 @@ struct PhotoUploadView: View {
         }
     }
 }
-
 struct PhotoUploadView2: View {
     @Binding var firstName: String
     @Binding var lastName: String
@@ -426,9 +420,11 @@ struct PhotoUploadView2: View {
     @Binding var imagePath2: String?
     @Binding var imagePath3: String?
     @Binding var imagePath4: String?
+    @Binding var imagePath5: String?
     @State private var selectedImage: UIImage?
     @State private var isShowingImagePicker = false
     @State private var currentImageNumber = 3
+    @State private var isShowingNextView = false
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -487,7 +483,6 @@ struct PhotoUploadView2: View {
                             .cornerRadius(14)
                     }
                     
-                    
                     Button(action: {
                         currentImageNumber = 5
                         isShowingImagePicker = true
@@ -500,17 +495,26 @@ struct PhotoUploadView2: View {
                             .background(Color.white)
                             .cornerRadius(14)
                     }
-                
+                    
                     Button(action: {
-                        // Code to confirm transaction
+                        isShowingNextView = true
                     }) {
-                        Text("Confirm Transaction")
+                        Text("Next")
                             .font(.custom("Avenir", size: 20))
                             .foregroundColor(.blue)
                             .fontWeight(.bold)
                             .padding()
                             .background(Color.white)
                             .cornerRadius(14)
+                    }
+                    .sheet(isPresented: $isShowingNextView) {
+                        ConfirmTransactionView(firstName: $firstName,
+                                               lastName: $lastName,
+                                               imagePath1: $imagePath1,
+                                               imagePath2: $imagePath2,
+                                               imagePath3: $imagePath3,
+                                               imagePath4: $imagePath4,
+                                               imagePath5: $imagePath5)
                     }
                 }
                 
@@ -560,6 +564,8 @@ struct PhotoUploadView2: View {
                     imagePath3 = urlString
                 } else if currentImageNumber == 4 {
                     imagePath4 = urlString
+                } else if currentImageNumber == 5 {
+                    imagePath5 = urlString
                 }
             }
         }
@@ -571,8 +577,6 @@ struct PhotoUploadView2: View {
         }
     }
 }
-
-
 
 
 struct SolarPanelView_Previews: PreviewProvider {
@@ -618,3 +622,179 @@ struct ImagePicker: UIViewControllerRepresentable {
         }
     }
 }
+
+struct ConfirmTransactionView: View {
+    @Binding var firstName: String
+    @Binding var lastName: String
+    @Binding var imagePath1: String?
+    @Binding var imagePath2: String?
+    @Binding var imagePath3: String?
+    @Binding var imagePath4: String?
+    @Binding var imagePath5: String?
+
+    @State private var image1: UIImage?
+    @State private var image2: UIImage?
+    @State private var image3: UIImage?
+    @State private var image4: UIImage?
+    @State private var image5: UIImage?
+
+    var body: some View {
+        ZStack {
+            Color(hex: "1B463C")
+                .ignoresSafeArea()
+
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        // Handle back button action
+                    }) {
+                        Text("Back")
+                            .font(.custom("Avenir", size: 20))
+                            .foregroundColor(.blue)
+                            .fontWeight(.bold)
+                            .padding(7)
+                            .background(Color.white)
+                            .cornerRadius(14)
+                    }
+                    .padding(.top, 20)
+                    .padding(.trailing, 20)
+                }
+
+                ScrollView {
+                    VStack {
+                        Text("Confirm Transaction")
+                            .font(.custom("Avenir", size: 30))
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.white)
+                            .padding(.horizontal, 15)
+                            .padding(.top, 30)
+
+                        Text("First Name: \(firstName)")
+                            .font(.custom("Avenir", size: 20))
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.white)
+                            .padding(.top, 20)
+
+                        Text("Last Name: \(lastName)")
+                            .font(.custom("Avenir", size: 20))
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.white)
+                            .padding(.top, 10)
+
+                        if let imageURL1 = URL(string: imagePath1 ?? ""),
+                           let image1 = image1 {
+                            Image(uiImage: image1)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 200, height: 200)
+                                .padding(.top, 20)
+                        }
+
+                        if let imageURL2 = URL(string: imagePath2 ?? ""),
+                           let image2 = image2 {
+                            Image(uiImage: image2)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 200, height: 200)
+                                .padding(.top, 20)
+                        }
+
+                        if let imageURL3 = URL(string: imagePath3 ?? ""),
+                           let image3 = image3 {
+                            Image(uiImage: image3)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 200, height: 200)
+                                .padding(.top, 20)
+                        }
+
+                        if let imageURL4 = URL(string: imagePath4 ?? ""),
+                           let image4 = image4 {
+                            Image(uiImage: image4)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 200, height: 200)
+                                .padding(.top, 20)
+                        }
+
+                        if let imageURL5 = URL(string: imagePath5 ?? ""),
+                           let image5 = image5 {
+                            Image(uiImage: image5)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 200, height: 200)
+                                .padding(.top, 20)
+                        }
+
+                        Button(action: {
+                            uploadTransaction()
+                        }) {
+                            Text("Confirm Transaction")
+                                .font(.custom("Avenir", size: 20))
+                                .foregroundColor(.blue)
+                                .fontWeight(.bold)
+                                .padding()
+                                .background(Color.white)
+                                .cornerRadius(14)
+                                .padding(.top, 30)
+                        }
+                    }
+                    .padding(.horizontal, 15)
+                    .padding(.bottom, 50)
+                }
+            }
+        }
+        .onAppear {
+            loadImage(from: URL(string: imagePath1 ?? ""), into: $image1)
+            loadImage(from: URL(string: imagePath2 ?? ""), into: $image2)
+            loadImage(from: URL(string: imagePath3 ?? ""), into: $image3)
+            loadImage(from: URL(string: imagePath4 ?? ""), into: $image4)
+            loadImage(from: URL(string: imagePath5 ?? ""), into: $image5)
+        }
+    }
+
+    private func loadImage(from url: URL?, into binding: Binding<UIImage?>) {
+        guard let url = url else {
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            if let data = data, let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    binding.wrappedValue = image
+                }
+            } else {
+                print("Failed to load image: \(String(describing: error))")
+            }
+        }.resume()
+    }
+    
+    func uploadTransaction() {
+        let db = Firestore.firestore()
+        let transaction = Transaction(firstName: firstName,
+                                      lastName: lastName,
+                                      imagePath1: imagePath1 ?? "",
+                                      imagePath2: imagePath2 ?? "",
+                                      imagePath3: imagePath3 ?? "",
+                                      imagePath4: imagePath4 ?? "",
+                                      imagePath5: imagePath5 ?? "",
+                                      transactionDate: Date())
+        
+        do {
+            try db.collection("transactions").addDocument(from: transaction) { error in
+                if let error = error {
+                    print("Error writing transaction to Firestore: \(error)")
+                } else {
+                    print("Transaction uploaded successfully")
+                }
+            }
+        } catch let error {
+            print("Error writing transaction to Firestore: \(error)")
+        }
+    }
+
+    
+}
+
+
