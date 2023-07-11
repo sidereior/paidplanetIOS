@@ -258,7 +258,7 @@ struct ElectricStoveUploadView: View {
                             .cornerRadius(14)
                     }
                     .sheet(isPresented: $isShowingNextView) {
-                        ElectricPhotoUploadView2(firstName: $firstName,
+                        ElectricStovePhotoUploadView2(firstName: $firstName,
                                          lastName: $lastName,
                                          imagePath1: $imagePath1,
                                          imagePath2: $imagePath2,
@@ -332,7 +332,7 @@ struct ElectricStoveUploadView: View {
     }
 }
 
-struct ElectricStoveUploadView2: View {
+struct ElectricStovePhotoUploadView2: View {
     @Binding var firstName: String
     @Binding var lastName: String
     @Binding var imagePath1: String?
