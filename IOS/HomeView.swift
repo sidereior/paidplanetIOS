@@ -7,7 +7,12 @@ import FirebaseFirestore
 //todo: make the settings button functional with a logout button
 import CITTopTabBar
 
+
+
 struct HomeView: View {
+    
+ 
+    
     @State var selectedTab: Int = 0
     @State var tabs: [CITTopTab] = [
         .init(
@@ -87,6 +92,11 @@ struct TransactionsView: View {
 
 struct HomeTab: View {
     @State private var userName: String = ""
+    @State private var showSolarPanelView = false
+    @State private var showElectricCarView = false
+    @State private var showElectricStoveView = false
+    
+    
     
     var greeting: String {
         let hour = Calendar.current.component(.hour, from: Date())
@@ -121,6 +131,20 @@ struct HomeTab: View {
     }
     
     var body: some View {
+       
+
+        if showSolarPanelView {
+                    SolarPanelView()
+                }
+                
+                if showElectricCarView {
+                    ElectricCarView()
+                }
+                
+                if showElectricStoveView {
+                    ElectricStoveView()
+                }
+        
         ZStack {
             Color(hex: "C9EAD4")
                 .ignoresSafeArea()
@@ -128,7 +152,10 @@ struct HomeTab: View {
             ScrollView
             {
                 
+               
+                
                 VStack {
+                    
                     
                     ZStack {
                         Color(hex: "C9EAD4")
@@ -154,7 +181,7 @@ struct HomeTab: View {
                                 .frame(height: 30)
                             
                             
-                            Text("Do you frequently use:")
+                            Text("Do you own and use:")
                                 .font(.custom("Avenir", size: 20))
                                 .font(.title)
                                 .foregroundColor(Color(hex: "1B463C"))
@@ -170,7 +197,7 @@ struct HomeTab: View {
                                         .shadow(radius: 3, x: 0, y: 3)
                                         .overlay(
                                             Button(action: {
-                                                // Handle button tap
+                                                showSolarPanelView.toggle()
                                             }) {
                                                 Text("Solar Panels")
                                                     .font(.custom("Avenir", size: 15))
@@ -186,7 +213,7 @@ struct HomeTab: View {
                                         .shadow(radius: 3, x: 0, y: 3)
                                         .overlay(
                                             Button(action: {
-                                                // Handle button tap
+                                                showElectricCarView.toggle()
                                             }) {
                                                 Text("Electric Cars")
                                                     .font(.custom("Avenir", size: 15))
@@ -202,7 +229,7 @@ struct HomeTab: View {
                                         .shadow(radius: 3, x: 0, y: 3)
                                         .overlay(
                                             Button(action: {
-                                                // Handle button tap
+                                                showElectricStoveView.toggle()
                                             }) {
                                                 Text("Electric Stoves")
                                                     .font(.custom("Avenir", size: 15))
@@ -215,8 +242,12 @@ struct HomeTab: View {
                             .padding(.horizontal, 15)
                             .padding(.top, -10)
                             
-                            Spacer()
-                                .frame(height: 15)
+                            
+                            
+                            Group{
+                                Spacer()
+                                    .frame(height: 15)
+                            }
                             
                             
                             Group {
