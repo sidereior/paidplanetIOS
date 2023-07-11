@@ -79,7 +79,6 @@ struct SolarPanelView: View {
                             .autocapitalization(.none)
                             .padding(.horizontal, 15)
                             .padding(.vertical, 10)
-                            
                             .background(Color(hex: "D9D9D9"))
                             .cornerRadius(14.0)
                             .padding(.horizontal, 25)
@@ -102,7 +101,6 @@ struct SolarPanelView: View {
                         .padding(.bottom, 30)
                         .sheet(isPresented: $isShowingNextView, onDismiss: uploadImage) {
                             
-                            //this is the photo upload view we need to modify
                             PhotoUploadView(firstName: $firstName,
                                             lastName: $lastName,
                                             imagePath1: $imagePath1,
@@ -184,12 +182,7 @@ struct SolarPanelView: View {
             print("Upload progress for image \(currentImageNumber): \(percentComplete)%")
         }
     }
-    
-    
-    
-    
 }
-
 
 
 struct PhotoUploadView: View {
@@ -347,6 +340,7 @@ struct PhotoUploadView: View {
         }
     }
 }
+
 struct PhotoUploadView2: View {
     @Binding var firstName: String
     @Binding var lastName: String
@@ -386,7 +380,7 @@ struct PhotoUploadView2: View {
                 
                 Group {
                     Text("Now, we need proof of your ownership and usage of the Solar Panels. This can be an invoice, electric bill, or even a picture of the panels. We require at least two iamges that demonstrate both ownership and usage of the solar panels. The more information you provide, the easier it will be for us to issue you payment.")
-                        .font(.custom("Avenir", size: 30))
+                        .font(.custom("Avenir", size: 20))
                         .fontWeight(.bold)
                         .foregroundColor(Color.white)
                         .padding(.horizontal, 15)
@@ -459,6 +453,7 @@ struct PhotoUploadView2: View {
             }
         }
     }
+    
     
     func uploadImage() {
         guard let image = selectedImage,
@@ -565,7 +560,6 @@ struct ConfirmTransactionView: View {
     @Binding var imagePath3: String?
     @Binding var imagePath4: String?
     @Binding var imagePath5: String?
-
     @State private var image1: UIImage?
     @State private var image2: UIImage?
     @State private var image3: UIImage?
@@ -598,7 +592,7 @@ struct ConfirmTransactionView: View {
                 ScrollView {
                     VStack {
                         Group{
-                            Text("Finally, preview your transaction before confirming it.")
+                            Text("Finally, preview your Solar Panel transaction before confirming it.")
                                 .font(.custom("Avenir", size: 30))
                                 .fontWeight(.bold)
                                 .foregroundColor(Color.white)
