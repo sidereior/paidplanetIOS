@@ -11,6 +11,7 @@ import FirebaseStorage
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import UIKit
+import SwiftUI
 
 struct TransactionsView: View {
     var body: some View {

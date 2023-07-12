@@ -84,11 +84,6 @@ struct HomeView: View {
     }
 }
 
-struct TransactionsView: View {
-    var body: some View {
-        Text("Greenback View")
-    }
-}
 
 struct HomeTab: View {
     @State private var userName: String = ""
