@@ -694,7 +694,7 @@ struct ConfirmTransactionView: View {
                         Button(action: {
                             uploadTransaction()
                         }) {
-                            Text("Confirm Greenback")
+                            Text("Confirm Cashback")
                                 .font(.custom("Avenir", size: 20))
                                 .foregroundColor(.blue)
                                 .fontWeight(.bold)

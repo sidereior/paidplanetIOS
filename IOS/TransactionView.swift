@@ -19,8 +19,11 @@ struct TransactionsView: View {
                     Text("Progress: \(transaction.progress)")
                         .font(.subheadline)
                 }
+                .listRowBackground(Color(hex: "1B463C"))
             }
+            .listStyle(PlainListStyle())
         }
+        .background(Color(hex: "C9EAD4").ignoresSafeArea())
         .onAppear {
             fetchTransactions()
         }
