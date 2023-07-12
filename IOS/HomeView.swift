@@ -152,11 +152,9 @@ struct HomeTab: View {
             ScrollView
             {
                 
-               
-                
                 VStack {
                     
-                    
+
                     ZStack {
                         Color(hex: "C9EAD4")
                         VStack {

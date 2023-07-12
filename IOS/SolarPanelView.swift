@@ -14,6 +14,7 @@ struct Transaction: Codable {
     var imagePath4: String
     var imagePath5: String
     var transactionDate: Date
+    var progress: String
 }
 
 
@@ -741,7 +742,8 @@ struct ConfirmTransactionView: View {
                                       imagePath3: imagePath3 ?? "",
                                       imagePath4: imagePath4 ?? "",
                                       imagePath5: imagePath5 ?? "",
-                                      transactionDate: Date())
+                                      transactionDate: Date(),
+                                      progress: "Pending")
         
         do {
             try db.collection("transactions").addDocument(from: transaction) { error in
@@ -755,6 +757,7 @@ struct ConfirmTransactionView: View {
             print("Error writing transaction to Firestore: \(error)")
         }
     }
+
 
     
 }

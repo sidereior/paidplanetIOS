@@ -695,7 +695,8 @@ struct ElectricStoveConfirmTransactionView: View {
                                       imagePath3: imagePath3 ?? "",
                                       imagePath4: imagePath4 ?? "",
                                       imagePath5: imagePath5 ?? "",
-                                      transactionDate: Date())
+                                      transactionDate: Date(),
+                                      progress: "Pending") // Set the initial progress value
         
         do {
             try db.collection("transactions").addDocument(from: transaction) { error in
@@ -709,6 +710,7 @@ struct ElectricStoveConfirmTransactionView: View {
             print("Error writing transaction to Firestore: \(error)")
         }
     }
+
 
     
 }

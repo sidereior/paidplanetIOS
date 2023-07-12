@@ -52,6 +52,7 @@
 		06C6688D2A52364C00746229 /* SolarPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C6688C2A52364C00746229 /* SolarPanelView.swift */; };
 		06C6688F2A52370300746229 /* ElectricCarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C6688E2A52370300746229 /* ElectricCarView.swift */; };
 		06C668912A52378500746229 /* ElectricStoveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C668902A52378500746229 /* ElectricStoveView.swift */; };
+		06EE8A0D2A5E465800911960 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EE8A0C2A5E465800911960 /* TransactionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		06C6688C2A52364C00746229 /* SolarPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarPanelView.swift; sourceTree = "<group>"; };
 		06C6688E2A52370300746229 /* ElectricCarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectricCarView.swift; sourceTree = "<group>"; };
 		06C668902A52378500746229 /* ElectricStoveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectricStoveView.swift; sourceTree = "<group>"; };
+		06EE8A0C2A5E465800911960 /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 				063D82B72A0AFFE4002449F4 /* IOSApp.swift */,
 				063D82B92A0AFFE4002449F4 /* ContentView.swift */,
 				06858B622A3F491700B2D5C1 /* HomeView.swift */,
+				06EE8A0C2A5E465800911960 /* TransactionView.swift */,
 				06C668822A50A7BB00746229 /* AddView.swift */,
 				06C6688E2A52370300746229 /* ElectricCarView.swift */,
 				06C668902A52378500746229 /* ElectricStoveView.swift */,
@@ -387,6 +390,7 @@
 				06C6688F2A52370300746229 /* ElectricCarView.swift in Sources */,
 				06C6688D2A52364C00746229 /* SolarPanelView.swift in Sources */,
 				06858B632A3F491700B2D5C1 /* HomeView.swift in Sources */,
+				06EE8A0D2A5E465800911960 /* TransactionView.swift in Sources */,
 				06C668912A52378500746229 /* ElectricStoveView.swift in Sources */,
 				063D82E22A0B02E4002449F4 /* fontviewer.swift in Sources */,
 			);
