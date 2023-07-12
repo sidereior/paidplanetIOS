@@ -1,20 +1,48 @@
-//
-//  TransactionView.swift
-//  IOS
-//
-//  Created by Alexander Nanda on 7/11/23.
-//
-
-import Foundation
+import SwiftUI
 import Firebase
-import FirebaseStorage
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import UIKit
-import SwiftUI
 
 struct TransactionsView: View {
+    @State private var transactions: [Transaction] = []
+
     var body: some View {
-        Text("Greenback View")
+        VStack {
+            List(transactions) { transaction in
+                VStack(alignment: .leading) {
+                    Text("\(transaction.firstName) \(transaction.lastName)")
+                        .font(.headline)
+
+                    Text("Transaction Date: \(transaction.transactionDate)")
+                        .font(.subheadline)
+
+                    Text("Progress: \(transaction.progress)")
+                        .font(.subheadline)
+                }
+            }
+        }
+        .onAppear {
+            fetchTransactions()
+        }
+    }
+
+    private func fetchTransactions() {
+        let db = Firestore.firestore()
+        db.collection("transactions")
+            .addSnapshotListener { snapshot, error in
+                guard let documents = snapshot?.documents else {
+                    print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
+                    return
+                }
+
+                transactions = documents.compactMap { document in
+                    do {
+                        return try document.data(as: Transaction.self)
+                    } catch {
+                        print("Error decoding transaction: \(error.localizedDescription)")
+                        return nil
+                    }
+                }
+            }
     }
 }

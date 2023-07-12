@@ -5,7 +5,8 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import UIKit
 
-struct Transaction: Codable {
+struct Transaction: Codable, Identifiable {
+    @DocumentID var id: String?
     var firstName: String
     var lastName: String
     var imagePath1: String
