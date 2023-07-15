@@ -47,7 +47,6 @@ struct HomeView: View {
         example.showBorderWhileUnselected = false
         example.selectedInsets = .init(top: 0, leading: 0, bottom: 10, trailing: 0)
         example.underlineHeight = 3
-        
         return example
     }
 
@@ -77,15 +76,13 @@ struct HomeView: View {
     }
 }
 
-
 struct HomeTab: View {
     @State private var userName: String = ""
     @State private var showSolarPanelView = false
     @State private var showElectricCarView = false
     @State private var showElectricStoveView = false
     @State private var transactions: [Transaction] = []
-    
-    
+
     private func fetchTransactions() {
         let db = Firestore.firestore()
         db.collection("transactions")
@@ -105,8 +102,6 @@ struct HomeTab: View {
                 }
             }
     }
-
-    
     
     var greeting: String {
         let hour = Calendar.current.component(.hour, from: Date())
@@ -141,7 +136,6 @@ struct HomeTab: View {
     }
     
     var body: some View {
-       
 
         if showSolarPanelView {
                     SolarPanelView()
@@ -163,7 +157,6 @@ struct HomeTab: View {
             {
                 
                 VStack {
-                    
 
                     ZStack {
                         Color(hex: "C9EAD4")
@@ -187,8 +180,7 @@ struct HomeTab: View {
                             
                             Spacer()
                                 .frame(height: 30)
-                            
-                            
+
                             Text("Do you own and use:")
                                 .font(.custom("Avenir", size: 20))
                                 .font(.title)
@@ -249,15 +241,12 @@ struct HomeTab: View {
                             }
                             .padding(.horizontal, 15)
                             .padding(.top, -10)
-                            
-                            
-                            
+      
                             Group{
                                 Spacer()
                                     .frame(height: 15)
                             }
-                            
-                            
+
                             Group {
                                 //recent transaction view
                                 Rectangle()
@@ -280,15 +269,10 @@ struct HomeTab: View {
                                                 .frame(height: 2)
                                                 .padding(.horizontal, 35)
                                                 .padding(.top, -25)
-                                            
-                                            
-                                            
-                                            
+
                                             VStack {
                                                 List(transactions) { transaction in
                                                     VStack(alignment: .leading) {
-                                                        Text("\(transaction.firstName) \(transaction.lastName)")
-                                                            .font(.headline)
 
                                                         Text("Transaction Date: \(transaction.transactionDate)")
                                                             .font(.subheadline)
@@ -302,12 +286,7 @@ struct HomeTab: View {
                                             }
                                             .padding(.horizontal, 35)
                                             .padding(.top, -20)
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
+            
                                             RoundedRectangle(cornerRadius: 14)
                                                 .fill(Color.white)
                                                 .frame(height: 35)
@@ -328,7 +307,6 @@ struct HomeTab: View {
                                 
                                 Spacer()
                                     .frame(height: 30)
-                                
                                 
                                 Rectangle()
                                     .fill(Color(hex: "67C587"))
@@ -362,17 +340,13 @@ struct HomeTab: View {
                                                     .cornerRadius(14.0)
                                                     .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
                                                 
-                                                
-                                                
                                             }
                                         }
                                             .padding(.horizontal, 15)
                                     )
-                                
-                                
+                    
                                 Spacer()
                                     .frame(height: 30)
-                                
                                 
                                 Rectangle()
                                     .fill(Color(hex: "67C587"))
