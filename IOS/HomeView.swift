@@ -2,23 +2,12 @@ import Foundation
 import SwiftUI
 import Firebase
 import FirebaseFirestore
-
-
-//todo: make the settings button functional with a logout button
 import CITTopTabBar
-import SwiftUI
-import Firebase
-import FirebaseFirestore
-import SwiftUI
-import Firebase
-import FirebaseFirestore
 
 struct HomeView: View {
-    @StateObject private var userManager = UserManager()
-    @StateObject private var transactionManager = TransactionManager()
-
-    @State private var selectedTab: Int = 0
-    @State private var tabs: [CITTopTab] = [
+        
+    @State var selectedTab: Int = 0
+    @State var tabs: [CITTopTab] = [
         .init(
             title: "Home" ,
             icon: .init(systemName: "house.fill"),
@@ -58,7 +47,7 @@ struct HomeView: View {
         example.showBorderWhileUnselected = false
         example.selectedInsets = .init(top: 0, leading: 0, bottom: 10, trailing: 0)
         example.underlineHeight = 3
-
+        
         return example
     }
 
@@ -85,23 +74,43 @@ struct HomeView: View {
         .background(Color(hex: "C9EAD4"))
         .preferredColorScheme(.dark)
         .edgesIgnoringSafeArea(.all)
-        .environmentObject(userManager)
-        .environmentObject(transactionManager)
     }
 }
 
-struct HomeTab: View {
-    @EnvironmentObject private var userManager: UserManager
-    @EnvironmentObject private var transactionManager: TransactionManager
 
+struct HomeTab: View {
     @State private var userName: String = ""
     @State private var showSolarPanelView = false
     @State private var showElectricCarView = false
     @State private var showElectricStoveView = false
+    @State private var transactions: [Transaction] = []
+    
+    
+    private func fetchTransactions() {
+        let db = Firestore.firestore()
+        db.collection("transactions")
+            .addSnapshotListener { snapshot, error in
+                guard let documents = snapshot?.documents else {
+                    print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
+                    return
+                }
 
+                transactions = documents.compactMap { document in
+                    do {
+                        return try document.data(as: Transaction.self)
+                    } catch {
+                        print("Error decoding transaction: \(error.localizedDescription)")
+                        return nil
+                    }
+                }
+            }
+    }
+
+    
+    
     var greeting: String {
         let hour = Calendar.current.component(.hour, from: Date())
-
+        
         if (6..<12).contains(hour) {
             return "Good Morning"
         } else if (12..<18).contains(hour) {
@@ -110,16 +119,16 @@ struct HomeTab: View {
             return "Good Evening"
         }
     }
-
+    
     private func fetchUserName() {
         guard let uid = Auth.auth().currentUser?.uid else {
             return
         }
-
+        
         let db = Firestore.firestore()
-
+      
         let userRef = db.collection("users").document(uid)
-
+        
         userRef.getDocument { document, error in
             if let document = document, document.exists {
                 if let userName = document.data()?["name"] as? String {
@@ -130,26 +139,32 @@ struct HomeTab: View {
             }
         }
     }
-
+    
     var body: some View {
+       
+
         if showSolarPanelView {
-            SolarPanelView()
-        }
-
-        if showElectricCarView {
-            ElectricCarView()
-        }
-
-        if showElectricStoveView {
-            ElectricStoveView()
-        }
-
+                    SolarPanelView()
+                }
+                
+                if showElectricCarView {
+                    ElectricCarView()
+                }
+                
+                if showElectricStoveView {
+                    ElectricStoveView()
+                }
+        
         ZStack {
             Color(hex: "C9EAD4")
                 .ignoresSafeArea()
-
-            ScrollView {
+           
+            ScrollView
+            {
+                
                 VStack {
+                    
+
                     ZStack {
                         Color(hex: "C9EAD4")
                         VStack {
@@ -159,29 +174,30 @@ struct HomeTab: View {
                                 .foregroundColor(Color(hex: "1B463C"))
                                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                 .padding(.leading, 15)
-
+                            
                             Spacer()
                                 .frame(height: 3)
-
+                            
                             Text(Date(), style: .date)
                                 .font(.custom("Avenir", size: 20))
                                 .font(.title)
                                 .foregroundColor(Color(hex: "1B463C"))
                                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                 .padding(.leading, 15)
-
+                            
                             Spacer()
                                 .frame(height: 30)
-
+                            
+                            
                             Text("Do you own and use:")
                                 .font(.custom("Avenir", size: 20))
                                 .font(.title)
                                 .foregroundColor(Color(hex: "1B463C"))
                                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                 .padding(.leading, 15)
-
+                            
                             VStack(alignment: .center) {
-                                HStack {
+                                HStack{
                                     Rectangle()
                                         .fill(Color(hex: "59DB84"))
                                         .frame(height: 35)
@@ -197,7 +213,7 @@ struct HomeTab: View {
                                                     .foregroundColor(Color(hex: "1B463C"))
                                             }
                                         )
-
+                                    
                                     Rectangle()
                                         .fill(Color(hex: "59DB84"))
                                         .frame(height: 35)
@@ -213,7 +229,7 @@ struct HomeTab: View {
                                                     .foregroundColor(Color(hex: "1B463C"))
                                             }
                                         )
-
+                                    
                                     Rectangle()
                                         .fill(Color(hex: "59DB84"))
                                         .frame(height: 35)
@@ -233,14 +249,17 @@ struct HomeTab: View {
                             }
                             .padding(.horizontal, 15)
                             .padding(.top, -10)
-
-                            Group {
+                            
+                            
+                            
+                            Group{
                                 Spacer()
                                     .frame(height: 15)
                             }
-
+                            
+                            
                             Group {
-                                // Recent transaction view
+                                //recent transaction view
                                 Rectangle()
                                     .fill(Color(hex: "1B463C"))
                                     .frame(height: 265)
@@ -255,21 +274,40 @@ struct HomeTab: View {
                                                 .fontWeight(.black)
                                                 .foregroundColor(.white)
                                                 .frame(minWidth: 0, maxWidth: .infinity)
-
+                                            
                                             Rectangle()
                                                 .fill(Color.white)
                                                 .frame(height: 2)
                                                 .padding(.horizontal, 35)
                                                 .padding(.top, -25)
+                                            
+                                            
+                                            
+                                            
+                                            VStack {
+                                                List(transactions) { transaction in
+                                                    VStack(alignment: .leading) {
+                                                        Text("\(transaction.firstName) \(transaction.lastName)")
+                                                            .font(.headline)
 
-                                            VStack(alignment: .leading, spacing: 10) {
-                                                ForEach(transactionManager.transactions) { transaction in
-                                                    TransactionBox(transaction: transaction)
+                                                        Text("Transaction Date: \(transaction.transactionDate)")
+                                                            .font(.subheadline)
+
+                                                        Text("Progress: \(transaction.progress)")
+                                                            .font(.subheadline)
+                                                    }
+                                                    .listRowBackground(Color(hex: "1B463C"))
                                                 }
+                                                .listStyle(PlainListStyle())
                                             }
                                             .padding(.horizontal, 35)
                                             .padding(.top, -20)
-
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
                                             RoundedRectangle(cornerRadius: 14)
                                                 .fill(Color.white)
                                                 .frame(height: 35)
@@ -287,10 +325,11 @@ struct HomeTab: View {
                                                 .padding(.horizontal, 35)
                                         }
                                     )
-
+                                
                                 Spacer()
                                     .frame(height: 30)
-
+                                
+                                
                                 Rectangle()
                                     .fill(Color(hex: "67C587"))
                                     .frame(height: 210)
@@ -303,14 +342,15 @@ struct HomeTab: View {
                                                 .font(.custom("Avenir", size: 25))
                                                 .fontWeight(.black)
                                                 .foregroundColor(Color(hex: "1B463C"))
-
+                                            
                                             HStack(spacing: 10) {
+                                                
                                                 Image("tesla-motors")
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fit)
                                                     .cornerRadius(14.0)
                                                     .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
-
+                                                
                                                 Image("oneshot")
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fit)
@@ -321,14 +361,19 @@ struct HomeTab: View {
                                                     .aspectRatio(contentMode: .fit)
                                                     .cornerRadius(14.0)
                                                     .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
+                                                
+                                                
+                                                
                                             }
                                         }
-                                        .padding(.horizontal, 15)
+                                            .padding(.horizontal, 15)
                                     )
-
+                                
+                                
                                 Spacer()
                                     .frame(height: 30)
-
+                                
+                                
                                 Rectangle()
                                     .fill(Color(hex: "67C587"))
                                     .frame(height: 85)
@@ -346,7 +391,7 @@ struct HomeTab: View {
                                                     .foregroundColor(Color(hex: "1B463C"))
                                                     .frame(alignment: .center)
                                             }
-
+                                            
                                             Button(action: {
                                                 // Handle button tap
                                             }) {
@@ -365,37 +410,40 @@ struct HomeTab: View {
         }
         .onAppear {
             fetchUserName()
-            transactionManager.fetchTransactions()
+            fetchTransactions()
         }
     }
+    
 }
 
 struct TransactionBox: View {
-    var transaction: Transaction
-
+    var date: String
+    var status: String
+    var amount: String
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text(transaction.transactionDate, formatter: DateFormatter.short)
+                Text(date)
                     .font(.custom("Avenir", size: 16))
                     .foregroundColor(.white)
                     .fontWeight(.bold)
-
+                
                 Spacer()
-
-                Text(transaction.progress)
+                
+                Text(status)
                     .font(.custom("Avenir", size: 16))
                     .foregroundColor(.white)
                     .fontWeight(.bold)
-
+                
                 Spacer()
-
-                Text("approx. \(transaction.amount)")
+                
+                Text(amount)
                     .font(.custom("Avenir", size: 16))
                     .foregroundColor(.white)
                     .fontWeight(.bold)
             }
-
+            
             Rectangle()
                 .fill(Color.white)
                 .frame(height: 1)
@@ -415,7 +463,7 @@ struct CenterTabButtonStyle: ButtonStyle {
             Image(systemName: "plus.circle.fill")
                 .font(.system(size: 30))
                 .foregroundColor(.white)
-
+            
             Text("Add")
                 .foregroundColor(.white)
         }

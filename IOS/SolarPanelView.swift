@@ -758,9 +758,6 @@ struct ConfirmTransactionView: View {
             print("Error writing transaction to Firestore: \(error)")
         }
     }
-
-
-    
 }
 
 
