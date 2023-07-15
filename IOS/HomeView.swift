@@ -415,13 +415,6 @@ struct TransactionBox: View {
         }
     }
 }
- 
-
-struct ProfileView: View {
-    var body: some View {
-        Text("Profile Tab")
-    }
-}
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {

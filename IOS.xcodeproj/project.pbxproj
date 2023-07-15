@@ -44,6 +44,7 @@
 		063D83192A0C382B002449F4 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 063D83182A0C382B002449F4 /* FirebaseStorageCombine-Community */; };
 		063D831B2A0F455C002449F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 063D831A2A0F455C002449F4 /* GoogleService-Info.plist */; };
 		0675124E2A5BA4AB000E19F5 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 0675124D2A5BA4AB000E19F5 /* SwiftUIX */; };
+		0680A60A2A62F2B30005A8BC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0680A6092A62F2B30005A8BC /* ProfileView.swift */; };
 		06858B632A3F491700B2D5C1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06858B622A3F491700B2D5C1 /* HomeView.swift */; };
 		06AFF8482A3FF7F300914586 /* AddTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AFF8472A3FF7F300914586 /* AddTabView.swift */; };
 		06C668632A46754000746229 /* TabBar in Frameworks */ = {isa = PBXBuildFile; productRef = 06C668622A46754000746229 /* TabBar */; };
@@ -85,6 +86,7 @@
 		063D82D42A0AFFE5002449F4 /* IOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		063D82E12A0B02E4002449F4 /* fontviewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fontviewer.swift; sourceTree = "<group>"; };
 		063D831A2A0F455C002449F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0680A6092A62F2B30005A8BC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		06858B622A3F491700B2D5C1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		06AFF8472A3FF7F300914586 /* AddTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTabView.swift; sourceTree = "<group>"; };
 		06C668822A50A7BB00746229 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				06C6688C2A52364C00746229 /* SolarPanelView.swift */,
 				06AFF8472A3FF7F300914586 /* AddTabView.swift */,
 				063D82E12A0B02E4002449F4 /* fontviewer.swift */,
+				0680A6092A62F2B30005A8BC /* ProfileView.swift */,
 				063D82BB2A0AFFE5002449F4 /* Assets.xcassets */,
 				063D82BD2A0AFFE5002449F4 /* Preview Content */,
 			);
@@ -392,6 +395,7 @@
 				06858B632A3F491700B2D5C1 /* HomeView.swift in Sources */,
 				06EE8A0D2A5E465800911960 /* TransactionView.swift in Sources */,
 				06C668912A52378500746229 /* ElectricStoveView.swift in Sources */,
+				0680A60A2A62F2B30005A8BC /* ProfileView.swift in Sources */,
 				063D82E22A0B02E4002449F4 /* fontviewer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
