@@ -16,6 +16,7 @@ struct Transaction: Codable, Identifiable {
     var imagePath5: String
     var transactionDate: Date
     var progress: String
+    var amountCO: String
 }
 
 
@@ -744,7 +745,8 @@ struct ConfirmTransactionView: View {
                                       imagePath4: imagePath4 ?? "",
                                       imagePath5: imagePath5 ?? "",
                                       transactionDate: Date(),
-                                      progress: "Pending")
+                                      progress: "Pending",
+                                      amountCO: "0 tons")
         
         do {
             try db.collection("transactions").addDocument(from: transaction) { error in
