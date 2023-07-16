@@ -157,7 +157,7 @@ struct HomeTab: View {
             {
                 
                 VStack {
-
+                    
                     ZStack {
                         Color(hex: "C9EAD4")
                         VStack {
@@ -180,7 +180,7 @@ struct HomeTab: View {
                             
                             Spacer()
                                 .frame(height: 30)
-
+                            
                             Text("Do you own and use:")
                                 .font(.custom("Avenir", size: 20))
                                 .font(.title)
@@ -189,59 +189,65 @@ struct HomeTab: View {
                                 .padding(.leading, 15)
                             
                             VStack(alignment: .center) {
-                                HStack{
-                                    Rectangle()
-                                        .fill(Color(hex: "59DB84"))
-                                        .frame(height: 35)
-                                        .cornerRadius(14.0)
-                                        .shadow(radius: 3, x: 0, y: 3)
-                                        .overlay(
-                                            Button(action: {
-                                                showSolarPanelView.toggle()
-                                            }) {
-                                                Text("Solar Panels")
-                                                    .font(.custom("Avenir", size: 15))
-                                                    .fontWeight(.black)
-                                                    .foregroundColor(Color(hex: "1B463C"))
-                                            }
-                                        )
+                                HStack {
+                                    Button(action: {
+                                        showSolarPanelView.toggle()
+                                    }) {
+                                        Text("Solar Panels")
+                                            .font(.custom("Avenir", size: 15))
+                                            .foregroundColor(Color(hex: "1B463C"))
+                                            .fontWeight(.black)
+                                            .padding(.leading, 5)
+                                    }
+                                    .frame(height: 35)
+                                    .padding(.horizontal, 7)
+                                    .background(Color(hex: "59DB84"))
+                                    .cornerRadius(14.0)
+                                    .shadow(radius: 3, x: 0, y: 3)
+                                    .sheet(isPresented: $showSolarPanelView) {
+                                        SolarPanelView()
+                                    }
                                     
-                                    Rectangle()
-                                        .fill(Color(hex: "59DB84"))
-                                        .frame(height: 35)
-                                        .cornerRadius(14.0)
-                                        .shadow(radius: 3, x: 0, y: 3)
-                                        .overlay(
-                                            Button(action: {
-                                                showElectricCarView.toggle()
-                                            }) {
-                                                Text("Electric Cars")
-                                                    .font(.custom("Avenir", size: 15))
-                                                    .fontWeight(.black)
-                                                    .foregroundColor(Color(hex: "1B463C"))
-                                            }
-                                        )
+                                    Button(action: {
+                                        showElectricCarView.toggle()
+                                    }) {
+                                        Text("Electric Cars")
+                                            .font(.custom("Avenir", size: 15))
+                                            .foregroundColor(Color(hex: "1B463C"))
+                                            .fontWeight(.black)
+                                            .padding(.leading, 5)
+                                    }
+                                    .frame(height: 35)
+                                    .padding(.horizontal, 7)
+                                    .background(Color(hex: "59DB84"))
+                                    .cornerRadius(14.0)
+                                    .shadow(radius: 3, x: 0, y: 3)
+                                    .sheet(isPresented: $showElectricCarView) {
+                                        ElectricCarView()
+                                    }
                                     
-                                    Rectangle()
-                                        .fill(Color(hex: "59DB84"))
-                                        .frame(height: 35)
-                                        .cornerRadius(14.0)
-                                        .shadow(radius: 3, x: 0, y: 3)
-                                        .overlay(
-                                            Button(action: {
-                                                showElectricStoveView.toggle()
-                                            }) {
-                                                Text("Electric Stoves")
-                                                    .font(.custom("Avenir", size: 15))
-                                                    .fontWeight(.black)
-                                                    .foregroundColor(Color(hex: "1B463C"))
-                                            }
-                                        )
+                                    
+                                    Button(action: {
+                                        showElectricStoveView.toggle()
+                                    }) {
+                                        Text("Electric Stoves")
+                                            .font(.custom("Avenir", size: 15))
+                                            .foregroundColor(Color(hex: "1B463C"))
+                                            .fontWeight(.black)
+                                            .padding(.leading, 5)
+                                    }
+                                    .padding(.horizontal, 7)
+                                    .frame(height: 35)
+                                    .background(Color(hex: "59DB84"))
+                                    .cornerRadius(14.0)
+                                    .shadow(radius: 3, x: 0, y: 3)
+                                    .sheet(isPresented: $showElectricStoveView) {
+                                        ElectricStoveView()
+                                    }
                                 }
                             }
                             .padding(.horizontal, 15)
-                            .padding(.top, -10)
-      
+                                                        .padding(.top, -10)
                             Group{
                                 Spacer()
                                     .frame(height: 15)
