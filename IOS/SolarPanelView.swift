@@ -568,6 +568,8 @@ struct ConfirmTransactionView: View {
     @State private var image3: UIImage?
     @State private var image4: UIImage?
     @State private var image5: UIImage?
+    @Environment(\.presentationMode) var presentationMode
+    
 
     var body: some View {
         ZStack {
@@ -578,7 +580,7 @@ struct ConfirmTransactionView: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        // Handle back button action
+                        presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("Back")
                             .font(.custom("Avenir", size: 20))
@@ -694,6 +696,10 @@ struct ConfirmTransactionView: View {
 
                         Button(action: {
                             uploadTransaction()
+                            UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true)
+                            //make this so that it closes out of all of hte views
+                            
+                            
                         }) {
                             Text("Confirm Cashback")
                                 .font(.custom("Avenir", size: 20))
