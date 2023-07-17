@@ -68,6 +68,16 @@ struct ProfileView: View {
                 )
             }
             
+            Button(action: logout){
+                Text("Logout")
+                    .font(.custom("Avenir", size: 25))
+                                       .font(.title)
+                                       .foregroundColor(.red)
+                                       .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                       .padding(.leading, 15)
+                                       .padding(.top, 25)
+            }
+            
             Spacer()
         }
         .navigationBarTitle("Profile")
@@ -87,6 +97,17 @@ struct ProfileView: View {
             }
         }
     }
+
+
+func logout() {
+       do {
+           try Auth.auth().signOut()
+           // Redirect to the login screen or exit the app
+           exit(0)
+       } catch {
+           print("Error signing out: \(error.localizedDescription)")
+       }
+   }
 }
 
 class UserManager: ObservableObject {
