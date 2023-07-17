@@ -329,23 +329,41 @@ struct HomeTab: View {
                                             
                                             HStack(spacing: 10) {
                                                 
-                                                Image("tesla-motors")
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .cornerRadius(14.0)
-                                                    .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
-                                                
-                                                Image("oneshot")
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .cornerRadius(14.0)
-                                                    .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
-                                                Image("GM")
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .cornerRadius(14.0)
-                                                    .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
-                                                
+                                                Button(action: {
+                                                    if let url = URL(string: "https://www.tesla.com") {
+                                                        UIApplication.shared.open(url)
+                                                    }
+                                                }) {
+                                                    Image("tesla-motors")
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fit)
+                                                        .cornerRadius(14.0)
+                                                        .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
+                                                }
+
+                                                Button(action: {
+                                                    if let url = URL(string: "https://www.gm.com") {
+                                                        UIApplication.shared.open(url)
+                                                    }
+                                                }) {
+                                                    Image("GM")
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fit)
+                                                        .cornerRadius(14.0)
+                                                        .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
+                                                }
+
+                                                Button(action: {
+                                                    if let url = URL(string: "https://www.lg.com") {
+                                                        UIApplication.shared.open(url)
+                                                    }
+                                                }) {
+                                                    Image("oneshot")
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fill)
+                                                        .cornerRadius(14.0)
+                                                        .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
+                                                }
                                             }
                                         }
                                             .padding(.horizontal, 15)
