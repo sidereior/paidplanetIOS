@@ -122,7 +122,7 @@ struct LoginPage: View {
                     .background(Color(hex: "D9D9D9"))
                     .cornerRadius(14.0)
                     .padding(.horizontal, 25)
-                    .font(.custom("Avenir", size: 15).bold())
+                    .font(.custom("Avenir", size: 15).bold())cxvcxv  c n
                 
                 if isSignUpMode {
                     SecureField("Confirm Password", text: $confirmPassword)
@@ -205,12 +205,19 @@ struct LoginPage: View {
                 
                 }
                 
+               
+                
                 
             }
             
         }
     }
+    
+    //https://paidplanet-e6762.firebaseapp.com/__/auth/handler
+   
 }
+
+
 
 struct LoginPage_Previews: PreviewProvider {
     static var previews: some View {
