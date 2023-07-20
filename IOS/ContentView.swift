@@ -74,8 +74,7 @@ struct LoginPage: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 20) {
-                Spacer()
-                    .frame(height: 250)
+               
               
                     Text(("Welcome to"))
                         .font(.custom("Avenir", size: 32))
@@ -102,11 +101,6 @@ struct LoginPage: View {
                     .cornerRadius(14.0)
                     .padding(.horizontal, 25)
                     .font(.custom("Avenir", size: 15).bold())
-                /*
-                    .opacity(isSignUpMode ? 1.0 : 0.0)
-                    .padding(.bottom, isSignUpMode ? 20 : 0)
-                    .disabled(!isSignUpMode)
-                 */
                 
                 if isSignUpMode {
                     TextField("Confirm Email", text: $confirmEmail)
@@ -116,8 +110,9 @@ struct LoginPage: View {
                         .background(Color(hex: "D9D9D9"))
                         .cornerRadius(14.0)
                         .padding(.horizontal, 25)
+                       
                         .font(.custom("Avenir", size: 15).bold())
-                        .padding(.bottom, 20)
+                       
                 }
                 
                 SecureField("Password", text: $password)
@@ -132,13 +127,13 @@ struct LoginPage: View {
                 if isSignUpMode {
                     SecureField("Confirm Password", text: $confirmPassword)
                         .autocapitalization(.none)
-                        .padding(.horizontal, 15)
                         .padding(.vertical, 10)
+                        .padding(.horizontal, 15)
                         .background(Color(hex: "D9D9D9"))
                         .cornerRadius(14.0)
                         .padding(.horizontal, 25)
                         .font(.custom("Avenir", size: 15).bold())
-                        .padding(.bottom, 20)
+                       
                 }
                 
                 if isSignUpMode {
@@ -150,9 +145,10 @@ struct LoginPage: View {
                         .cornerRadius(14.0)
                         .padding(.horizontal, 25)
                         .font(.custom("Avenir", size: 15).bold())
-                        .padding(.bottom, 20)
+                     
                 }
                 
+                Group{
                 Button(action: {
                     if isSignUpMode {
                         // Check if email and confirmEmail match
@@ -183,31 +179,35 @@ struct LoginPage: View {
                         .frame(width: 220, height: 60)
                         .background(Color(hex: "1B463C"))
                         .cornerRadius(14.0)
-                        .padding(.bottom, 50)
+                     
                 })
                 
-                Button(action: {
-                    isSignUpMode.toggle()
-                }, label: {
-                    Text(isSignUpMode ? "Already have an account? Log in" : "New to PaidPlanet? Sign up here")
-                        .font(.custom("Avenir", size: 20))
-                        .fontWeight(.black)
-                        .foregroundColor(Color(hex: "D9D9D9"))
-                        .overlay(
-                            Text(isSignUpMode ? "Already have an account? Log in" : "New to PaidPlanet? Sign up here")
-                                .font(.custom("Avenir", size: 20))
-                                .fontWeight(.black)
-                                .foregroundColor(.black)
-                                .offset(x: 1, y: 1)
-                        )
-                        .font(.custom("Avenir", size: 20))
-                        .foregroundColor(Color(hex: "D9D9D9"))
-                        .cornerRadius(14.0)
-                        .padding(.bottom, 50)
-                })
-               
+              
+                    Button(action: {
+                        isSignUpMode.toggle()
+                    }, label: {
+                        Text(isSignUpMode ? "Already have an account? Log in" : "New to PaidPlanet? Sign up here")
+                            .font(.custom("Avenir", size: 20))
+                            .fontWeight(.black)
+                            .foregroundColor(Color(hex: "D9D9D9"))
+                            .overlay(
+                                Text(isSignUpMode ? "Already have an account? Log in" : "New to PaidPlanet? Sign up here")
+                                    .font(.custom("Avenir", size: 20))
+                                    .fontWeight(.black)
+                                    .foregroundColor(.black)
+                                    .offset(x: 1, y: 1)
+                            )
+                            .font(.custom("Avenir", size: 20))
+                            .foregroundColor(Color(hex: "D9D9D9"))
+                            .cornerRadius(14.0)
+                        
+                    })
+                
+                }
+                
+                
             }
-            .padding()
+            
         }
     }
 }
