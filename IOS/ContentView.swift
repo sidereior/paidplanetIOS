@@ -74,8 +74,7 @@ struct LoginPage: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 20) {
-                Spacer()
-                    .frame(height: 250)
+               
               
                     Text(("Welcome to"))
                         .font(.custom("Avenir", size: 32))
@@ -111,7 +110,6 @@ struct LoginPage: View {
                         .background(Color(hex: "D9D9D9"))
                         .cornerRadius(14.0)
                         .padding(.horizontal, 25)
-                       
                         .font(.custom("Avenir", size: 15).bold())
                        
                 }
@@ -201,12 +199,8 @@ struct LoginPage: View {
                             .font(.custom("Avenir", size: 20))
                             .foregroundColor(Color(hex: "D9D9D9"))
                             .cornerRadius(14.0)
-                        
                     })
-                
                 }
-                
-                
             }
             
         }

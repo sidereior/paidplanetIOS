@@ -1,3 +1,11 @@
+//
+//  OtherSustainableView.swift
+//  IOS
+//
+//  Created by Alexander Nanda on 7/21/23.
+//
+
+import Foundation
 import SwiftUI
 import Firebase
 import FirebaseStorage
@@ -8,7 +16,7 @@ import UIKit
 
 
 
-struct ElectricStoveView: View {
+struct OtherSustainableView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var isShowingImagePicker = false
     @State private var selectedImage: UIImage?
@@ -48,7 +56,7 @@ struct ElectricStoveView: View {
                         Spacer()
                             .frame(height: 25)
                         
-                        Text("So, you own an Electric Stove. First, you'll need to enter some basic information so we can pay you for using your electric stove.")
+                        Text("So, you want to report your own sustainable activity. Enter your first and last name.")
                             .font(.custom("Avenir", size: 30))
                             .fontWeight(.bold)
                             .foregroundColor(Color.white)
@@ -92,7 +100,7 @@ struct ElectricStoveView: View {
                         .padding(.bottom, 30)
                         .sheet(isPresented: $isShowingNextView, onDismiss: uploadImage) {
                             
-                            ElectricStoveUploadView(firstName: $firstName,
+                            OtherUploadView(firstName: $firstName,
                                             lastName: $lastName,
                                             imagePath1: $imagePath1,
                                             imagePath2: $imagePath2,
@@ -176,7 +184,7 @@ struct ElectricStoveView: View {
 }
 
 
-struct ElectricStoveUploadView: View {
+struct OtherUploadView: View {
     @Binding var firstName: String
     @Binding var lastName: String
     @Binding var imagePath1: String?
@@ -214,7 +222,7 @@ struct ElectricStoveUploadView: View {
                 }
                 
                 Group {
-                    Text("Next, we need some proof of identification. Upload a picture of your driver's license, passport, or other form of ID so we can confirm your info. The more information you provide, the easier it will be for us to issue you payment.")
+                    Text("Next, we need some proof of identification. Upload a picture of your driver's license, passport, or other form of ID so we can confirm your info. Note, for this transaction you will not earn payment.")
                         .font(.custom("Avenir", size: 30))
                         .fontWeight(.bold)
                         .foregroundColor(Color.white)
@@ -258,7 +266,7 @@ struct ElectricStoveUploadView: View {
                             .cornerRadius(14)
                     }
                     .sheet(isPresented: $isShowingNextView) {
-                        ElectricStovePhotoUploadView2(firstName: $firstName,
+                        OtherUploadView2(firstName: $firstName,
                                          lastName: $lastName,
                                          imagePath1: $imagePath1,
                                          imagePath2: $imagePath2,
@@ -332,7 +340,7 @@ struct ElectricStoveUploadView: View {
     }
 }
 
-struct ElectricStovePhotoUploadView2: View {
+struct OtherUploadView2: View {
     @Binding var firstName: String
     @Binding var lastName: String
     @Binding var imagePath1: String?
@@ -370,7 +378,7 @@ struct ElectricStovePhotoUploadView2: View {
                 }
                 
                 Group {
-                    Text("Now, we need proof of your ownership and usage of your Electric stove. This can be an picture of the stove, a picture of your electric bill, the invoice from when you bought the stove, or other proof of ownership/usage. The more information you provide, the easier it will be for us to issue you payment.")
+                    Text("Now, we need proof of your ownership and usage of whatever form of sustainable activity you are using. Note, we cannot gaurentee payment for this type of transaction and will be determined whether or not you will be paid based upon what you submit.")
                         .font(.custom("Avenir", size: 20))
                         .fontWeight(.bold)
                         .foregroundColor(Color.white)
@@ -427,7 +435,7 @@ struct ElectricStovePhotoUploadView2: View {
                             .cornerRadius(14)
                     }
                     .sheet(isPresented: $isShowingNextView) {
-                        ElectricStoveConfirmTransactionView(firstName: $firstName,
+                       OtherConfirmTransactionView(firstName: $firstName,
                                                lastName: $lastName,
                                                imagePath1: $imagePath1,
                                                imagePath2: $imagePath2,
@@ -499,14 +507,14 @@ struct ElectricStovePhotoUploadView2: View {
 }
 
 
-struct ElectricStoveView_Previews: PreviewProvider {
+struct OtherView_Previews: PreviewProvider {
     static var previews: some View {
-        ElectricStoveView()
+        OtherSustainableView()
     }
 }
 
 
-struct ElectricStoveConfirmTransactionView: View {
+struct OtherConfirmTransactionView: View {
     @Binding var firstName: String
     @Binding var lastName: String
     @Binding var imagePath1: String?
@@ -547,7 +555,7 @@ struct ElectricStoveConfirmTransactionView: View {
                 ScrollView {
                     VStack {
                         Group{
-                            Text("Finally, preview your Electric Stove transaction before confirming it.")
+                            Text("Finally, preview your other sustainable activity transaction before confirming it.")
                                 .font(.custom("Avenir", size: 30))
                                 .fontWeight(.bold)
                                 .foregroundColor(Color.white)

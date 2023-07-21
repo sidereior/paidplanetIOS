@@ -519,7 +519,8 @@ struct ElectricConfirmTransactionView: View {
     @State private var image3: UIImage?
     @State private var image4: UIImage?
     @State private var image5: UIImage?
-
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         ZStack {
             Color(hex: "1B463C")
@@ -529,7 +530,8 @@ struct ElectricConfirmTransactionView: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        // Handle back button action
+                        presentationMode.wrappedValue.dismiss()
+                        
                     }) {
                         Text("Back")
                             .font(.custom("Avenir", size: 20))

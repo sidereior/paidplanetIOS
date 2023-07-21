@@ -45,6 +45,7 @@
 		063D831B2A0F455C002449F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 063D831A2A0F455C002449F4 /* GoogleService-Info.plist */; };
 		0675124E2A5BA4AB000E19F5 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 0675124D2A5BA4AB000E19F5 /* SwiftUIX */; };
 		0680A60A2A62F2B30005A8BC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0680A6092A62F2B30005A8BC /* ProfileView.swift */; };
+		0680A60C2A6B17A80005A8BC /* OtherSustainableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0680A60B2A6B17A80005A8BC /* OtherSustainableView.swift */; };
 		06858B632A3F491700B2D5C1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06858B622A3F491700B2D5C1 /* HomeView.swift */; };
 		06AFF8482A3FF7F300914586 /* AddTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AFF8472A3FF7F300914586 /* AddTabView.swift */; };
 		06C668632A46754000746229 /* TabBar in Frameworks */ = {isa = PBXBuildFile; productRef = 06C668622A46754000746229 /* TabBar */; };
@@ -87,6 +88,7 @@
 		063D82E12A0B02E4002449F4 /* fontviewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fontviewer.swift; sourceTree = "<group>"; };
 		063D831A2A0F455C002449F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0680A6092A62F2B30005A8BC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		0680A60B2A6B17A80005A8BC /* OtherSustainableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherSustainableView.swift; sourceTree = "<group>"; };
 		06858B622A3F491700B2D5C1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		06AFF8472A3FF7F300914586 /* AddTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTabView.swift; sourceTree = "<group>"; };
 		06C668822A50A7BB00746229 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				06C668822A50A7BB00746229 /* AddView.swift */,
 				06C6688E2A52370300746229 /* ElectricCarView.swift */,
 				06C668902A52378500746229 /* ElectricStoveView.swift */,
+				0680A60B2A6B17A80005A8BC /* OtherSustainableView.swift */,
 				06C6688C2A52364C00746229 /* SolarPanelView.swift */,
 				06AFF8472A3FF7F300914586 /* AddTabView.swift */,
 				063D82E12A0B02E4002449F4 /* fontviewer.swift */,
@@ -395,6 +398,7 @@
 				06858B632A3F491700B2D5C1 /* HomeView.swift in Sources */,
 				06EE8A0D2A5E465800911960 /* TransactionView.swift in Sources */,
 				06C668912A52378500746229 /* ElectricStoveView.swift in Sources */,
+				0680A60C2A6B17A80005A8BC /* OtherSustainableView.swift in Sources */,
 				0680A60A2A62F2B30005A8BC /* ProfileView.swift in Sources */,
 				063D82E22A0B02E4002449F4 /* fontviewer.swift in Sources */,
 			);

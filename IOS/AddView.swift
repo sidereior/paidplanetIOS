@@ -16,6 +16,7 @@ struct AddView: View {
     @State private var isShowingSolarPanels = false
     @State private var isShowingElectricCars = false
     @State private var isShowingElectricStoves = false
+    @State private var isShowingOtherView = false
     
     var body: some View {
         ZStack {
@@ -29,7 +30,7 @@ struct AddView: View {
                         .foregroundColor(Color(hex: "1B463C"))
                     Rectangle()
                         .fill(Color(hex: "59DB84"))
-                        .frame(height: 500)
+                        .frame(height: 550)
                         .cornerRadius(14.0)
                         .shadow(radius: 3, x: 0, y: 3)
                         .padding(.horizontal, 20)
@@ -58,7 +59,7 @@ struct AddView: View {
                                     SolarPanelView()
                                 }
                                 
-                                Spacer().frame(height: 30)
+                                Spacer().frame(height: 15)
                                 
                                 Button(action: {
                                     isShowingElectricCars = true
@@ -79,7 +80,7 @@ struct AddView: View {
                                     ElectricCarView()
                                 }
                                 
-                                Spacer().frame(height: 30)
+                                Spacer().frame(height: 15)
                                 
                                 Button(action: {
                                     isShowingElectricStoves = true
@@ -99,6 +100,23 @@ struct AddView: View {
                                 .sheet(isPresented: $isShowingElectricStoves) {
                                     ElectricStoveView()
                                 }
+                                
+                                Spacer().frame(height: 15)
+                                
+                                Button(action: {
+                                    isShowingOtherView = true
+                                }) {
+                                    Text("Other Activity")
+                                        .font(.custom("Avenir", size: 30))
+                                        .foregroundColor(Color(hex: "1B463C"))
+                                        .fontWeight(.black)
+                                        .padding(.leading, 5)
+                                        
+                                }
+                                .sheet(isPresented: $isShowingOtherView) {
+                                    OtherSustainableView()
+                                }
+                                
                             }
                         )
                 }
