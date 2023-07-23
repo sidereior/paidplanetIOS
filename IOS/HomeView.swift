@@ -82,6 +82,7 @@ struct HomeTab: View {
     @State private var showElectricCarView = false
     @State private var showElectricStoveView = false
     @State private var transactions: [Transaction] = []
+    @State private var totalCO2Amount: Double = 0.0
 
     private func fetchTransactions() {
         let db = Firestore.firestore()
@@ -92,14 +93,22 @@ struct HomeTab: View {
                     return
                 }
 
+                var totalCO2: Double = 0.0
+
                 transactions = documents.compactMap { document in
                     do {
-                        return try document.data(as: Transaction.self)
+                        let transaction = try document.data(as: Transaction.self)
+                        if let amountCO = Double(transaction.amountCO) {
+                            totalCO2 += amountCO
+                        }
+                        return transaction
                     } catch {
                         print("Error decoding transaction: \(error.localizedDescription)")
                         return nil
                     }
                 }
+
+                totalCO2Amount = totalCO2
             }
     }
     
@@ -161,6 +170,7 @@ struct HomeTab: View {
                     ZStack {
                         Color(hex: "C9EAD4")
                         VStack {
+                            Group{
                             Text(greeting + ", \(userName)")
                                 .font(.custom("Avenir", size: 25) .bold())
                                 .font(.title)
@@ -187,6 +197,12 @@ struct HomeTab: View {
                                 .foregroundColor(Color(hex: "1B463C"))
                                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                 .padding(.leading, 15)
+                            
+                            Text("Total CO2 Amount: \(totalCO2Amount)")
+                                .font(.custom("Avenir", size: 20))
+                                .foregroundColor(Color(hex: "1B463C"))
+                                .padding(.top, 10)
+                        }
                             
                             VStack(alignment: .center) {
                                 HStack {
