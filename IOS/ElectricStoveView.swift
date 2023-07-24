@@ -698,7 +698,7 @@ struct ElectricStoveConfirmTransactionView: View {
                                       imagePath5: imagePath5 ?? "",
                                       transactionDate: Date(),
                                       progress: "Pending",
-                                      amountCO: "0 tons") // Set the initial progress value
+                                      amountCO: 0.0) // Set the initial progress value
         
         do {
             try db.collection("transactions").addDocument(from: transaction) { error in

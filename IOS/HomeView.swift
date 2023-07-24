@@ -97,17 +97,16 @@ struct HomeTab: View {
 
                 transactions = documents.compactMap { document in
                     do {
+                       
                         let transaction = try document.data(as: Transaction.self)
-                        if let amountCO = Double(transaction.amountCO) {
-                            totalCO2 += amountCO
-                        }
+                        totalCO2 += transaction.amountCO
                         return transaction
                     } catch {
                         print("Error decoding transaction: \(error.localizedDescription)")
                         return nil
                     }
                 }
-
+                
                 totalCO2Amount = totalCO2
             }
     }
