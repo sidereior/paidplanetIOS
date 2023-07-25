@@ -9,7 +9,7 @@ struct HomeView: View {
     @State var selectedTab: Int = 0
     @State var tabs: [CITTopTab] = [
         .init(
-            title: "Home" ,
+            title: "Garden" ,
             icon: .init(systemName: "house.fill"),
             iconColorOverride: Color(hex: "1B463C"),
             selectedIconColorOverride: Color(hex: "67C587")
@@ -170,23 +170,47 @@ struct HomeTab: View {
                         Color(hex: "C9EAD4")
                         VStack {
                             Group{
-                            Text(greeting + ", \(userName)")
-                                .font(.custom("Avenir", size: 25) .bold())
-                                .font(.title)
-                                .foregroundColor(Color(hex: "1B463C"))
-                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                .padding(.leading, 15)
-                            
-                            Spacer()
-                                .frame(height: 3)
-                            
-                            Text(Date(), style: .date)
-                                .font(.custom("Avenir", size: 20))
-                                .font(.title)
-                                .foregroundColor(Color(hex: "1B463C"))
-                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                .padding(.leading, 15)
-                            
+                                Group{
+                                    Image("stage1")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .cornerRadius(14.0)
+                                        .frame(width: UIScreen.main.bounds.width - 30)
+                                        .overlay(
+                                            
+                                            VStack{
+                                                
+                                                Text(greeting + ", \(userName)")
+                                                    .font(.custom("Avenir", size: 25) .bold())
+                                                    .font(.title)
+                                                    .foregroundColor(Color(hex: "1B463C"))
+                                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                                    .padding(.leading, 15)
+                                                    .padding(.top, 15)
+                                                
+                                                Spacer()
+                                                    .frame(height: 3)
+                                                
+                                                Text(Date(), style: .date)
+                                                    .font(.custom("Avenir", size: 20))
+                                                    .font(.title)
+                                                    .foregroundColor(Color(hex: "1B463C"))
+                                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                                    .padding(.leading, 15)
+                                                
+                                                Text("Total CO2 Amount: \(totalCO2Amount) tons")
+                                                    .font(.custom("Avenir", size: 20).bold())
+                                                    .foregroundColor(Color(hex: "1B463C"))
+                                                    .padding(.top, 10)
+                                                    
+                                                
+                                                Spacer()
+                                            }
+                                                
+                                        )
+                                
+                            }
+                        
                             Spacer()
                                 .frame(height: 30)
                             
@@ -197,10 +221,7 @@ struct HomeTab: View {
                                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                 .padding(.leading, 15)
                             
-                            Text("Total CO2 Amount: \(totalCO2Amount)")
-                                .font(.custom("Avenir", size: 20))
-                                .foregroundColor(Color(hex: "1B463C"))
-                                .padding(.top, 10)
+                            
                         }
                             
                             VStack(alignment: .center) {
@@ -267,9 +288,8 @@ struct HomeTab: View {
                                 Spacer()
                                     .frame(height: 15)
                             }
-
+                            
                             Group {
-                                //recent transaction view
                                 Rectangle()
                                     .fill(Color(hex: "1B463C"))
                                     .frame(height: 265)
