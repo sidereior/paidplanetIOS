@@ -171,7 +171,8 @@ struct HomeTab: View {
                         VStack {
                             Group{
                                 Group{
-                                    Image("stage1")
+                                    
+                                    Image(totalCO2Amount > 0.1 ? "stage2" : "stage1")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .cornerRadius(14.0)
@@ -197,8 +198,10 @@ struct HomeTab: View {
                                                     .foregroundColor(Color(hex: "1B463C"))
                                                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                                     .padding(.leading, 15)
+                                               
+                                                var roundedCO2 = Double(String(format: "%.2f", totalCO2Amount)) ?? 0.0
                                                 
-                                                Text("Total CO2 Amount: \(totalCO2Amount) tons")
+                                                Text("Total Amount Offset: \(String(format: "%.2f", totalCO2Amount)) tons of C02")
                                                     .font(.custom("Avenir", size: 20).bold())
                                                     .foregroundColor(Color(hex: "1B463C"))
                                                     .padding(.top, 10)
