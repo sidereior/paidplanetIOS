@@ -172,7 +172,7 @@ struct HomeTab: View {
                             Group{
                                 Group{
                                     
-                                    Image(totalCO2Amount > 0.1 ? "stage2" : "stage1")
+                                    Image(totalCO2Amount > 0.5 ? "stage3" :(totalCO2Amount > 0.1 ? "stage2" : "stage1"))
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .cornerRadius(14.0)
@@ -201,7 +201,7 @@ struct HomeTab: View {
                                                
                                                 var roundedCO2 = Double(String(format: "%.2f", totalCO2Amount)) ?? 0.0
                                                 
-                                                Text("Total Amount Offset: \(String(format: "%.2f", totalCO2Amount)) tons of C02")
+                                                Text("Total Amount Offset: \(roundedCO2) tons of C02")
                                                     .font(.custom("Avenir", size: 20).bold())
                                                     .foregroundColor(Color(hex: "1B463C"))
                                                     .padding(.top, 10)
