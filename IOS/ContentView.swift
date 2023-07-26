@@ -6,18 +6,17 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 struct LoginPage: View {
-   
     @State private var email = ""
-    @State private var password = ""
-    @State private var name = ""
-    @State private var userIsLoggedIn = false
-    @State private var shake = false
-    @State private var confirmEmail = ""
-    @State private var confirmPassword = ""
- 
-    @AppStorage("rememberMe") private var rememberMe = true
+       @State private var password = ""
+       @State private var name = ""
+       @State private var userIsLoggedIn = false
+       @State private var shake = false
+       @State private var confirmEmail = ""
+       @State private var confirmPassword = ""
     
-    @State private var isSignUpMode = false
+       @AppStorage("rememberMe") private var rememberMe = true
+       
+       @State private var isSignUpMode = false
     
     func loginUser() {
             Auth.auth().signIn(withEmail: email, password: password) { result, error in
@@ -38,22 +37,22 @@ struct LoginPage: View {
         }
     
     func autoLoginUser() {
-            // Get the saved email and password from UserDefaults
-            let savedEmail = UserDefaults.standard.string(forKey: "savedEmail") ?? ""
-            let savedPassword = UserDefaults.standard.string(forKey: "savedPassword") ?? ""
+           // Get the saved email and password from UserDefaults
+           let savedEmail = UserDefaults.standard.string(forKey: "savedEmail") ?? ""
+           let savedPassword = UserDefaults.standard.string(forKey: "savedPassword") ?? ""
 
-            // Check if both email and password are non-empty
-            if !savedEmail.isEmpty && !savedPassword.isEmpty {
-                // Attempt to log in the user using saved credentials
-                Auth.auth().signIn(withEmail: savedEmail, password: savedPassword) { result, error in
-                    if error != nil {
-                        print(error!.localizedDescription)
-                    } else {
-                        userIsLoggedIn = true
-                    }
-                }
-            }
-        }
+           // Check if both email and password are non-empty
+           if !savedEmail.isEmpty && !savedPassword.isEmpty {
+               // Attempt to log in the user using saved credentials
+               Auth.auth().signIn(withEmail: savedEmail, password: savedPassword) { result, error in
+                   if error != nil {
+                       print(error!.localizedDescription)
+                   } else {
+                       userIsLoggedIn = true
+                   }
+               }
+           }
+       }
     
     
     func registerUser() {
@@ -69,6 +68,11 @@ struct LoginPage: View {
                 
                 // Initialize the Firestore database
                 let db = Firestore.firestore()
+                
+                if rememberMe {
+                            UserDefaults.standard.set(email, forKey: "savedEmail")
+                            UserDefaults.standard.set(password, forKey: "savedPassword")
+                        }
                 
                 // Set user data in the Firestore database
                 db.collection("users").document(authResult.user.uid).setData(userData) { error in
@@ -89,6 +93,8 @@ struct LoginPage: View {
                 unLogged
                     .onAppear {
                         if rememberMe {
+                            
+                            
                             autoLoginUser()
                         }
                     }

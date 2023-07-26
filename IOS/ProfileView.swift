@@ -1,28 +1,15 @@
-//
-//  ProfileView.swift
-//  IOS
-//
-//  Created by Alexander Nanda on 7/15/23.
-//
-
-import Foundation
-import SwiftUI
-import Firebase
-import FirebaseFirestore
-import FirebaseFirestoreSwift
-
 import SwiftUI
 import Firebase
 
 struct ProfileView: View {
-    @StateObject private var userManager = UserManager()
+    @StateObject private var userManager = UserManager()//TODO: THIS IS HOW WE CAN GET THE EMAIL, STORE THIS IN TRANSACTIONS
     @State private var isShowingResetPasswordAlert = false
-    
+
     var body: some View {
         VStack {
             var greeting: String {
                 let hour = Calendar.current.component(.hour, from: Date())
-                
+
                 if (6..<12).contains(hour) {
                     return "Good Morning"
                 } else if (12..<18).contains(hour) {
@@ -31,23 +18,23 @@ struct ProfileView: View {
                     return "Good Evening"
                 }
             }
-            
-            Text(greeting + ", \(userManager.user?.displayName)")
+
+            Text(greeting + ", \(userManager.user?.displayName ?? "")")
                 .font(.custom("Avenir", size: 25).bold())
                 .font(.title)
                 .foregroundColor(Color(hex: "1B463C"))
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 15)
-                .padding(.top,25)
-            
+                .padding(.top, 25)
+
             Text("Email: \(userManager.user?.email ?? "")")
                 .font(.custom("Avenir", size: 25))
                 .font(.title)
                 .foregroundColor(Color(hex: "1B463C"))
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 15)
-                .padding(.top,25)
-            
+                .padding(.top, 25)
+
             Button(action: {
                 isShowingResetPasswordAlert = true
             }) {
@@ -57,7 +44,7 @@ struct ProfileView: View {
                     .foregroundColor(.blue)
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     .padding(.leading, 15)
-                    .padding(.top,25)
+                    .padding(.top, 25)
             }
             .alert(isPresented: $isShowingResetPasswordAlert) {
                 Alert(
@@ -67,17 +54,17 @@ struct ProfileView: View {
                     secondaryButton: .cancel()
                 )
             }
-            
-            Button(action: logout){
+
+            Button(action: logout) {
                 Text("Logout")
                     .font(.custom("Avenir", size: 25))
-                                       .font(.title)
-                                       .foregroundColor(.red)
-                                       .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                       .padding(.leading, 15)
-                                       .padding(.top, 25)
+                    .font(.title)
+                    .foregroundColor(.red)
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading, 15)
+                    .padding(.top, 25)
             }
-            
+
             Spacer()
         }
         .navigationBarTitle("Profile")
@@ -85,7 +72,7 @@ struct ProfileView: View {
             userManager.fetchUser()
         }
     }
-    
+
     func resetPassword() {
         if let email = userManager.user?.email {
             Auth.auth().sendPasswordReset(withEmail: email) { error in
@@ -98,23 +85,27 @@ struct ProfileView: View {
         }
     }
 
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+            clearStoredCredentials()
+            exit(0)
+        } catch {
+            print("Error signing out: \(error.localizedDescription)")
+        }
+    }
 
-func logout() {
-       do {
-           try Auth.auth().signOut()
-           // Redirect to the login screen or exit the app
-           exit(0)
-       } catch {
-           print("Error signing out: \(error.localizedDescription)")
-       }
-   }
+    private func clearStoredCredentials() {
+        UserDefaults.standard.removeObject(forKey: "savedEmail")
+        UserDefaults.standard.removeObject(forKey: "savedPassword")
+    }
+
 }
 
 class UserManager: ObservableObject {
     @Published var user: User?
-    
+
     func fetchUser() {
         user = Auth.auth().currentUser
     }
 }
-
