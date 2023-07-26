@@ -14,22 +14,47 @@ struct LoginPage: View {
     @State private var shake = false
     @State private var confirmEmail = ""
     @State private var confirmPassword = ""
-    
+ 
     @AppStorage("rememberMe") private var rememberMe = true
     
     @State private var isSignUpMode = false
     
     func loginUser() {
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
-            if error != nil {
-                print(error!.localizedDescription)
-                shake = true
-            } else {
-                userIsLoggedIn = true
-                shake = false
+            Auth.auth().signIn(withEmail: email, password: password) { result, error in
+                if error != nil {
+                    print(error!.localizedDescription)
+                    shake = true
+                } else {
+                    userIsLoggedIn = true
+                    shake = false
+
+                    // Save the user's email and password to UserDefaults if "Remember Me" is checked
+                    if rememberMe {
+                        UserDefaults.standard.set(email, forKey: "savedEmail")
+                        UserDefaults.standard.set(password, forKey: "savedPassword")
+                    }
+                }
             }
         }
-    }
+    
+    func autoLoginUser() {
+            // Get the saved email and password from UserDefaults
+            let savedEmail = UserDefaults.standard.string(forKey: "savedEmail") ?? ""
+            let savedPassword = UserDefaults.standard.string(forKey: "savedPassword") ?? ""
+
+            // Check if both email and password are non-empty
+            if !savedEmail.isEmpty && !savedPassword.isEmpty {
+                // Attempt to log in the user using saved credentials
+                Auth.auth().signIn(withEmail: savedEmail, password: savedPassword) { result, error in
+                    if error != nil {
+                        print(error!.localizedDescription)
+                    } else {
+                        userIsLoggedIn = true
+                    }
+                }
+            }
+        }
+    
     
     func registerUser() {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
@@ -58,12 +83,17 @@ struct LoginPage: View {
     }
 
     var body: some View {
-        if userIsLoggedIn {
-            HomeView()
-        } else {
-            unLogged
+            if userIsLoggedIn {
+                HomeView()
+            } else {
+                unLogged
+                    .onAppear {
+                        if rememberMe {
+                            autoLoginUser()
+                        }
+                    }
+            }
         }
-    }
 
     var unLogged: some View {
         ZStack {
