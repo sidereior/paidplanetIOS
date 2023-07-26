@@ -14,7 +14,8 @@ struct LoginPage: View {
     @State private var shake = false
     @State private var confirmEmail = ""
     @State private var confirmPassword = ""
-
+    
+    @AppStorage("rememberMe") private var rememberMe = true
     
     @State private var isSignUpMode = false
     
@@ -29,6 +30,7 @@ struct LoginPage: View {
             }
         }
     }
+    
     func registerUser() {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let error = error {
@@ -55,8 +57,6 @@ struct LoginPage: View {
         }
     }
 
-
-    
     var body: some View {
         if userIsLoggedIn {
             HomeView()
@@ -64,7 +64,7 @@ struct LoginPage: View {
             unLogged
         }
     }
-    
+
     var unLogged: some View {
         ZStack {
             Image("background")
@@ -74,24 +74,21 @@ struct LoginPage: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 20) {
-               
-              
-                    Text(("Welcome to"))
-                        .font(.custom("Avenir", size: 32))
-                        .fontWeight(.black)
-                        .foregroundColor(Color(hex: "D9D9D9"))
-                        .overlay(
-                            Text(("Welcome to"))
-                                .font(.custom("Avenir", size: 32))
-                                .fontWeight(.black)
-                                .foregroundColor(.black)
-                                .offset(x: 1, y: 1)
-                        )
-                    Text(("PaidPlanet"))
-                        .font(.custom("Avenir-Oblique", size: 32))
-                        .fontWeight(.black)
-                        .foregroundColor(Color(hex: "1B463C"))
-                
+                Text(("Welcome to"))
+                    .font(.custom("Avenir", size: 32))
+                    .fontWeight(.black)
+                    .foregroundColor(Color(hex: "D9D9D9"))
+                    .overlay(
+                        Text(("Welcome to"))
+                            .font(.custom("Avenir", size: 32))
+                            .fontWeight(.black)
+                            .foregroundColor(.black)
+                            .offset(x: 1, y: 1)
+                    )
+                Text(("PaidPlanet"))
+                    .font(.custom("Avenir-Oblique", size: 32))
+                    .fontWeight(.black)
+                    .foregroundColor(Color(hex: "1B463C"))
                 
                 TextField("Email", text: $email)
                     .autocapitalization(.none)
@@ -111,7 +108,6 @@ struct LoginPage: View {
                         .cornerRadius(14.0)
                         .padding(.horizontal, 25)
                         .font(.custom("Avenir", size: 15).bold())
-                       
                 }
                 
                 SecureField("Password", text: $password)
@@ -132,7 +128,6 @@ struct LoginPage: View {
                         .cornerRadius(14.0)
                         .padding(.horizontal, 25)
                         .font(.custom("Avenir", size: 15).bold())
-                       
                 }
                 
                 if isSignUpMode {
@@ -144,44 +139,40 @@ struct LoginPage: View {
                         .cornerRadius(14.0)
                         .padding(.horizontal, 25)
                         .font(.custom("Avenir", size: 15).bold())
-                     
                 }
                 
-                Group{
-                Button(action: {
-                    if isSignUpMode {
-                        // Check if email and confirmEmail match
-                        if email == confirmEmail {
-                            // Check if password and confirmPassword match
-                            if password == confirmPassword {
-                                // Register user
-                                registerUser()
+                Group {
+                    Button(action: {
+                        if isSignUpMode {
+                            // Check if email and confirmEmail match
+                            if email == confirmEmail {
+                                // Check if password and confirmPassword match
+                                if password == confirmPassword {
+                                    // Register user
+                                    registerUser()
+                                } else {
+                                    // Show password mismatch error
+                                    //come back to this later!
+                                    print("Your passwords do not match.")
+                                }
                             } else {
-                                // Show password mismatch error
-                                //come back to this later!
-                                print("Your passwords do not match.")
+                                // Show email mismatch error
+                                print("Your email do not match.")
                             }
                         } else {
-                            // Show email mismatch error
-                            
-                            print("Your email do not match.")
+                            // Login user
+                            loginUser()
                         }
-                    } else {
-                        // Login user
-                        loginUser()
-                    }
-                }, label: {
-                    Text(isSignUpMode ? "Sign Up" : "Login")
-                        .font(.custom("Avenir", size: 20))
-                        .fontWeight(.bold)
-                        .foregroundColor(Color(hex: "D9D9D9"))
-                        .frame(width: 220, height: 60)
-                        .background(Color(hex: "1B463C"))
-                        .cornerRadius(14.0)
-                     
-                })
-                
-              
+                    }, label: {
+                        Text(isSignUpMode ? "Sign Up" : "Login")
+                            .font(.custom("Avenir", size: 20))
+                            .fontWeight(.bold)
+                            .foregroundColor(Color(hex: "D9D9D9"))
+                            .frame(width: 220, height: 60)
+                            .background(Color(hex: "1B463C"))
+                            .cornerRadius(14.0)
+                    })
+                    
                     Button(action: {
                         isSignUpMode.toggle()
                     }, label: {
@@ -200,9 +191,14 @@ struct LoginPage: View {
                             .foregroundColor(Color(hex: "D9D9D9"))
                             .cornerRadius(14.0)
                     })
+                    
+                    // Add the Toggle for "Remember Me" here
+                    Toggle("Remember Me", isOn: $rememberMe)
+                        .toggleStyle(SwitchToggleStyle(tint: Color(hex: "1B463C")))
+                        .padding(.horizontal, 25)
+                        .font(.custom("Avenir", size: 15).bold())
                 }
             }
-            
         }
     }
 }
@@ -227,7 +223,6 @@ extension Color {
         self.init(red: red, green: green, blue: blue)
     }
 }
-
 
 class EmailManager {
     static let shared = EmailManager()

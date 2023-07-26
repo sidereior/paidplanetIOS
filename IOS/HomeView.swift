@@ -97,7 +97,6 @@ struct HomeTab: View {
 
                 transactions = documents.compactMap { document in
                     do {
-                       
                         let transaction = try document.data(as: Transaction.self)
                         totalCO2 += transaction.amountCO
                         return transaction
@@ -392,6 +391,8 @@ struct HomeTab: View {
                                                 }
 
                                                 Button(action: {
+                                                    //TODO: fix bug with this
+                                                    
                                                     if let url = URL(string: "https://www.lg.com") {
                                                         UIApplication.shared.open(url)
                                                     }
