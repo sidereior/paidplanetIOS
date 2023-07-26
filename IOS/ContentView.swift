@@ -177,6 +177,11 @@ struct LoginPage: View {
                         .font(.custom("Avenir", size: 15).bold())
                 }
                 
+                Toggle("Remember Me", isOn: $rememberMe)
+                    .toggleStyle(SwitchToggleStyle(tint: Color(hex: "1B463C")), backgroundStyle(Color(hex: "D9D9D9")))
+                    .padding(.horizontal, 25)
+                    .font(.custom("Avenir", size: 15).bold())
+                
                 Group {
                     Button(action: {
                         if isSignUpMode {
@@ -229,10 +234,7 @@ struct LoginPage: View {
                     })
                     
                     // Add the Toggle for "Remember Me" here
-                    Toggle("Remember Me", isOn: $rememberMe)
-                        .toggleStyle(SwitchToggleStyle(tint: Color(hex: "1B463C")))
-                        .padding(.horizontal, 25)
-                        .font(.custom("Avenir", size: 15).bold())
+                   
                 }
             }
         }
