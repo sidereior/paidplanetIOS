@@ -13,9 +13,8 @@ struct LoginPage: View {
        @State private var shake = false
        @State private var confirmEmail = ""
        @State private var confirmPassword = ""
-    
+       @State private var isShowingWelcomeSheet = true
        @AppStorage("rememberMe") private var rememberMe = true
-       
        @State private var isSignUpMode = false
     
     func loginUser() {
@@ -87,6 +86,7 @@ struct LoginPage: View {
     }
 
     var body: some View {
+        ZStack{
             if userIsLoggedIn {
                 HomeView()
             } else {
@@ -100,6 +100,14 @@ struct LoginPage: View {
                     }
             }
         }
+        .sheet(isPresented: $isShowingWelcomeSheet) {
+                    WelcomeFrameView()
+                }
+                .onAppear {
+                    isShowingWelcomeSheet = true // Show the WelcomeFrameView as a sheet when the LoginPage appears
+                }
+        }
+    
 
     var unLogged: some View {
         ZStack {
@@ -176,9 +184,9 @@ struct LoginPage: View {
                         .padding(.horizontal, 25)
                         .font(.custom("Avenir", size: 15).bold())
                 }
-                
+                        
                 Toggle("Remember Me", isOn: $rememberMe)
-                    .toggleStyle(SwitchToggleStyle(tint: Color(hex: "1B463C")), backgroundStyle(Color(hex: "D9D9D9")))
+                    .toggleStyle(SwitchToggleStyle(tint: Color(hex: "1B463C")))
                     .padding(.horizontal, 25)
                     .font(.custom("Avenir", size: 15).bold())
                 
@@ -233,8 +241,7 @@ struct LoginPage: View {
                             .cornerRadius(14.0)
                     })
                     
-                    // Add the Toggle for "Remember Me" here
-                   
+                
                 }
             }
         }
