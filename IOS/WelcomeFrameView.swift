@@ -3,7 +3,7 @@
 //  IOS
 //
 //  Created by Alexander Nanda on 7/26/23.
-// 
+//
 
 import Foundation
 import AuthenticationServices
@@ -36,8 +36,6 @@ struct WelcomeFrameView: View {
                         .background(Color.white)
                         .cornerRadius(14)
                 }
-                
-                Spacer()
                 
                 Text(("Welcome to"))
                     .font(.custom("Avenir", size: 32))
