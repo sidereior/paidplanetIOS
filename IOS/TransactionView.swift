@@ -23,7 +23,7 @@ struct TransactionsView: View {
             }
             .listStyle(PlainListStyle())
         }
-        .background(Color(hex: "C9EAD4").ignoresSafeArea())
+        .background(Color(hex: "9aaee0").ignoresSafeArea())
         .onAppear {
             fetchTransactions()
         }
