@@ -1,10 +1,3 @@
-//
-//  OtherSustainableView.swift
-//  IOS
-//
-//  Created by Alexander Nanda on 7/21/23.
-//
-
 import Foundation
 import SwiftUI
 import Firebase

@@ -520,7 +520,7 @@ struct ElectricConfirmTransactionView: View {
     @State private var image4: UIImage?
     @State private var image5: UIImage?
     @State private var userEmail = ""
-@Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         ZStack {

@@ -1,10 +1,3 @@
-//
-//  AddView.swift
-//  IOS
-//
-//  Created by Alexander Nanda on 7/1/23.
-//
-
 import Foundation
 import SwiftUI
 import Firebase
@@ -20,7 +13,7 @@ struct AddView: View {
     
     var body: some View {
         ZStack {
-                        Color(hex: "9aaee0")
+            Color(hex: "C9EAD4")
                 .ignoresSafeArea()
             ScrollView {
                 VStack {

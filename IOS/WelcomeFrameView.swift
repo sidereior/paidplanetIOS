@@ -1,10 +1,3 @@
-//
-//  WelcomeFrameView.swift
-//  IOS
-//
-//  Created by Alexander Nanda on 7/26/23.
-//
-
 import Foundation
 import AuthenticationServices
 import Firebase

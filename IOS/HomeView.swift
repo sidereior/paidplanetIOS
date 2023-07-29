@@ -392,6 +392,7 @@ struct HomeTab: View {
 
                                                 Button(action: {
                                                     //TODO: fix bug with this
+    
                                                     
                                                     if let url = URL(string: "https://www.lg.com") {
                                                         UIApplication.shared.open(url)
