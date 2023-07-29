@@ -7,23 +7,17 @@ struct TransactionsView: View {
     @State private var transactions: [Transaction] = []
 
     var body: some View {
-        VStack {
-            List(transactions) { transaction in
-                VStack(alignment: .leading) {
-                    Text("\(transaction.firstName) \(transaction.lastName)")
-                        .font(.headline)
+        ZStack {
+            Color(hex: "9aaee0").edgesIgnoringSafeArea(.all)
 
-                    Text("Transaction Date: \(transaction.transactionDate)")
-                        .font(.subheadline)
-
-                    Text("Progress: \(transaction.progress)")
-                        .font(.subheadline)
+            ScrollView {
+                VStack {
+                    ForEach(transactions) { transaction in
+                        TransactionCardView(transaction: transaction)
+                    }
                 }
-                .listRowBackground(Color(hex: "1B463C"))
             }
-            .listStyle(PlainListStyle())
         }
-        .background(Color(hex: "9aaee0").ignoresSafeArea())
         .onAppear {
             fetchTransactions()
         }
@@ -47,5 +41,42 @@ struct TransactionsView: View {
                     }
                 }
             }
+    }
+}
+
+struct TransactionCardView: View {
+    var transaction: Transaction
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("\(transaction.firstName) \(transaction.lastName)")
+                .font(.title)
+                .foregroundColor(.white)
+
+            Text("Transaction Date: \(formattedDate)")
+                .font(.subheadline)
+                .foregroundColor(.white)
+
+            Text("Progress: \(transaction.progress)")
+                .font(.subheadline)
+                .foregroundColor(.white)
+        }
+        .frame(
+              minWidth: 0,
+              maxWidth: .infinity,
+              minHeight: 0,
+              maxHeight: .infinity,
+              alignment: .topLeading
+            )
+        .padding(.horizontal, 15)
+        .background(Color(hex: "1B463C"))
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+    }
+
+    private var formattedDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        return dateFormatter.string(from: transaction.transactionDate)
     }
 }
