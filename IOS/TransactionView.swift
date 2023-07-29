@@ -61,13 +61,7 @@ struct TransactionCardView: View {
                 .font(.subheadline)
                 .foregroundColor(.white)
         }
-        .frame(
-              minWidth: 0,
-              maxWidth: .infinity,
-              minHeight: 0,
-              maxHeight: .infinity,
-              alignment: .topLeading
-            )
+        
         .padding(.horizontal, 15)
         .background(Color(hex: "1B463C"))
         .cornerRadius(10)

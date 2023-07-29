@@ -17,6 +17,9 @@ struct Transaction: Codable, Identifiable {
     var transactionDate: Date
     var progress: String
     var amountCO: Double
+    var dollarAmount: Double
+    var transactionType: String
+    var email: String
 }
 
 
@@ -568,6 +571,7 @@ struct ConfirmTransactionView: View {
     @State private var image3: UIImage?
     @State private var image4: UIImage?
     @State private var image5: UIImage?
+    @State private var userEmail = ""
     @Environment(\.presentationMode) var presentationMode
     
 
@@ -717,6 +721,9 @@ struct ConfirmTransactionView: View {
             }
         }
         .onAppear {
+            if let user = Auth.auth().currentUser {
+                    userEmail = user.email ?? "unknown@example.com"
+                }
             loadImage(from: URL(string: imagePath1 ?? ""), into: $image1)
             loadImage(from: URL(string: imagePath2 ?? ""), into: $image2)
             loadImage(from: URL(string: imagePath3 ?? ""), into: $image3)
@@ -752,7 +759,10 @@ struct ConfirmTransactionView: View {
                                       imagePath5: imagePath5 ?? "",
                                       transactionDate: Date(),
                                       progress: "Pending",
-                                      amountCO: 0.0)
+                                      amountCO: 0.0,
+                                      dollarAmount: 0.0,
+                                      transactionType: "SolarPanels",
+                                      email: userEmail)
         
         do {
             try db.collection("transactions").addDocument(from: transaction) { error in

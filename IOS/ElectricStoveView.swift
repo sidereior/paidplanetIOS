@@ -519,6 +519,7 @@ struct ElectricStoveConfirmTransactionView: View {
     @State private var image3: UIImage?
     @State private var image4: UIImage?
     @State private var image5: UIImage?
+    @State private var userEmail = ""
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -663,6 +664,10 @@ struct ElectricStoveConfirmTransactionView: View {
             }
         }
         .onAppear {
+            if let user = Auth.auth().currentUser {
+                userEmail = user.email ?? "unknown@example.com"
+            }
+                
             loadImage(from: URL(string: imagePath1 ?? ""), into: $image1)
             loadImage(from: URL(string: imagePath2 ?? ""), into: $image2)
             loadImage(from: URL(string: imagePath3 ?? ""), into: $image3)
@@ -698,7 +703,10 @@ struct ElectricStoveConfirmTransactionView: View {
                                       imagePath5: imagePath5 ?? "",
                                       transactionDate: Date(),
                                       progress: "Pending",
-                                      amountCO: 0.0) // Set the initial progress value
+                                      amountCO: 0.0,
+                                      dollarAmount: 0.0,
+                                      transactionType: "ElectricStove",
+                                      email: userEmail)
         
         do {
             try db.collection("transactions").addDocument(from: transaction) { error in
