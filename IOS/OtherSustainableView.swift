@@ -6,9 +6,6 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import UIKit
 
-
-
-
 struct OtherSustainableView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var isShowingImagePicker = false
@@ -111,10 +108,6 @@ struct OtherSustainableView: View {
             }
         }
     }
-    
-    
-    
-    
     
     func uploadImage() {
         guard let image = selectedImage,
@@ -645,7 +638,6 @@ struct OtherConfirmTransactionView: View {
                                     .padding(.top, 20)
                             }
                         }
-
                         Button(action: {
                             uploadTransaction()
                             UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true)

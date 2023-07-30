@@ -2,7 +2,7 @@ import SwiftUI
 import Firebase
 
 struct ProfileView: View {
-    @StateObject private var userManager = UserManager()//TODO: THIS IS HOW WE CAN GET THE EMAIL, STORE THIS IN TRANSACTIONS
+    @StateObject private var userManager = UserManager()
     @State private var isShowingResetPasswordAlert = false
 
     var body: some View {

@@ -13,7 +13,7 @@ struct AddView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "C9EAD4")
+            Color(hex: "9aaee0")
                 .ignoresSafeArea()
             ScrollView {
                 VStack {
