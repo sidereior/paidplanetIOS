@@ -14,7 +14,7 @@ struct TransactionsView: View {
                 VStack {
                     ForEach(transactions) { transaction in
                         TransactionCardView(transaction: transaction)
-                    }
+                    }.padding(.horizontal, 15)
                 }
             }
         }
@@ -49,19 +49,68 @@ struct TransactionCardView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("\(transaction.firstName) \(transaction.lastName)")
+            
+            Spacer()
+                .frame(height: 5)
+            
+            Text("\(transaction.transactionType)")
                 .font(.title)
                 .foregroundColor(.white)
+                .fontWeight(.black)
+           
+            HStack{
+                Text("Progress: ")
+                    .font(.subheadline)
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+               
+                if(transaction.progress == "Pending")
+                {
+                    Text("\(transaction.progress)")
+                        .font(.subheadline)
+                        .fontWeight(.bold)
+                        .foregroundColor(.yellow)
+                }
+                else
+                {
+                    Text("\(transaction.progress)")
+                    .font(.subheadline)
+                    .fontWeight(.bold)
+                    .foregroundColor(.green)
 
+                }
+            }
+            
             Text("Transaction Date: \(formattedDate)")
                 .font(.subheadline)
                 .foregroundColor(.white)
-
-            Text("Progress: \(transaction.progress)")
-                .font(.subheadline)
-                .foregroundColor(.white)
-        }
-        
+                .fontWeight(.bold)
+            
+            if(transaction.dollarAmount.isEqual(to: 0.0))
+            {
+                Text("Dollar Amount: Transaction is still being reviewed.")
+                    .font(.subheadline)
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+            }
+            else
+            {
+                Text("Dollar Amount: \(transaction.dollarAmount)")
+                    .font(.subheadline)
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+            }
+            
+            Spacer()
+                .frame(height: 5)
+       }
+        .frame(
+              minWidth: 0,
+              maxWidth: .infinity,
+              minHeight: 0,
+              maxHeight: .infinity,
+              alignment: .topLeading
+            )
         .padding(.horizontal, 15)
         .background(Color(hex: "1B463C"))
         .cornerRadius(10)
