@@ -701,9 +701,6 @@ struct ConfirmTransactionView: View {
                         Button(action: {
                             uploadTransaction()
                             UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true)
-                            //make this so that it closes out of all of hte views
-                            
-                            
                         }) {
                             Text("Confirm Cashback")
                                 .font(.custom("Avenir", size: 20))

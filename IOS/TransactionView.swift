@@ -53,7 +53,7 @@ struct TransactionCardView: View {
             Spacer()
                 .frame(height: 5)
             
-            Text("\(transaction.transactionType)")
+            Text("Type: \(transaction.transactionType)")
                 .font(.title)
                 .foregroundColor(.white)
                 .fontWeight(.black)

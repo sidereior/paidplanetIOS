@@ -647,6 +647,7 @@ struct ElectricStoveConfirmTransactionView: View {
 
                         Button(action: {
                             uploadTransaction()
+                            UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true)
                         }) {
                             Text("Confirm Cashback")
                                 .font(.custom("Avenir", size: 20))
