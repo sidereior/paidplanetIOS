@@ -49,6 +49,7 @@
 		06858B632A3F491700B2D5C1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06858B622A3F491700B2D5C1 /* HomeView.swift */; };
 		06AFF8482A3FF7F300914586 /* AddTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AFF8472A3FF7F300914586 /* AddTabView.swift */; };
 		06C09E892A71D2DC00D8F5D6 /* WelcomeFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C09E882A71D2DC00D8F5D6 /* WelcomeFrameView.swift */; };
+		06C09F082A7759DC00D8F5D6 /* RedeemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C09F072A7759DC00D8F5D6 /* RedeemView.swift */; };
 		06C668632A46754000746229 /* TabBar in Frameworks */ = {isa = PBXBuildFile; productRef = 06C668622A46754000746229 /* TabBar */; };
 		06C668792A4BD7BD00746229 /* CITTopTabBar in Frameworks */ = {isa = PBXBuildFile; productRef = 06C668782A4BD7BD00746229 /* CITTopTabBar */; };
 		06C668832A50A7BB00746229 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C668822A50A7BB00746229 /* AddView.swift */; };
@@ -93,6 +94,7 @@
 		06858B622A3F491700B2D5C1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		06AFF8472A3FF7F300914586 /* AddTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTabView.swift; sourceTree = "<group>"; };
 		06C09E882A71D2DC00D8F5D6 /* WelcomeFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFrameView.swift; sourceTree = "<group>"; };
+		06C09F072A7759DC00D8F5D6 /* RedeemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemView.swift; sourceTree = "<group>"; };
 		06C668822A50A7BB00746229 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		06C6688C2A52364C00746229 /* SolarPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarPanelView.swift; sourceTree = "<group>"; };
 		06C6688E2A52370300746229 /* ElectricCarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectricCarView.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				063D82B92A0AFFE4002449F4 /* ContentView.swift */,
 				06C09E882A71D2DC00D8F5D6 /* WelcomeFrameView.swift */,
 				06858B622A3F491700B2D5C1 /* HomeView.swift */,
+				06C09F072A7759DC00D8F5D6 /* RedeemView.swift */,
 				06C668822A50A7BB00746229 /* AddView.swift */,
 				06EE8A0C2A5E465800911960 /* TransactionView.swift */,
 				06C6688E2A52370300746229 /* ElectricCarView.swift */,
@@ -394,6 +397,7 @@
 			files = (
 				06AFF8482A3FF7F300914586 /* AddTabView.swift in Sources */,
 				063D82BA2A0AFFE4002449F4 /* ContentView.swift in Sources */,
+				06C09F082A7759DC00D8F5D6 /* RedeemView.swift in Sources */,
 				06C668832A50A7BB00746229 /* AddView.swift in Sources */,
 				063D82B82A0AFFE4002449F4 /* IOSApp.swift in Sources */,
 				06C6688F2A52370300746229 /* ElectricCarView.swift in Sources */,

@@ -84,7 +84,7 @@ struct HomeTab: View {
     @State private var transactions: [Transaction] = []
     @State private var totalCO2Amount: Double = 0.0
     @State private var transactionChanged: Bool = false
-    
+   @State private var isPresentingRedeemView = false
     private func fetchTransactions() {
         let db = Firestore.firestore()
         db.collection("transactions")
@@ -221,6 +221,10 @@ struct HomeTab: View {
                                     else
                                     {
                                         
+                                        Button(action: {
+                                                isPresentingRedeemView = true
+                                        })
+                                        {
                                         Image(totalCO2Amount > 0.5 ? "stage3.5" :(totalCO2Amount > 0.1 ? "stage2.5" : "stage1.5"))
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
@@ -261,8 +265,13 @@ struct HomeTab: View {
                                                 
                                             )
                                     }
-                                
+                                        .sheet(isPresented: $isPresentingRedeemView) {
+                                            RedeemView()
+                                        }
+                                           }
+                                           
                             }
+                                
                         
                             Spacer()
                                 .frame(height: 30)
