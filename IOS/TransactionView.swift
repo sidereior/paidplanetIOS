@@ -71,13 +71,20 @@ struct TransactionCardView: View {
                         .fontWeight(.bold)
                         .foregroundColor(.yellow)
                 }
-                else
+                else if(transaction.progress == "Completed")
                 {
                     Text("\(transaction.progress)")
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .foregroundColor(.green)
 
+                }
+                else if (transaction.progress == "Redeemed")
+                {
+                    Text("\(transaction.progress)")
+                        .font(.subheadline)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
                 }
             }
             
