@@ -272,7 +272,6 @@ struct HomeTab: View {
                                            
                             }
                                 
-                        
                             Spacer()
                                 .frame(height: 30)
                             
