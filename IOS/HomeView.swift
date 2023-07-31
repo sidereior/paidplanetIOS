@@ -83,7 +83,8 @@ struct HomeTab: View {
     @State private var showElectricStoveView = false
     @State private var transactions: [Transaction] = []
     @State private var totalCO2Amount: Double = 0.0
-
+    @State private var transactionChanged: Bool = false
+    
     private func fetchTransactions() {
         let db = Firestore.firestore()
         db.collection("transactions")
@@ -97,8 +98,13 @@ struct HomeTab: View {
 
                 transactions = documents.compactMap { document in
                     do {
+                        
                         let transaction = try document.data(as: Transaction.self)
                         totalCO2 += transaction.amountCO
+                        if(transaction.progress == "Completed")
+                        {
+                            transactionChanged = true
+                        }
                         return transaction
                     } catch {
                         print("Error decoding transaction: \(error.localizedDescription)")
@@ -170,46 +176,91 @@ struct HomeTab: View {
                         VStack {
                             Group{
                                 Group{
-                                    
-                                    Image(totalCO2Amount > 0.5 ? "stage3" :(totalCO2Amount > 0.1 ? "stage2" : "stage1"))
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .cornerRadius(14.0)
-                                        .frame(width: UIScreen.main.bounds.width - 30)
-                                        .overlay(
-                                            
-                                            VStack{
+                                    if(!transactionChanged)
+                                    {
+                                        Image(totalCO2Amount > 0.5 ? "stage3" :(totalCO2Amount > 0.1 ? "stage2" : "stage1"))
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .cornerRadius(14.0)
+                                            .frame(width: UIScreen.main.bounds.width - 30)
+                                            .overlay(
                                                 
-                                                Text(greeting + ", \(userName)")
-                                                    .font(.custom("Avenir", size: 25) .bold())
-                                                    .font(.title)
-                                                    .foregroundColor(Color(hex: "1B463C"))
-                                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                                    .padding(.leading, 15)
-                                                    .padding(.top, 15)
-                                                
-                                                Text(Date(), style: .date)
-                                                    .font(.custom("Avenir", size: 20))
-                                                    .font(.title)
-                                                    .foregroundColor(Color(hex: "1B463C"))
-                                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                                    .padding(.leading, 15)
-                                                
-                                                Spacer()
-                                                    .frame(height: 3)
-                                                
-                                                Group{
-                                                    Text(String(format: "Total Offset: %.2f tons of CO2", totalCO2Amount))
-                                                        .font(.custom("Avenir", size: 20).bold())
+                                                VStack{
+                                                    
+                                                    Text(greeting + ", \(userName)")
+                                                        .font(.custom("Avenir", size: 25) .bold())
+                                                        .font(.title)
                                                         .foregroundColor(Color(hex: "1B463C"))
                                                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                                         .padding(.leading, 15)
-                                                }
+                                                        .padding(.top, 15)
                                                     
-                                                Spacer()
-                                            }
+                                                    Text(Date(), style: .date)
+                                                        .font(.custom("Avenir", size: 20))
+                                                        .font(.title)
+                                                        .foregroundColor(Color(hex: "1B463C"))
+                                                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                                        .padding(.leading, 15)
+                                                    
+                                                    Spacer()
+                                                        .frame(height: 3)
+                                                    
+                                                    Group{
+                                                        Text(String(format: "Total Offset: %.2f tons of CO2", totalCO2Amount))
+                                                            .font(.custom("Avenir", size: 20).bold())
+                                                            .foregroundColor(Color(hex: "1B463C"))
+                                                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                                            .padding(.leading, 15)
+                                                    }
+                                                    
+                                                    Spacer()
+                                                }
                                                 
-                                        )
+                                            )
+                                    }
+                                    else
+                                    {
+                                        
+                                        Image(totalCO2Amount > 0.5 ? "stage3.5" :(totalCO2Amount > 0.1 ? "stage2.5" : "stage1.5"))
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .cornerRadius(14.0)
+                                            .frame(width: UIScreen.main.bounds.width - 30)
+                                            .overlay(
+                                                
+                                                VStack{
+                                                    
+                                                    Text(greeting + ", \(userName)")
+                                                        .font(.custom("Avenir", size: 25) .bold())
+                                                        .font(.title)
+                                                        .foregroundColor(Color(hex: "1B463C"))
+                                                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                                        .padding(.leading, 15)
+                                                        .padding(.top, 15)
+                                                    
+                                                    Text(Date(), style: .date)
+                                                        .font(.custom("Avenir", size: 20))
+                                                        .font(.title)
+                                                        .foregroundColor(Color(hex: "1B463C"))
+                                                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                                        .padding(.leading, 15)
+                                                    
+                                                    Spacer()
+                                                        .frame(height: 3)
+                                                    
+                                                    Group{
+                                                        Text(String(format: "Total Offset: %.2f tons of CO2", totalCO2Amount))
+                                                            .font(.custom("Avenir", size: 20).bold())
+                                                            .foregroundColor(Color(hex: "1B463C"))
+                                                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                                            .padding(.leading, 15)
+                                                    }
+                                                    
+                                                    Spacer()
+                                                }
+                                                
+                                            )
+                                    }
                                 
                             }
                         

@@ -6,6 +6,7 @@ import FirebaseFirestoreSwift
 struct TransactionsView: View {
     @State private var transactions: [Transaction] = []
 
+    @State private var transactionChanged: Bool = false
     var body: some View {
         ZStack {
             Color(hex: "9aaee0").edgesIgnoringSafeArea(.all)
@@ -14,6 +15,7 @@ struct TransactionsView: View {
                 VStack {
                     ForEach(transactions) { transaction in
                         TransactionCardView(transaction: transaction)
+                        
                     }.padding(.horizontal, 15)
                 }
             }
