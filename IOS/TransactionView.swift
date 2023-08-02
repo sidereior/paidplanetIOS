@@ -5,14 +5,51 @@ import FirebaseFirestoreSwift
 
 struct TransactionsView: View {
     @State private var transactions: [Transaction] = []
-
+    @State private var totalCO2Amount: Double = 0.0
     @State private var transactionChanged: Bool = false
+    @State private var totalDollarAmount: Double = 0.0
+    
     var body: some View {
         ZStack {
             Color(hex: "9aaee0").edgesIgnoringSafeArea(.all)
 
             ScrollView {
                 VStack {
+                    
+                    VStack(alignment: .leading, spacing: 10){
+                        Spacer()
+                            .frame(height: 5)
+                        
+                        HStack{
+                            Text("Total Transactions: ")
+                             .fontWeight(.black)
+                             .foregroundColor(.white)
+                            
+                            Text("\(transactions.count)")
+                            .fontWeight(.black)
+                            .foregroundColor(Color(hex: "1B463C"))
+                        }
+                            .font(.title)
+                        
+                        Text("Total CO2 Offset: \(String(format: "%.2f", totalCO2Amount))")
+                            .font(.subheadline)
+                            .foregroundColor(.white)
+                            .fontWeight(.black)
+                      
+                        Text("Total $ Earned: \(String(format: "%.2f", totalDollarAmount)))")
+                            .font(.subheadline)
+                            .foregroundColor(.white)
+                            .fontWeight(.black)
+                        
+                        Spacer()
+                            .frame(height: 5)
+                    }
+                    .padding(.horizontal,15)
+                    .background(Color(hex: "1B463C"))
+                    .cornerRadius(10)
+                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+                    .padding(.bottom, 10)
+                    
                     ForEach(transactions) { transaction in
                         TransactionCardView(transaction: transaction)
                         
@@ -25,7 +62,7 @@ struct TransactionsView: View {
         }
     }
 
-    private func fetchTransactions() {
+        private func fetchTransactions() {
         let db = Firestore.firestore()
         db.collection("transactions")
             .addSnapshotListener { snapshot, error in
@@ -34,14 +71,27 @@ struct TransactionsView: View {
                     return
                 }
 
+                var totalCO2: Double = 0.0
+                var totalDollars: Double = 0.0
+
                 transactions = documents.compactMap { document in
                     do {
-                        return try document.data(as: Transaction.self)
+                        
+                        let transaction = try document.data(as: Transaction.self)
+                        totalCO2 += transaction.amountCO
+                        totalDollars += transaction.dollarAmount
+                        if(transaction.progress == "Completed")
+                        {
+                            transactionChanged = true
+                        }
+                        return transaction
                     } catch {
                         print("Error decoding transaction: \(error.localizedDescription)")
                         return nil
                     }
                 }
+                totalDollarAmount = totalDollars
+                totalCO2Amount = totalCO2
             }
     }
 }
@@ -51,6 +101,8 @@ struct TransactionCardView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
+           
+            
             
             Spacer()
                 .frame(height: 5)
@@ -104,10 +156,12 @@ struct TransactionCardView: View {
             }
             else
             {
-                Text("Dollar Amount: \(transaction.dollarAmount)")
+                
+                Text("Dollar Amount: \(String(format: "%.2f", transaction.dollarAmount))")
                     .font(.subheadline)
                     .foregroundColor(.white)
                     .fontWeight(.bold)
+
             }
             
             Spacer()

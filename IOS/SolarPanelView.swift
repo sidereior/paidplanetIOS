@@ -758,7 +758,7 @@ struct ConfirmTransactionView: View {
                                       progress: "Pending",
                                       amountCO: 0.0,
                                       dollarAmount: 0.0,
-                                      transactionType: "SolarPanels",
+                                      transactionType: "Solar Panels",
                                       email: userEmail)
         
         do {

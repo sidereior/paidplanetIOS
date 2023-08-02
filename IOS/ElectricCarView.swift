@@ -707,7 +707,7 @@ struct ElectricConfirmTransactionView: View {
                                       progress: "Pending",
                                       amountCO: 0.0,
                                       dollarAmount: 0.0,
-                                      transactionType: "ElectricCar",
+                                      transactionType: "Electric Car",
                                       email: userEmail)
         
         do {
