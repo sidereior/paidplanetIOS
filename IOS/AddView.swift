@@ -13,16 +13,16 @@ struct AddView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "9aaee0")
+            Color(hex: "F2E8CF")
                 .ignoresSafeArea()
             ScrollView {
                 VStack {
                     Text("Do you own and use:")
                         .font(.custom("Avenir", size: 30))
                         .fontWeight(.bold)
-                        .foregroundColor(Color(hex: "1B463C"))
+                        .foregroundColor(Color(hex: "00653B"))
                     Rectangle()
-                        .fill(Color(hex: "59DB84"))
+                        .fill(Color(hex: "87CAF6"))
                         .frame(height: 550)
                         .cornerRadius(14.0)
                         .shadow(radius: 3, x: 0, y: 3)
@@ -38,7 +38,7 @@ struct AddView: View {
                                 }) {
                                     Text("Solar Panels")
                                         .font(.custom("Avenir", size: 30))
-                                        .foregroundColor(Color(hex: "1B463C"))
+                                        .foregroundColor(Color(hex: "00653B"))
                                         .fontWeight(.black)
                                         .padding(.leading, 5)
                                     Spacer().frame(width: 10)
@@ -47,6 +47,7 @@ struct AddView: View {
                                         .aspectRatio(contentMode: .fit)
                                         .cornerRadius(14.0)
                                         .frame(width: UIScreen.main.bounds.width / 5, height: 135)
+                                        .colorMultiply(Color(hex: "00653B"))
                                 }
                                 .sheet(isPresented: $isShowingSolarPanels) {
                                     SolarPanelView()
@@ -59,7 +60,7 @@ struct AddView: View {
                                 }) {
                                     Text("Electric Cars")
                                         .font(.custom("Avenir", size: 30))
-                                        .foregroundColor(Color(hex: "1B463C"))
+                                        .foregroundColor(Color(hex: "00653B"))
                                         .fontWeight(.black)
                                         .padding(.leading, 5)
                                     Spacer().frame(width: 10)
@@ -68,6 +69,7 @@ struct AddView: View {
                                         .aspectRatio(contentMode: .fit)
                                         .cornerRadius(14.0)
                                         .frame(width: UIScreen.main.bounds.width / 5, height: 135)
+                                        .colorMultiply(Color(hex: "00653B"))
                                 }
                                 .sheet(isPresented: $isShowingElectricCars) {
                                     ElectricCarView()
@@ -80,7 +82,7 @@ struct AddView: View {
                                 }) {
                                     Text("Electric Stoves")
                                         .font(.custom("Avenir", size: 30))
-                                        .foregroundColor(Color(hex: "1B463C"))
+                                        .foregroundColor(Color(hex: "00653B"))
                                         .fontWeight(.black)
                                         .padding(.leading, 5)
                                     Spacer().frame(width: 10)
@@ -89,6 +91,7 @@ struct AddView: View {
                                         .aspectRatio(contentMode: .fit)
                                         .cornerRadius(14.0)
                                         .frame(width: UIScreen.main.bounds.width / 5, height: 135)
+                                        .colorMultiply(Color(hex: "00653B"))
                                 }
                                 .sheet(isPresented: $isShowingElectricStoves) {
                                     ElectricStoveView()
@@ -101,7 +104,7 @@ struct AddView: View {
                                 }) {
                                     Text("Other Activity")
                                         .font(.custom("Avenir", size: 30))
-                                        .foregroundColor(Color(hex: "1B463C"))
+                                        .foregroundColor(Color(hex: "00653B"))
                                         .fontWeight(.black)
                                         .padding(.leading, 5)
                                         

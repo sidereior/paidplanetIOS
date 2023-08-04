@@ -11,7 +11,7 @@ struct TransactionsView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "9aaee0").edgesIgnoringSafeArea(.all)
+            Color(hex: "F2E8CF").edgesIgnoringSafeArea(.all)
 
             ScrollView {
                 VStack {
@@ -45,7 +45,7 @@ struct TransactionsView: View {
                             .frame(height: 5)
                     }
                     .padding(.horizontal,15)
-                    .background(Color(hex: "1B463C"))
+                    .background(Color(hex: "B7D8A3"))
                     .cornerRadius(10)
                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
                     .padding(.bottom, 10)
@@ -209,7 +209,7 @@ struct TransactionCardView: View {
               alignment: .topLeading
             )
         .padding(.horizontal, 15)
-        .background(Color(hex: "1B463C"))
+        .background(Color(hex: "B7D8A3"))
         .cornerRadius(10)
         .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
     }

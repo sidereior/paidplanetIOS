@@ -11,36 +11,36 @@ struct HomeView: View {
         .init(
             title: "Garden" ,
             icon: .init(systemName: "house.fill"),
-            iconColorOverride: Color(hex: "67C587"),
-            selectedIconColorOverride: Color(hex: "67C587")
+            iconColorOverride: Color(hex: "7D5E35"),
+            selectedIconColorOverride: Color(hex: "00653B")
         ),
         .init(
             title: "Scan" ,
             icon: .init(systemName: "camera.viewfinder"),
-            iconColorOverride: Color(hex: "67C587"),
-            selectedIconColorOverride: Color(hex: "67C587")
+            iconColorOverride: Color(hex: "7D5E35"),
+            selectedIconColorOverride: Color(hex: "00653B")
         ),
         .init(
             title: "Cashbacks",
             icon: .init(systemName: "archivebox.fill"),
-            iconColorOverride: Color(hex: "67C587"),
-            selectedIconColorOverride: Color(hex: "67C587")
+            iconColorOverride: Color(hex: "7D5E35"),
+            selectedIconColorOverride: Color(hex: "00653B")
         ),
         .init(
             title: "Profile",
             icon: .init(systemName: "person.crop.square.fill"),
-            iconColorOverride: Color(hex: "67C587"),
-            selectedIconColorOverride: Color(hex: "67C587")
+            iconColorOverride: Color(hex: "7D5E35"),
+            selectedIconColorOverride: Color(hex: "00653B")
         )
     ]
 
     var config: CITTopTabBarView.Configuration {
         var example: CITTopTabBarView.Configuration = .exampleUnderlined
-        example.textColor = Color(hex: "1B463C")
+        example.textColor = Color(hex: "7D5E35")
         example.backgroundColor = Color.white.opacity(0.0)
-        example.underlineColor = Color(hex: "67C587")
-        example.selectedTextColor = Color(hex: "87caf6")
-        example.selectedIconColor = Color(hex: "67C587")
+        example.underlineColor = Color(hex: "00653B")
+        example.selectedTextColor = Color(hex: "00653B")
+        example.selectedIconColor = Color(hex: "00653B")
         example.font = Font.custom("Avenir", size: 16).bold()
         example.iconSize = CGSize(width: 30, height: 30)
         example.showUnderline = true
@@ -70,7 +70,7 @@ struct HomeView: View {
             .tabViewStyle(.page(indexDisplayMode: .never))
             .edgesIgnoringSafeArea(.all)
         }
-        .background(Color(hex: "9aaee0"))
+        .background(Color(hex: "F2E8CF"))
         .preferredColorScheme(.dark)
         .edgesIgnoringSafeArea(.all)
     }
@@ -163,7 +163,7 @@ struct HomeTab: View {
                 }
         
         ZStack {
-            Color(hex: "9aaee0")
+            Color(hex: "EAE1DF")
                 .ignoresSafeArea()
            
             ScrollView
@@ -172,7 +172,7 @@ struct HomeTab: View {
                 VStack {
                     
                     ZStack {
-                        Color(hex: "9aaee0")
+                        Color(hex: "EAE1DF")
                         VStack {
                             Group{
                                 Group{
@@ -190,7 +190,7 @@ struct HomeTab: View {
                                                     Text(greeting + ", \(userName)")
                                                         .font(.custom("Avenir", size: 25) .bold())
                                                         .font(.title)
-                                                        .foregroundColor(Color(hex: "1B463C"))
+                                                        .foregroundColor(Color(hex: "00653B"))
                                                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                                         .padding(.leading, 15)
                                                         .padding(.top, 15)
@@ -198,7 +198,7 @@ struct HomeTab: View {
                                                     Text(Date(), style: .date)
                                                         .font(.custom("Avenir", size: 20))
                                                         .font(.title)
-                                                        .foregroundColor(Color(hex: "1B463C"))
+                                                        .foregroundColor(Color(hex: "00653B"))
                                                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                                         .padding(.leading, 15)
                                                     
@@ -208,7 +208,7 @@ struct HomeTab: View {
                                                     Group{
                                                         Text(String(format: "Total Offset: %.2f tons of CO2", totalCO2Amount))
                                                             .font(.custom("Avenir", size: 20).bold())
-                                                            .foregroundColor(Color(hex: "1B463C"))
+                                                            .foregroundColor(Color(hex: "00653B"))
                                                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                                             .padding(.leading, 15)
                                                     }
@@ -237,7 +237,7 @@ struct HomeTab: View {
                                                     Text(greeting + ", \(userName)")
                                                         .font(.custom("Avenir", size: 25) .bold())
                                                         .font(.title)
-                                                        .foregroundColor(Color(hex: "1B463C"))
+                                                        .foregroundColor(Color(hex: "00653B"))
                                                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                                         .padding(.leading, 15)
                                                         .padding(.top, 15)
@@ -245,7 +245,7 @@ struct HomeTab: View {
                                                     Text(Date(), style: .date)
                                                         .font(.custom("Avenir", size: 20))
                                                         .font(.title)
-                                                        .foregroundColor(Color(hex: "1B463C"))
+                                                        .foregroundColor(Color(hex: "00653B"))
                                                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                                         .padding(.leading, 15)
                                                     
@@ -255,7 +255,7 @@ struct HomeTab: View {
                                                     Group{
                                                         Text(String(format: "Total Offset: %.2f tons of CO2", totalCO2Amount))
                                                             .font(.custom("Avenir", size: 20).bold())
-                                                            .foregroundColor(Color(hex: "1B463C"))
+                                                            .foregroundColor(Color(hex: "00653B"))
                                                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                                             .padding(.leading, 15)
                                                     }
