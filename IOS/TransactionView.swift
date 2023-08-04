@@ -31,12 +31,12 @@ struct TransactionsView: View {
                         }
                             .font(.title)
                         
-                        Text("Total CO2 Offset: \(String(format: "%.2f", totalCO2Amount))")
+                        Text("Total CO2 Offset: \(String(format: "%.2f", totalCO2Amount)) tons of CO2")
                             .font(.subheadline)
                             .foregroundColor(.white)
                             .fontWeight(.black)
                       
-                        Text("Total $ Earned: \(String(format: "%.2f", totalDollarAmount)))")
+                        Text("Total $ Earned: \(String(format: "%.2f", totalDollarAmount)) dollars")
                             .font(.subheadline)
                             .foregroundColor(.white)
                             .fontWeight(.black)
@@ -52,8 +52,8 @@ struct TransactionsView: View {
                     
                     ForEach(transactions) { transaction in
                         TransactionCardView(transaction: transaction)
-                        
-                    }.padding(.horizontal, 15)
+                    }
+                        .padding(.horizontal, 15)
                 }
             }
         }
