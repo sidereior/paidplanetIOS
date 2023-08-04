@@ -23,7 +23,7 @@ struct TransactionsView: View {
                         HStack{
                             Text("Total Transactions: ")
                              .fontWeight(.black)
-                             .foregroundColor(.white)
+                             .foregroundColor(Color(hex: "D1AD7D"))
                             
                             Text("\(transactions.count)")
                             .fontWeight(.black)
@@ -33,12 +33,12 @@ struct TransactionsView: View {
                         
                         Text("Total CO2 Offset: \(String(format: "%.2f", totalCO2Amount)) tons of CO2")
                             .font(.subheadline)
-                            .foregroundColor(.white)
+                            .foregroundColor(Color(hex: "D1AD7D"))
                             .fontWeight(.black)
                       
                         Text("Total $ Earned: \(String(format: "%.2f", totalDollarAmount)) dollars")
                             .font(.subheadline)
-                            .foregroundColor(.white)
+                            .foregroundColor(Color(hex: "D1AD7D"))
                             .fontWeight(.black)
                         
                         Spacer()
@@ -109,7 +109,7 @@ struct TransactionCardView: View {
             HStack{
                 Text("\(transaction.transactionType)")
                     .font(.title)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color(hex: "D1AD7D"))
                     .fontWeight(.black)
                 
                 Spacer()
@@ -149,7 +149,7 @@ struct TransactionCardView: View {
             HStack{
                 Text("Progress: ")
                     .font(.subheadline)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color(hex: "D1AD7D"))
                     .fontWeight(.bold)
                
                 if(transaction.progress == "Pending")
@@ -172,20 +172,20 @@ struct TransactionCardView: View {
                     Text("\(transaction.progress)")
                         .font(.subheadline)
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color(hex: "D1AD7D"))
                 }
             }
             
             Text("Transaction Date: \(formattedDate)")
                 .font(.subheadline)
-                .foregroundColor(.white)
+                .foregroundColor(Color(hex: "D1AD7D"))
                 .fontWeight(.bold)
             
             if(transaction.dollarAmount.isEqual(to: 0.0))
             {
                 Text("Dollar Amount: Transaction is still being reviewed.")
                     .font(.subheadline)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color(hex: "D1AD7D"))
                     .fontWeight(.bold)
             }
             else
@@ -193,7 +193,7 @@ struct TransactionCardView: View {
                 
                 Text("Dollar Amount: \(String(format: "%.2f", transaction.dollarAmount))")
                     .font(.subheadline)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color(hex: "D1AD7D"))
                     .fontWeight(.bold)
 
             }

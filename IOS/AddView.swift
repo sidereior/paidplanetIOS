@@ -28,8 +28,6 @@ struct AddView: View {
                         .shadow(radius: 3, x: 0, y: 3)
                         .padding(.horizontal, 20)
                         .overlay(
-                            
-                            
                             VStack(alignment: .center) {
                                 Spacer().frame(height: 30)
                                 
