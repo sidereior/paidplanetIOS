@@ -100,17 +100,51 @@ struct TransactionCardView: View {
     var transaction: Transaction
 
     var body: some View {
+        
         VStack(alignment: .leading, spacing: 10) {
            
-            
-            
             Spacer()
                 .frame(height: 5)
-            
-            Text("Type: \(transaction.transactionType)")
-                .font(.title)
-                .foregroundColor(.white)
-                .fontWeight(.black)
+       
+            HStack{
+                Text("\(transaction.transactionType)")
+                    .font(.title)
+                    .foregroundColor(.white)
+                    .fontWeight(.black)
+                
+                Spacer()
+                 
+                if(transaction.transactionType.contains("Car"))
+                {
+                 Image("car")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .cornerRadius(14.0)
+                    .frame(width: 50, height: 50)
+                    .colorInvert()
+                }
+                else if(transaction.transactionType.contains("Solar"))
+                {
+                 Image("solar")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .cornerRadius(14.0)
+                    .frame(width: 50, height: 50)
+                    .colorInvert()
+   
+                }
+                else if(transaction.transactionType.contains("Stove"))
+                {
+                  Image("stove")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .cornerRadius(14.0)
+                    .frame(width: 50, height: 50)
+                    .colorInvert()
+                }
+                   
+
+            }
            
             HStack{
                 Text("Progress: ")
