@@ -23,29 +23,46 @@ struct TransactionsView: View {
                         HStack{
                             Text("Total Transactions: ")
                              .fontWeight(.black)
-                             .foregroundColor(Color(hex: "D1AD7D"))
+                             .foregroundColor(Color(hex: "7D5E35"))
                             
                             Text("\(transactions.count)")
                             .fontWeight(.black)
-                            .foregroundColor(Color(hex: "1B463C"))
+                            .foregroundColor(Color(hex: "00653B"))
                         }
                             .font(.title)
+                       
+                        HStack{
+                            Text("Total CO2 Offset: ")
+                                .font(.subheadline)
+                                .foregroundColor(Color(hex: "7D5E35"))
+                                .fontWeight(.black)
+                            
+                            Text("\(String(format: "%.2f", totalCO2Amount)) tons of CO2")
+                                .font(.subheadline)
+                                .foregroundColor(Color(hex: "00653B"))
+                                .fontWeight(.black)
+
+                        }
                         
-                        Text("Total CO2 Offset: \(String(format: "%.2f", totalCO2Amount)) tons of CO2")
-                            .font(.subheadline)
-                            .foregroundColor(Color(hex: "D1AD7D"))
-                            .fontWeight(.black)
-                      
-                        Text("Total $ Earned: \(String(format: "%.2f", totalDollarAmount)) dollars")
-                            .font(.subheadline)
-                            .foregroundColor(Color(hex: "D1AD7D"))
-                            .fontWeight(.black)
+                        Hstack{
+                            
+                            
+                            Text("Total $ Earned: \(String(format: "%.2f", totalDollarAmount)) dollars")
+                                .font(.subheadline)
+                                .foregroundColor(Color(hex: "7d5e35"))
+                                .fontWeight(.black)
+                            Text("\(String(format: "%.2f", totalDollarAmount)) dollars")
+                                .font(.subheadline)
+                                .foregroundColor(Color(hex: "00653b"))
+                                .fontWeight(.black)
+                            
+                        }
                         
                         Spacer()
                             .frame(height: 5)
                     }
                     .padding(.horizontal,15)
-                    .background(Color(hex: "B7D8A3"))
+                    .background(Color(hex: "AACB96"))
                     .cornerRadius(10)
                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
                     .padding(.bottom, 10)
@@ -190,14 +207,11 @@ struct TransactionCardView: View {
             }
             else
             {
-                
                 Text("Dollar Amount: \(String(format: "%.2f", transaction.dollarAmount))")
                     .font(.subheadline)
                     .foregroundColor(Color(hex: "D1AD7D"))
                     .fontWeight(.bold)
-
             }
-            
             Spacer()
                 .frame(height: 5)
        }
@@ -209,7 +223,7 @@ struct TransactionCardView: View {
               alignment: .topLeading
             )
         .padding(.horizontal, 15)
-        .background(Color(hex: "B7D8A3"))
+        .background(Color(hex: "AACB96"))
         .cornerRadius(10)
         .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
     }

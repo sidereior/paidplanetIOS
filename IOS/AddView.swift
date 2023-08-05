@@ -13,8 +13,6 @@ struct AddView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "F2E8CF")
-                .ignoresSafeArea()
             ScrollView {
                 VStack {
                     Text("Do you own and use:")
@@ -22,7 +20,7 @@ struct AddView: View {
                         .fontWeight(.bold)
                         .foregroundColor(Color(hex: "00653B"))
                     Rectangle()
-                        .fill(Color(hex: "87CAF6"))
+                        .fill(Color(hex: "AACB96"))
                         .frame(height: 550)
                         .cornerRadius(14.0)
                         .shadow(radius: 3, x: 0, y: 3)
