@@ -44,10 +44,8 @@ struct TransactionsView: View {
 
                         }
                         
-                        Hstack{
-                            
-                            
-                            Text("Total $ Earned: \(String(format: "%.2f", totalDollarAmount)) dollars")
+                        HStack{
+                            Text("Total $ Earned:")
                                 .font(.subheadline)
                                 .foregroundColor(Color(hex: "7d5e35"))
                                 .fontWeight(.black)
@@ -55,14 +53,13 @@ struct TransactionsView: View {
                                 .font(.subheadline)
                                 .foregroundColor(Color(hex: "00653b"))
                                 .fontWeight(.black)
-                            
                         }
                         
                         Spacer()
                             .frame(height: 5)
                     }
                     .padding(.horizontal,15)
-                    .background(Color(hex: "AACB96"))
+                    .background(Color(hex: "D1AD7D"))
                     .cornerRadius(10)
                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
                     .padding(.bottom, 10)
@@ -122,11 +119,13 @@ struct TransactionCardView: View {
            
             Spacer()
                 .frame(height: 5)
-       
+      
+            
+            
             HStack{
                 Text("\(transaction.transactionType)")
                     .font(.title)
-                    .foregroundColor(Color(hex: "D1AD7D"))
+                    .foregroundColor(Color(hex: "EAE1DF"))
                     .fontWeight(.black)
                 
                 Spacer()
@@ -223,7 +222,7 @@ struct TransactionCardView: View {
               alignment: .topLeading
             )
         .padding(.horizontal, 15)
-        .background(Color(hex: "AACB96"))
+        .background(Color(hex: "00653B"))
         .cornerRadius(10)
         .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
     }

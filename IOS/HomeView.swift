@@ -163,7 +163,7 @@ struct HomeTab: View {
                 }
         
         ZStack {
-            Color(hex: "EAE1DF")
+            Color(hex: "D1AD7D")
                 .ignoresSafeArea()
            
             ScrollView
