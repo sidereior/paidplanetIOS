@@ -1,2 +1,2 @@
-# PaidPlanet IOS App Client
-check out paidplanet.com
+##check out [paidplanet.com](paidplanet.com)
+# paidplanet IOS app frontend
