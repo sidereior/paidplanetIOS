@@ -119,13 +119,11 @@ struct TransactionCardView: View {
            
             Spacer()
                 .frame(height: 5)
-      
-            
             
             HStack{
                 Text("\(transaction.transactionType)")
                     .font(.title)
-                    .foregroundColor(Color(hex: "EAE1DF"))
+                    .foregroundColor(Color(hex: "C3E8AC"))
                     .fontWeight(.black)
                 
                 Spacer()
@@ -158,14 +156,12 @@ struct TransactionCardView: View {
                     .frame(width: 50, height: 50)
                     .colorInvert()
                 }
-                   
-
             }
            
             HStack{
                 Text("Progress: ")
                     .font(.subheadline)
-                    .foregroundColor(Color(hex: "D1AD7D"))
+                    .foregroundColor(Color(hex: "AACB96"))
                     .fontWeight(.bold)
                
                 if(transaction.progress == "Pending")
@@ -194,21 +190,21 @@ struct TransactionCardView: View {
             
             Text("Transaction Date: \(formattedDate)")
                 .font(.subheadline)
-                .foregroundColor(Color(hex: "D1AD7D"))
+                .foregroundColor(Color(hex: "AACB96"))
                 .fontWeight(.bold)
             
             if(transaction.dollarAmount.isEqual(to: 0.0))
             {
                 Text("Dollar Amount: Transaction is still being reviewed.")
                     .font(.subheadline)
-                    .foregroundColor(Color(hex: "D1AD7D"))
+                    .foregroundColor(Color(hex: "AACB96"))
                     .fontWeight(.bold)
             }
             else
             {
                 Text("Dollar Amount: \(String(format: "%.2f", transaction.dollarAmount))")
                     .font(.subheadline)
-                    .foregroundColor(Color(hex: "D1AD7D"))
+                    .foregroundColor(Color(hex: "AACB96"))
                     .fontWeight(.bold)
             }
             Spacer()

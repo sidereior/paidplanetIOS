@@ -84,7 +84,7 @@ struct HomeTab: View {
     @State private var transactions: [Transaction] = []
     @State private var totalCO2Amount: Double = 0.0
     @State private var transactionChanged: Bool = false
-   @State private var isPresentingRedeemView = false
+    @State private var isPresentingRedeemView = false
     private func fetchTransactions() {
         let db = Firestore.firestore()
         db.collection("transactions")
@@ -93,9 +93,9 @@ struct HomeTab: View {
                     print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
                     return
                 }
-
+                
                 var totalCO2: Double = 0.0
-
+                
                 transactions = documents.compactMap { document in
                     do {
                         
@@ -134,7 +134,7 @@ struct HomeTab: View {
         }
         
         let db = Firestore.firestore()
-      
+        
         let userRef = db.collection("users").document(uid)
         
         userRef.getDocument { document, error in
@@ -149,23 +149,23 @@ struct HomeTab: View {
     }
     
     var body: some View {
-
+        
         if showSolarPanelView {
-                    SolarPanelView()
-                }
-                
-                if showElectricCarView {
-                    ElectricCarView()
-                }
-                
-                if showElectricStoveView {
-                    ElectricStoveView()
-                }
+            SolarPanelView()
+        }
+        
+        if showElectricCarView {
+            ElectricCarView()
+        }
+        
+        if showElectricStoveView {
+            ElectricStoveView()
+        }
         
         ZStack {
             Color(hex: "D1AD7D")
                 .ignoresSafeArea()
-           
+            
             ScrollView
             {
                 
@@ -222,355 +222,359 @@ struct HomeTab: View {
                                     {
                                         
                                         Button(action: {
-                                                isPresentingRedeemView = true
+                                            isPresentingRedeemView = true
                                         })
                                         {
-                                        Image(totalCO2Amount > 0.5 ? "stage3.5" :(totalCO2Amount > 0.1 ? "stage2.5" : "stage1.5"))
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .cornerRadius(14.0)
-                                            .frame(width: UIScreen.main.bounds.width - 30)
-                                            .overlay(
-                                                
-                                                VStack{
+                                            Image(totalCO2Amount > 0.5 ? "stage3.5" :(totalCO2Amount > 0.1 ? "stage2.5" : "stage1.5"))
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .cornerRadius(14.0)
+                                                .frame(width: UIScreen.main.bounds.width - 30)
+                                                .overlay(
                                                     
-                                                    Text(greeting + ", \(userName)")
-                                                        .font(.custom("Avenir", size: 25) .bold())
-                                                        .font(.title)
-                                                        .foregroundColor(Color(hex: "00653B"))
-                                                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                                        .padding(.leading, 15)
-                                                        .padding(.top, 15)
-                                                    
-                                                    Text(Date(), style: .date)
-                                                        .font(.custom("Avenir", size: 20))
-                                                        .font(.title)
-                                                        .foregroundColor(Color(hex: "00653B"))
-                                                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                                        .padding(.leading, 15)
-                                                    
-                                                    Spacer()
-                                                        .frame(height: 3)
-                                                    
-                                                    Group{
-                                                        Text(String(format: "Total Offset: %.2f tons of CO2", totalCO2Amount))
-                                                            .font(.custom("Avenir", size: 20).bold())
+                                                    VStack{
+                                                        
+                                                        Text(greeting + ", \(userName)")
+                                                            .font(.custom("Avenir", size: 25) .bold())
+                                                            .font(.title)
                                                             .foregroundColor(Color(hex: "00653B"))
                                                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                                             .padding(.leading, 15)
+                                                            .padding(.top, 15)
+                                                        
+                                                        Text(Date(), style: .date)
+                                                            .font(.custom("Avenir", size: 20))
+                                                            .font(.title)
+                                                            .foregroundColor(Color(hex: "00653B"))
+                                                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                                            .padding(.leading, 15)
+                                                        
+                                                        Spacer()
+                                                            .frame(height: 3)
+                                                        
+                                                        Group{
+                                                            Text(String(format: "Total Offset: %.2f tons of CO2", totalCO2Amount))
+                                                                .font(.custom("Avenir", size: 20).bold())
+                                                                .foregroundColor(Color(hex: "00653B"))
+                                                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                                                .padding(.leading, 15)
+                                                        }
+                                                        
+                                                        Spacer()
                                                     }
                                                     
-                                                    Spacer()
-                                                }
-                                                
-                                            )
-                                    }
+                                                )
+                                        }
                                         .sheet(isPresented: $isPresentingRedeemView) {
                                             RedeemView()
                                         }
-                                           }
-                                           
-                            }
-                                
-                            Spacer()
-                                .frame(height: 30)
-                            
-                            Text("Do you own and use:")
-                                .font(.custom("Avenir", size: 20))
-                                .font(.title)
-                                .foregroundColor(Color(hex: "1B463C"))
-                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                .padding(.leading, 15)
-                            
-                            
-                        }
-                            
-                            VStack(alignment: .center) {
-                                HStack {
-                                    Button(action: {
-                                        showSolarPanelView.toggle()
-                                    }) {
-                                        Text("Solar Panels")
-                                            .font(.custom("Avenir", size: 15))
-                                            .foregroundColor(Color(hex: "1B463C"))
-                                            .fontWeight(.black)
-                                            .padding(.leading, 5)
-                                    }
-                                    .frame(height: 35)
-                                    .padding(.horizontal, 7)
-                                    .background(Color(hex: "59DB84"))
-                                    .cornerRadius(14.0)
-                                    .shadow(radius: 3, x: 0, y: 3)
-                                    .sheet(isPresented: $showSolarPanelView) {
-                                        SolarPanelView()
                                     }
                                     
-                                    Button(action: {
-                                        showElectricCarView.toggle()
-                                    }) {
-                                        Text("Electric Cars")
-                                            .font(.custom("Avenir", size: 15))
-                                            .foregroundColor(Color(hex: "1B463C"))
-                                            .fontWeight(.black)
-                                            .padding(.leading, 5)
-                                    }
-                                    .frame(height: 35)
-                                    .padding(.horizontal, 7)
-                                    .background(Color(hex: "59DB84"))
-                                    .cornerRadius(14.0)
-                                    .shadow(radius: 3, x: 0, y: 3)
-                                    .sheet(isPresented: $showElectricCarView) {
-                                        ElectricCarView()
-                                    }
-                                    
-                                    
-                                    Button(action: {
-                                        showElectricStoveView.toggle()
-                                    }) {
-                                        Text("Electric Stoves")
-                                            .font(.custom("Avenir", size: 15))
-                                            .foregroundColor(Color(hex: "1B463C"))
-                                            .fontWeight(.black)
-                                            .padding(.leading, 5)
-                                    }
-                                    .padding(.horizontal, 7)
-                                    .frame(height: 35)
-                                    .background(Color(hex: "59DB84"))
-                                    .cornerRadius(14.0)
-                                    .shadow(radius: 3, x: 0, y: 3)
-                                    .sheet(isPresented: $showElectricStoveView) {
-                                        ElectricStoveView()
-                                    }
                                 }
-                            }
-                            .padding(.horizontal, 15)
-                                                        .padding(.top, -10)
-                            Group{
-                                Spacer()
-                                    .frame(height: 15)
-                            }
-                            
-                            Group {
-                                Rectangle()
-                                    .fill(Color(hex: "1B463C"))
-                                    .frame(height: 265)
-                                    .cornerRadius(14.0)
-                                    .padding(.horizontal)
-                                    .shadow(radius: 3, x: 0, y: 3)
-                                    .overlay(
-                                        VStack() {
-                                            Text("Recent Cashbacks")
-                                                .font(.custom("Avenir", size: 35))
-                                                .font(.title)
-                                                .fontWeight(.black)
-                                                .foregroundColor(.white)
-                                                .frame(minWidth: 0, maxWidth: .infinity)
-                                            
-                                            Rectangle()
-                                                .fill(Color.white)
-                                                .frame(height: 2)
-                                                .padding(.horizontal, 35)
-                                                .padding(.top, -25)
-
-                                            VStack {
-                                                List(transactions) { transaction in
-                                                    VStack(alignment: .leading) {
-
-                                                        Text("Transaction Date: \(transaction.transactionDate)")
-                                                            .font(.subheadline)
-
-                                                        Text("Progress: \(transaction.progress)")
-                                                            .font(.subheadline)
-                                                    }
-                                                    .listRowBackground(Color(hex: "1B463C"))
-                                                }
-                                                .listStyle(PlainListStyle())
-                                            }
-                                            .padding(.horizontal, 35)
-                                            .padding(.top, -20)
-            
-                                            RoundedRectangle(cornerRadius: 14)
-                                                .fill(Color.white)
-                                                .frame(height: 35)
-                                                .overlay(
-                                                    VStack(alignment: .leading) {
-                                                        Text("View All Cashbacks")
-                                                            .font(.custom("Avenir", size: 23))
-                                                            .fontWeight(.bold)
-                                                            .foregroundColor(Color(hex: "1B463C"))
-                                                            .padding(.top, 11)
-                                                            .padding(.leading, 25)
-                                                        Spacer()
-                                                    }
-                                                )
-                                                .padding(.horizontal, 35)
-                                        }
-                                    )
+                                /*
+                                 Spacer()
+                                 .frame(height: 30)
+                                 
+                                 Text("Do you own and use:")
+                                 .font(.custom("Avenir", size: 20))
+                                 .font(.title)
+                                 .foregroundColor(Color(hex: "1B463C"))
+                                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                 .padding(.leading, 15)
+                                 */
                                 
-                                Spacer()
-                                    .frame(height: 30)
-                                
-                                Rectangle()
-                                    .fill(Color(hex: "67C587"))
-                                    .frame(height: 210)
-                                    .cornerRadius(14.0)
-                                    .shadow(radius: 3, x: 0, y: 3)
-                                    .padding(.horizontal, 15)
-                                    .overlay(
-                                        VStack(spacing: 10) {
-                                            Text("Our Sponsors:")
-                                                .font(.custom("Avenir", size: 25))
-                                                .fontWeight(.black)
-                                                .foregroundColor(Color(hex: "1B463C"))
-                                            
-                                            HStack(spacing: 10) {
-                                                
-                                                Button(action: {
-                                                    if let url = URL(string: "https://www.tesla.com") {
-                                                        UIApplication.shared.open(url)
-                                                    }
-                                                }) {
-                                                    Image("tesla-motors")
-                                                        .resizable()
-                                                        .aspectRatio(contentMode: .fit)
-                                                        .cornerRadius(14.0)
-                                                        .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
-                                                }
-
-                                                Button(action: {
-                                                    if let url = URL(string: "https://www.gm.com") {
-                                                        UIApplication.shared.open(url)
-                                                    }
-                                                }) {
-                                                    Image("GM")
-                                                        .resizable()
-                                                        .aspectRatio(contentMode: .fit)
-                                                        .cornerRadius(14.0)
-                                                        .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
-                                                }
-
-                                                Button(action: {
-                                                    //TODO: fix bug with this
-                                                    if let url = URL(string: "https://www.lg.com") {
-                                                        UIApplication.shared.open(url)
-                                                    }
-                                                }) {
-                                                    Image("oneshot")
-                                                        .resizable()
-                                                        .aspectRatio(contentMode: .fill)
-                                                        .cornerRadius(14.0)
-                                                        .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
-                                                }
-                                            }
-                                        }
-                                            .padding(.horizontal, 15)
-                                    )
-                    
-                                Spacer()
-                                    .frame(height: 30)
-                                
-                                Rectangle()
-                                    .fill(Color(hex: "67C587"))
-                                    .frame(height: 85)
-                                    .cornerRadius(14.0)
-                                    .shadow(radius: 3, x: 0, y: 3)
-                                    .padding(.horizontal, 15)
-                                    .overlay(
-                                        VStack() {
-                                            Button(action: {
-                                                // Handle button tap
-                                            }) {
-                                                Text("Need Help with PaidPlanet?")
-                                                    .font(.custom("Avenir", size: 25))
-                                                    .fontWeight(.black)
-                                                    .foregroundColor(Color(hex: "1B463C"))
-                                                    .frame(alignment: .center)
-                                            }
-                                            
-                                            Button(action: {
-                                                // Handle button tap
-                                            }) {
-                                                Text("Learn more here.")
-                                                    .font(.custom("Avenir", size: 20))
-                                                    .foregroundColor(Color(hex: "1B463C"))
-                                                    .padding(.leading, 10)
-                                            }
-                                        }
-                                    )
                             }
+                            /*
+                             VStack(alignment: .center) {
+                             HStack {
+                             Button(action: {
+                             showSolarPanelView.toggle()
+                             }) {
+                             Text("Solar Panels")
+                             .font(.custom("Avenir", size: 15))
+                             .foregroundColor(Color(hex: "1B463C"))
+                             .fontWeight(.black)
+                             .padding(.leading, 5)
+                             }
+                             .frame(height: 35)
+                             .padding(.horizontal, 7)
+                             .background(Color(hex: "59DB84"))
+                             .cornerRadius(14.0)
+                             .shadow(radius: 3, x: 0, y: 3)
+                             .sheet(isPresented: $showSolarPanelView) {
+                             SolarPanelView()
+                             }
+                             
+                             Button(action: {
+                             showElectricCarView.toggle()
+                             }) {
+                             Text("Electric Cars")
+                             .font(.custom("Avenir", size: 15))
+                             .foregroundColor(Color(hex: "1B463C"))
+                             .fontWeight(.black)
+                             .padding(.leading, 5)
+                             }
+                             .frame(height: 35)
+                             .padding(.horizontal, 7)
+                             .background(Color(hex: "59DB84"))
+                             .cornerRadius(14.0)
+                             .shadow(radius: 3, x: 0, y: 3)
+                             .sheet(isPresented: $showElectricCarView) {
+                             ElectricCarView()
+                             }
+                             
+                             
+                             Button(action: {
+                             showElectricStoveView.toggle()
+                             }) {
+                             Text("Electric Stoves")
+                             .font(.custom("Avenir", size: 15))
+                             .foregroundColor(Color(hex: "1B463C"))
+                             .fontWeight(.black)
+                             .padding(.leading, 5)
+                             }
+                             .padding(.horizontal, 7)
+                             .frame(height: 35)
+                             .background(Color(hex: "59DB84"))
+                             .cornerRadius(14.0)
+                             .shadow(radius: 3, x: 0, y: 3)
+                             .sheet(isPresented: $showElectricStoveView) {
+                             ElectricStoveView()
+                             }
+                             }
+                             }
+                             .padding(.horizontal, 15)
+                             .padding(.top, -10)
+                             Group{
+                             Spacer()
+                             .frame(height: 15)
+                             }
+                             
+                             Group {
+                             Rectangle()
+                             .fill(Color(hex: "1B463C"))
+                             .frame(height: 265)
+                             .cornerRadius(14.0)
+                             .padding(.horizontal)
+                             .shadow(radius: 3, x: 0, y: 3)
+                             .overlay(
+                             VStack() {
+                             Text("Recent Cashbacks")
+                             .font(.custom("Avenir", size: 35))
+                             .font(.title)
+                             .fontWeight(.black)
+                             .foregroundColor(.white)
+                             .frame(minWidth: 0, maxWidth: .infinity)
+                             
+                             Rectangle()
+                             .fill(Color.white)
+                             .frame(height: 2)
+                             .padding(.horizontal, 35)
+                             .padding(.top, -25)
+                             
+                             VStack {
+                             List(transactions) { transaction in
+                             VStack(alignment: .leading) {
+                             
+                             Text("Transaction Date: \(transaction.transactionDate)")
+                             .font(.subheadline)
+                             
+                             Text("Progress: \(transaction.progress)")
+                             .font(.subheadline)
+                             }
+                             .listRowBackground(Color(hex: "1B463C"))
+                             }
+                             .listStyle(PlainListStyle())
+                             }
+                             .padding(.horizontal, 35)
+                             .padding(.top, -20)
+                             
+                             RoundedRectangle(cornerRadius: 14)
+                             .fill(Color.white)
+                             .frame(height: 35)
+                             .overlay(
+                             VStack(alignment: .leading) {
+                             Text("View All Cashbacks")
+                             .font(.custom("Avenir", size: 23))
+                             .fontWeight(.bold)
+                             .foregroundColor(Color(hex: "1B463C"))
+                             .padding(.top, 11)
+                             .padding(.leading, 25)
+                             Spacer()
+                             }
+                             )
+                             .padding(.horizontal, 35)
+                             }
+                             )
+                             
+                             Spacer()
+                             .frame(height: 30)
+                             
+                             Rectangle()
+                             .fill(Color(hex: "67C587"))
+                             .frame(height: 210)
+                             .cornerRadius(14.0)
+                             .shadow(radius: 3, x: 0, y: 3)
+                             .padding(.horizontal, 15)
+                             .overlay(
+                             VStack(spacing: 10) {
+                             Text("Our Sponsors:")
+                             .font(.custom("Avenir", size: 25))
+                             .fontWeight(.black)
+                             .foregroundColor(Color(hex: "1B463C"))
+                             
+                             HStack(spacing: 10) {
+                             
+                             Button(action: {
+                             if let url = URL(string: "https://www.tesla.com") {
+                             UIApplication.shared.open(url)
+                             }
+                             }) {
+                             Image("tesla-motors")
+                             .resizable()
+                             .aspectRatio(contentMode: .fit)
+                             .cornerRadius(14.0)
+                             .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
+                             }
+                             
+                             Button(action: {
+                             if let url = URL(string: "https://www.gm.com") {
+                             UIApplication.shared.open(url)
+                             }
+                             }) {
+                             Image("GM")
+                             .resizable()
+                             .aspectRatio(contentMode: .fit)
+                             .cornerRadius(14.0)
+                             .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
+                             }
+                             
+                             Button(action: {
+                             //TODO: fix bug with this
+                             if let url = URL(string: "https://www.lg.com") {
+                             UIApplication.shared.open(url)
+                             }
+                             }) {
+                             Image("oneshot")
+                             .resizable()
+                             .aspectRatio(contentMode: .fill)
+                             .cornerRadius(14.0)
+                             .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
+                             }
+                             }
+                             }
+                             .padding(.horizontal, 15)
+                             )
+                             
+                             Spacer()
+                             .frame(height: 30)
+                             
+                             Rectangle()
+                             .fill(Color(hex: "67C587"))
+                             .frame(height: 85)
+                             .cornerRadius(14.0)
+                             .shadow(radius: 3, x: 0, y: 3)
+                             .padding(.horizontal, 15)
+                             .overlay(
+                             VStack() {
+                             Button(action: {
+                             // Handle button tap
+                             }) {
+                             Text("Need Help with PaidPlanet?")
+                             .font(.custom("Avenir", size: 25))
+                             .fontWeight(.black)
+                             .foregroundColor(Color(hex: "1B463C"))
+                             .frame(alignment: .center)
+                             }
+                             
+                             Button(action: {
+                             // Handle button tap
+                             }) {
+                             Text("Learn more here.")
+                             .font(.custom("Avenir", size: 20))
+                             .foregroundColor(Color(hex: "1B463C"))
+                             .padding(.leading, 10)
+                             }
+                             }
+                             )
+                             }
+                             }
+                             */
                         }
+                        
+                        
                     }
                 }
             }
-        }
-        .onAppear {
-            fetchUserName()
-            fetchTransactions()
-        }
-    }
-    
-}
-
-struct TransactionBox: View {
-    var date: String
-    var status: String
-    var amount: String
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text(date)
-                    .font(.custom("Avenir", size: 16))
-                    .foregroundColor(.white)
-                    .fontWeight(.bold)
-                
-                Spacer()
-                
-                Text(status)
-                    .font(.custom("Avenir", size: 16))
-                    .foregroundColor(.white)
-                    .fontWeight(.bold)
-                
-                Spacer()
-                
-                Text(amount)
-                    .font(.custom("Avenir", size: 16))
-                    .foregroundColor(.white)
-                    .fontWeight(.bold)
+            .onAppear {
+                fetchUserName()
+                fetchTransactions()
             }
-            
-            Rectangle()
-                .fill(Color.white)
-                .frame(height: 1)
+        }
+        
+    }
+    
+    struct TransactionBox: View {
+        var date: String
+        var status: String
+        var amount: String
+        
+        var body: some View {
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(date)
+                        .font(.custom("Avenir", size: 16))
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                    
+                    Spacer()
+                    
+                    Text(status)
+                        .font(.custom("Avenir", size: 16))
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                    
+                    Spacer()
+                    
+                    Text(amount)
+                        .font(.custom("Avenir", size: 16))
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                }
+                
+                Rectangle()
+                    .fill(Color.white)
+                    .frame(height: 1)
+            }
         }
     }
-}
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
-}
-
-struct CenterTabButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        VStack {
-            Image(systemName: "plus.circle.fill")
-                .font(.system(size: 30))
-                .foregroundColor(.white)
-            
-            Text("Add")
-                .foregroundColor(.white)
+    
+    struct HomeView_Previews: PreviewProvider {
+        static var previews: some View {
+            HomeView()
         }
-        .frame(maxWidth: .infinity)
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color(hex: "1B463C"))
-                .frame(height: 60)
-                .padding(.horizontal)
-        )
-        .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
-        .opacity(configuration.isPressed ? 0.8 : 1.0)
     }
+    
+    struct CenterTabButtonStyle: ButtonStyle {
+        func makeBody(configuration: Configuration) -> some View {
+            VStack {
+                Image(systemName: "plus.circle.fill")
+                    .font(.system(size: 30))
+                    .foregroundColor(.white)
+                
+                Text("Add")
+                    .foregroundColor(.white)
+            }
+            .frame(maxWidth: .infinity)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color(hex: "1B463C"))
+                    .frame(height: 60)
+                    .padding(.horizontal)
+            )
+            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+            .opacity(configuration.isPressed ? 0.8 : 1.0)
+        }
+    }
+    
 }
-

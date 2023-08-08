@@ -10,7 +10,7 @@ struct RedeemView: View {
         ZStack {
             Color(hex: "1B463C")
                 .ignoresSafeArea()
-           //first fetch all transactions
+            //first fetch all transactions
             //then display the transactions along with a checkbox next to them.
             //the checkbox should go in and change the transaction's progress property to "Redeemed"
             //below this list there should be a total dollar amount field that is updated
