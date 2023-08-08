@@ -12,10 +12,18 @@ struct AddView: View {
         ZStack {
             ScrollView {
                 VStack {
-                    Text("Do you own and use:")
-                        .font(.custom("Avenir", size: 30))
-                        .fontWeight(.bold)
-                        .foregroundColor(Color(hex: "00653B"))
+                    
+                    HStack{
+                        Text("Do you own and use:")
+                         .fontWeight(.black)
+                         .foregroundColor(Color(hex: "7D5E35"))
+                    }
+                        .font(.title)
+                        .padding()
+                        .background(Color(hex: "D1AD7D"))
+                        .cornerRadius(10)
+                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+                        .padding(.bottom, 10)
                     
                     VStack {
                         Button(action: {
