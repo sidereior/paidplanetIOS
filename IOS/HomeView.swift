@@ -163,26 +163,21 @@ struct HomeTab: View {
         }
         
         ZStack {
-            Color(hex: "D1AD7D")
-                .ignoresSafeArea()
-            
-            ScrollView
-            {
+           
                 
                 VStack {
                     
                     ZStack {
-                        Color(hex: "EAE1DF")
                         VStack {
                             Group{
-                                Group{
+                                Group
+                                {
                                     if(!transactionChanged)
                                     {
                                         Image(totalCO2Amount > 0.5 ? "stage3" :(totalCO2Amount > 0.1 ? "stage2" : "stage1"))
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .cornerRadius(14.0)
-                                            .frame(width: UIScreen.main.bounds.width - 30)
                                             .overlay(
                                                 
                                                 VStack{
@@ -229,9 +224,7 @@ struct HomeTab: View {
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
                                                 .cornerRadius(14.0)
-                                                .frame(width: UIScreen.main.bounds.width - 30)
                                                 .overlay(
-                                                    
                                                     VStack{
                                                         
                                                         Text(greeting + ", \(userName)")
@@ -406,104 +399,10 @@ struct HomeTab: View {
                              .padding(.horizontal, 35)
                              }
                              )
-                             
-                             Spacer()
-                             .frame(height: 30)
-                             
-                             Rectangle()
-                             .fill(Color(hex: "67C587"))
-                             .frame(height: 210)
-                             .cornerRadius(14.0)
-                             .shadow(radius: 3, x: 0, y: 3)
-                             .padding(.horizontal, 15)
-                             .overlay(
-                             VStack(spacing: 10) {
-                             Text("Our Sponsors:")
-                             .font(.custom("Avenir", size: 25))
-                             .fontWeight(.black)
-                             .foregroundColor(Color(hex: "1B463C"))
-                             
-                             HStack(spacing: 10) {
-                             
-                             Button(action: {
-                             if let url = URL(string: "https://www.tesla.com") {
-                             UIApplication.shared.open(url)
-                             }
-                             }) {
-                             Image("tesla-motors")
-                             .resizable()
-                             .aspectRatio(contentMode: .fit)
-                             .cornerRadius(14.0)
-                             .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
-                             }
-                             
-                             Button(action: {
-                             if let url = URL(string: "https://www.gm.com") {
-                             UIApplication.shared.open(url)
-                             }
-                             }) {
-                             Image("GM")
-                             .resizable()
-                             .aspectRatio(contentMode: .fit)
-                             .cornerRadius(14.0)
-                             .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
-                             }
-                             
-                             Button(action: {
-                             //TODO: fix bug with this
-                             if let url = URL(string: "https://www.lg.com") {
-                             UIApplication.shared.open(url)
-                             }
-                             }) {
-                             Image("oneshot")
-                             .resizable()
-                             .aspectRatio(contentMode: .fill)
-                             .cornerRadius(14.0)
-                             .frame(width: UIScreen.main.bounds.width / 3 - 30, height: 135)
-                             }
-                             }
-                             }
-                             .padding(.horizontal, 15)
-                             )
-                             
-                             Spacer()
-                             .frame(height: 30)
-                             
-                             Rectangle()
-                             .fill(Color(hex: "67C587"))
-                             .frame(height: 85)
-                             .cornerRadius(14.0)
-                             .shadow(radius: 3, x: 0, y: 3)
-                             .padding(.horizontal, 15)
-                             .overlay(
-                             VStack() {
-                             Button(action: {
-                             // Handle button tap
-                             }) {
-                             Text("Need Help with PaidPlanet?")
-                             .font(.custom("Avenir", size: 25))
-                             .fontWeight(.black)
-                             .foregroundColor(Color(hex: "1B463C"))
-                             .frame(alignment: .center)
-                             }
-                             
-                             Button(action: {
-                             // Handle button tap
-                             }) {
-                             Text("Learn more here.")
-                             .font(.custom("Avenir", size: 20))
-                             .foregroundColor(Color(hex: "1B463C"))
-                             .padding(.leading, 10)
-                             }
-                             }
-                             )
-                             }
-                             }
-                             */
+                            */
                         }
                         
                         
-                    }
                 }
             }
             .onAppear {
