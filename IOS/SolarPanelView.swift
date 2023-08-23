@@ -53,7 +53,7 @@ struct SolarPanelView: View {
                                 .foregroundColor(.red)
                                 .fontWeight(.bold)
                                 .padding(7)
-                                .background(Color.white)
+                                .background(Color(hex: "C3E8AC"))
                                 .cornerRadius(14)
                         }
                         .padding(.top, 20)
@@ -62,12 +62,12 @@ struct SolarPanelView: View {
                     Group {
                         Spacer()
                             .frame(height: 25)
-                        
-                        Text("So, you own Solar Panels. First, you'll need to enter some basic information so we can pay you for using solar.")
-                            .font(.custom("Avenir", size: 30))
-                            .fontWeight(.bold)
-                            .foregroundColor(Color.white)
-                            .padding(.horizontal, 15)
+                        Text("Got Solar?  We just need a couple of things to get you paid")
+                            .font(.custom("Avenir", size: 25))
+                            .fontWeight(.black)
+                            .foregroundColor(Color(hex: "1B463C"))
+                            .padding(.horizontal, 35)
+                            .padding(.top, 15)
                         
                         TextField("First name", text: $firstName)
                             .autocapitalization(.none)
@@ -77,7 +77,7 @@ struct SolarPanelView: View {
                             .cornerRadius(14.0)
                             .padding(.horizontal, 25)
                             .font(.custom("Avenir", size: 20).bold())
-                            .foregroundColor(.black)
+                            .foregroundColor(Color(hex: "1B463C"))
                             .padding(.bottom, 10)
                             .accentColor(.black)
                         
@@ -152,10 +152,7 @@ struct SolarPanelView: View {
                 return
             }
             
-            // Image uploaded successfully
             print("Image uploaded successfully")
-            
-            // Access the download URL for the uploaded image
             imageRef.downloadURL { (url, error) in
                 guard let downloadURL = url else {
                     if let error = error {
@@ -164,7 +161,6 @@ struct SolarPanelView: View {
                     return
                 }
                 
-                // Use the download URL for further operations (e.g., save it to a database)
                 let urlString = downloadURL.absoluteString
                 print("Download URL: \(urlString)")
                 if currentImageNumber == 1 {
@@ -181,7 +177,6 @@ struct SolarPanelView: View {
             }
         }
         
-        // Add a progress observer to track the upload progress
         uploadTask.observe(.progress) { snapshot in
             guard let progress = snapshot.progress else { return }
             let percentComplete = Double(progress.completedUnitCount) / Double(progress.totalUnitCount) * 100
@@ -229,19 +224,19 @@ struct PhotoUploadView: View {
                 }
                 
                 Group {
-                    Text("Next, we need some proof of identification. Upload a picture of your driver's license, passport, or other form of ID so we can confirm your info. The more information you provide, the easier it will be for us to issue you payment.")
-                        .font(.custom("Avenir", size: 30))
+                    Text(verbatim: "Now for your best photo 🙂.\nUpload (one of the below):\nDriver’s License\nGov. Issued ID\nPassport")
+                            .font(.custom("Avenir", size: 25))
                         .fontWeight(.bold)
                         .foregroundColor(Color.white)
-                        .padding(.horizontal, 15)
+                        .padding(.horizontal, 35)
                     
                     Button(action: {
                         currentImageNumber = 1
                         isShowingImagePicker = true
                     }) {
-                        Text("Upload Identification")
+                        Text("Upload Identification ")
                             .font(.custom("Avenir", size: 20))
-                            .foregroundColor(.blue)
+                            .foregroundColor(.white) // the light green button color for background
                             .fontWeight(.bold)
                             .padding()
                             .background(Color.white)
@@ -269,7 +264,8 @@ struct PhotoUploadView: View {
                             .foregroundColor(.blue)
                             .fontWeight(.bold)
                             .padding()
-                            .background(Color.white)
+                                                        .background(Color(hex: "C3E8AC"))
+
                             .cornerRadius(14)
                     }
                     .sheet(isPresented: $isShowingNextView) {
@@ -438,7 +434,7 @@ struct PhotoUploadView2: View {
                             .foregroundColor(.blue)
                             .fontWeight(.bold)
                             .padding()
-                            .background(Color.white)
+                             .background(Color(hex: "C3E8AC"))
                             .cornerRadius(14)
                     }
                     .sheet(isPresented: $isShowingNextView) {
@@ -758,7 +754,7 @@ struct ConfirmTransactionView: View {
                                       progress: "Pending",
                                       amountCO: 0.0,
                                       dollarAmount: 0.0,
-                                      transactionType: "Solar Panels",
+                                      transactionType: "SolarPanels",
                                       email: userEmail)
         
         do {

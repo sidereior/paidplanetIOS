@@ -12,8 +12,6 @@ struct WelcomeFrameView: View {
        @State private var currentDriveEst: Double = 1000
        @State private var carbonCreditPrice: Double = 20
        @State private var fee: Double = 0.1
-       
-       // Function output values
        @State private var emissionsEstimate: Double = 0
        @State private var carbonCreditPayout: Double = 0
     var body: some View {
@@ -21,7 +19,7 @@ struct WelcomeFrameView: View {
             Image("background")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .opacity(0.5) // Adjust the opacity as needed for the green tint
+                .opacity(0.5)
                 .ignoresSafeArea()
             
             VStack(spacing: 20) {
@@ -82,7 +80,6 @@ struct WelcomeFrameView: View {
                     Text("Fee: \(fee, specifier: "%.2f")")
                         .padding(.horizontal, 10)
                 }
-                                // Calculate and display function output
                                 Button(action: {
                                     let result = electricCars(currentCarMPG: Int(currentCarMPG),
                                                               currentDriveEst: Int(currentDriveEst),
@@ -100,7 +97,6 @@ struct WelcomeFrameView: View {
                                         .cornerRadius(14)
                                 }
                 Group{
-                    // Display function output
                     Text("Emissions Estimate: \(emissionsEstimate, specifier: "%.2f") lbs")
                     Text("Carbon Credit Payout: $\(carbonCreditPayout, specifier: "%.2f")")
                     
@@ -109,21 +105,14 @@ struct WelcomeFrameView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.white) // Change the background color to white or any other color you want for the frame
+        .background(Color.white)
     }
     
     func electricCars(currentCarMPG: Int, currentDriveEst: Int, carbonCreditPrice: Int, fee: Double) -> (currentEmissionsEstimate: Double, carbonCreditPayout: Double) {
         let gallonsGasConsumed = Double(currentDriveEst) / Double(currentCarMPG)
-        
-        // CO2 emissions per gallon of gasoline (grams)
         let co2Gallon = 8887.0
-        
         let currentEmissionsEstimate = gallonsGasConsumed * co2Gallon
-        
-        // Convert emissions estimate to metric tonnes (grams to kilograms to metric tonnes)
         let currentEmissionsInMetricTonnes = currentEmissionsEstimate / 1_000_000.0
-        
-        // Calculate carbon credit payout
         let carbonCreditPayout = currentEmissionsInMetricTonnes * Double(carbonCreditPrice) * (1 - fee)
         
         return (currentEmissionsEstimate, carbonCreditPayout)
@@ -131,11 +120,7 @@ struct WelcomeFrameView: View {
 
     func newSolarPanels(currentEnergyBill: Int, state: String, roofSizeEstimate: Double, carbonCreditPrice: Double, fee: Double) -> (currentEmissionsEstimate: Double, carbonCreditPayout: Double) {
         let currentEnergyBillInKWh = Double(currentEnergyBill) / 1000.0
-        
-        // Average solar panel watts per hour
         let solarPanelWattsPerHour = 325.0
-        
-        // Average peak sun hours based on state
         let peaksunhoursDict: [String: Int] = [
             "alabama": 4,
             "alaska": 4,
@@ -190,7 +175,6 @@ struct WelcomeFrameView: View {
             "wyoming": 6
         ]
         
-        // Electricity emissions in lbs/MWh based on state
         let electricityEmissionDict: [String: Int] = [
             "alabama": 765,
             "alaska": 1186,
@@ -245,29 +229,18 @@ struct WelcomeFrameView: View {
             "wyoming": 1858
         ]
         
-        // Calculate the number of solar panels
         let numSolarPanels = Int(roofSizeEstimate / 1.7032224)
-        
-        // Calculate monthly MWh produced
         let WhProduced = Double(numSolarPanels) * solarPanelWattsPerHour * Double(peaksunhoursDict[state] ?? 0)
         let monthlyMWhProduced = WhProduced * 30 / 1000000
-        
-        // Calculate emissions avoided in lbs
         let emissionsAvoidedLbs = monthlyMWhProduced * Double(electricityEmissionDict[state] ?? 0)
-        
-        // Calculate carbon credit payout
         let carbonCreditPayout = emissionsAvoidedLbs / 2204.62 * carbonCreditPrice * (1 - fee)
-        
         let currentEmissionsEstimate = currentEnergyBillInKWh * Double(electricityEmissionDict[state] ?? 0)
-        
         return (currentEmissionsEstimate, carbonCreditPayout)
     }
 
     
     func oldSolarPanels(currentEnergyBill: Int, state: String, numberOfPanels: Int, wattsPerHour: Int, carbonCreditPrice: Double, fee: Double) -> (currentEmissionsEstimate: Double, carbonCreditPayout: Double) {
         let currentEnergyBillInKWh = Double(currentEnergyBill) / 1000.0
-        
-        // Average peak sun hours based on state
         let peaksunhoursDict: [String: Int] = [
             "alabama": 4,
             "alaska": 4,
@@ -322,7 +295,6 @@ struct WelcomeFrameView: View {
             "wyoming": 6
         ]
         
-        // Electricity emissions in lbs/MWh based on state
         let electricityEmissionDict: [String: Int] = [
             "alabama": 765,
             "alaska": 1186,
@@ -377,20 +349,11 @@ struct WelcomeFrameView: View {
             "wyoming": 1858
         ]
         
-        // Calculate Wh produced
         let WhProduced = Double(numberOfPanels * wattsPerHour * (peaksunhoursDict[state] ?? 0))
-        
-        // Calculate monthly MWh produced
         let monthlyMWhProduced = WhProduced * 30 / 1000000
-        
-        // Calculate emissions avoided in lbs
         let emissionsAvoidedLbs = monthlyMWhProduced * Double(electricityEmissionDict[state] ?? 0)
-        
-        // Calculate carbon credit payout
         let carbonCreditPayout = emissionsAvoidedLbs / 2204.62 * carbonCreditPrice * (1 - fee)
-        
         let currentEmissionsEstimate = currentEnergyBillInKWh * Double(electricityEmissionDict[state] ?? 0)
-        
         return (currentEmissionsEstimate, carbonCreditPayout)
     }
 }

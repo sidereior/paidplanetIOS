@@ -98,7 +98,6 @@ struct HomeTab: View {
                 
                 transactions = documents.compactMap { document in
                     do {
-                        
                         let transaction = try document.data(as: Transaction.self)
                         totalCO2 += transaction.amountCO
                         if(transaction.progress == "Completed")

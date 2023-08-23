@@ -204,7 +204,7 @@ struct TransactionCardView: View {
             {
                 Text("Dollar Amount: \(String(format: "%.2f", transaction.dollarAmount))")
                     .font(.subheadline)
-                    .foregroundColor(Color(hex: "AACB96"))
+                    .foregroundColor(Color(hex: "D1AD7D"))
                     .fontWeight(.bold)
             }
             Spacer()
