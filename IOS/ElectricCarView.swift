@@ -24,7 +24,7 @@ struct ElectricCarView: View {
 
     var body: some View {
         ZStack {
-            Color(hex: "1B463C")
+            Color(hex: "F2E8CF")
                 .ignoresSafeArea()
             VStack {
                 ScrollView {
@@ -35,12 +35,12 @@ struct ElectricCarView: View {
                         }) {
                             Text("Cancel")
                                 .font(.custom("Avenir", size: 20))
-                                .foregroundColor(.red)
-                                .fontWeight(.bold)
-                                .padding(7)
-                                .background(Color.white)
-                                .cornerRadius(14)
-                        }
+                                    .foregroundColor(.red)
+                                    .fontWeight(.bold)
+                                    .padding()
+                                    .background(Color(hex: "C3E8AC"))
+                                    .cornerRadius(14)
+                                }
                         .padding(.top, 20)
                         .padding(.trailing, 20)
                     }

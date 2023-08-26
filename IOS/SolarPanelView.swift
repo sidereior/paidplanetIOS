@@ -616,8 +616,7 @@ struct ConfirmTransactionView: View {
                                 .padding(.top, 15)
                             
                             Text("First Name: \(firstName)")
-                                .font(.custom("Avenir", size: 25))
-                                .fontWeight(.black)
+                                .font(.custom("Avenir", size: 25)) .fontWeight(.black)
                                 .foregroundColor(Color(hex: "00653B"))
                                 .padding(.horizontal, 35)
                                 .padding(.top, 15)

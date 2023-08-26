@@ -21,7 +21,7 @@ struct RedeemView: View {
             
             
             VStack {
-                Text("This is the Redeem View")
+                Text("Share on socials that PaidPlanet just PaidMe! #CookingGreen! #DrivingGreen! #GreenEnergy! #GreenCreditForAll!")
                     .font(.custom("Avenir", size: 30))
                     .fontWeight(.bold)
                     .foregroundColor(Color.white)
