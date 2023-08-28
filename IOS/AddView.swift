@@ -119,7 +119,7 @@ struct AddView: View {
                         RoundedRectangle(cornerRadius: 14)
                             .fill(Color(hex: "00653B"))
                             .shadow(radius: 3, x: 0, y: 3)
-                            .padding(.horizontal, 10)
+                            .padding(.horizontal)
                     )
                     
                     VStack {

@@ -1,10 +1,32 @@
 import Foundation
 import SwiftUI
 import Firebase
+import FirebaseFirestore
 
+class FirestoreService {
+    private let db = Firestore.firestore()
 
+    func addPayment(enteredWord: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let paymentData: [String: Any] = [
+            "enteredWord": enteredWord
+            // You can add more fields if needed
+        ]
+
+        db.collection("payments").addDocument(data: paymentData) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+}
+
+    
 struct RedeemView: View {
     @Environment(\.presentationMode) var presentationMode
+    @State private var enteredWord = ""
+    private let firestoreService = FirestoreService()
     
     var body: some View {
         ZStack {
@@ -22,25 +44,53 @@ struct RedeemView: View {
             
             ScrollView{
                 VStack {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Text("Cancel")
-                            .font(.custom("Avenir", size: 20))
-                            .foregroundColor(.red)
-                            .fontWeight(.bold)
-                            .padding()
-                            .background(Color(hex: "C3E8AC"))
-                            .cornerRadius(14)
+                    HStack{
+                        Spacer()
+                        
+                        Button(action: {
+                            presentationMode.wrappedValue.dismiss()
+                        }) {
+                            Text("Cancel")
+                                .font(.custom("Avenir", size: 20))
+                                .foregroundColor(.red)
+                                .fontWeight(.bold)
+                                .padding()
+                                .background(Color(hex: "C3E8AC"))
+                                .cornerRadius(14)
+                        }
+                        .padding(.top, 20)
+                        .padding(.trailing, 20)
                     }
-                    .padding(.top, 20)
-                    .padding(.trailing, 20)
+                
+                    TextField("Enter a word", text: $enteredWord)
+                                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                                            .padding()
+
+                                        Button(action: {
+                                           firestoreService.addPayment(enteredWord: enteredWord) { result in
+                                                switch result {
+                                                case .success:
+                                                    print("Payment added to Firestore")
+                                                case .failure(let error):
+                                                    print("Error adding payment: \(error.localizedDescription)")
+                                                }
+                                            }
+                                        }) {
+                                            Text("Submit Payment")
+                                                .font(.custom("Avenir", size: 20))
+                                                .foregroundColor(.blue)
+                                                .fontWeight(.bold)
+                                                .padding()
+                                                .background(Color(hex: "C3E8AC"))
+                                                .cornerRadius(14)
+                                        }
                     
                     Text("Share on socials that PaidPlanet just PaidMe! #CookingGreen! #DrivingGreen! #GreenEnergy! #GreenCreditForAll!")
-                        .font(.custom("Avenir", size: 30))
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.white)
-                        .padding()
+                        .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                                .foregroundColor(Color(hex: "00653B"))
+                                .padding(.horizontal, 35)
+                                .padding(.top, 15)
                     
                 }
             }
