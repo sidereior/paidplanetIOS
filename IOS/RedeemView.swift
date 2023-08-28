@@ -8,8 +8,9 @@ struct RedeemView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "1B463C")
+            Color(hex: "F2E8CF")
                 .ignoresSafeArea()
+            
             //first fetch all transactions
             //then display the transactions along with a checkbox next to them.
             //the checkbox should go in and change the transaction's progress property to "Redeemed"
@@ -19,24 +20,28 @@ struct RedeemView: View {
             //below the total amount there should a confirm and get paid button that opens a new sheet
             //this new sheet should be called paymentview
             
-            
-            VStack {
-                Text("Share on socials that PaidPlanet just PaidMe! #CookingGreen! #DrivingGreen! #GreenEnergy! #GreenCreditForAll!")
-                    .font(.custom("Avenir", size: 30))
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.white)
-                    .padding()
-                
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("Dismiss")
-                        .font(.custom("Avenir", size: 20))
-                        .foregroundColor(.blue)
+            ScrollView{
+                VStack {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Text("Cancel")
+                            .font(.custom("Avenir", size: 20))
+                            .foregroundColor(.red)
+                            .fontWeight(.bold)
+                            .padding()
+                            .background(Color(hex: "C3E8AC"))
+                            .cornerRadius(14)
+                    }
+                    .padding(.top, 20)
+                    .padding(.trailing, 20)
+                    
+                    Text("Share on socials that PaidPlanet just PaidMe! #CookingGreen! #DrivingGreen! #GreenEnergy! #GreenCreditForAll!")
+                        .font(.custom("Avenir", size: 30))
                         .fontWeight(.bold)
+                        .foregroundColor(Color.white)
                         .padding()
-                        .background(Color.white)
-                        .cornerRadius(14)
+                    
                 }
             }
         }

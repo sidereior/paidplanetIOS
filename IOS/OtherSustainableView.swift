@@ -100,7 +100,7 @@ struct OtherSustainableView: View {
                 }
                      
                 .sheet(isPresented: $isShowingImagePicker, onDismiss: uploadImage) {
-                    ImagePicker(selectedImage: $selectedImage)
+                    CameraPicker(selectedImage: $selectedImage)
                 }
             }
         }
@@ -235,8 +235,7 @@ struct OtherUploadView: View {
                                 .cornerRadius(14)
                         }
                     
-                    Button(action: {
-                        isShowingNextView = true
+                    Button(action: {                       isShowingNextView = true
                     }) {
                         Text("Next").font(.custom("Avenir", size: 20))
                                 .foregroundColor(.blue)
@@ -259,7 +258,7 @@ struct OtherUploadView: View {
                 Spacer()
             }
             .sheet(isPresented: $isShowingImagePicker, onDismiss: uploadImage) {
-                ImagePicker(selectedImage: $selectedImage)
+                CameraPicker(selectedImage: $selectedImage)
             }
         }
     }
@@ -316,6 +315,44 @@ struct OtherUploadView: View {
             guard let progress = snapshot.progress else { return }
             let percentComplete = Double(progress.completedUnitCount) / Double(progress.totalUnitCount) * 100
             print("Upload progress for image \(currentImageNumber): \(percentComplete)%")
+        }
+    }
+}
+
+struct CameraPicker: UIViewControllerRepresentable {
+    @Binding var selectedImage: UIImage?
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<CameraPicker>) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
+        picker.sourceType = .camera
+        return picker
+    }
+
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<CameraPicker>) {
+        // Update the view controller if needed
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+        var parent: CameraPicker
+
+        init(_ parent: CameraPicker) {
+            self.parent = parent
+        }
+
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+            if let image = info[.originalImage] as? UIImage {
+                parent.selectedImage = image
+            }
+            picker.dismiss(animated: true)
+        }
+
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            picker.dismiss(animated: true)
         }
     }
 }
@@ -426,7 +463,7 @@ struct OtherUploadView2: View {
                 Spacer()
             }
             .sheet(isPresented: $isShowingImagePicker, onDismiss: uploadImage) {
-                ImagePicker(selectedImage: $selectedImage)
+                CameraPicker(selectedImage: $selectedImage)
             }
         }
     }
@@ -604,6 +641,7 @@ struct OtherConfirmTransactionView: View {
 
                         Group{
                             Text("Proof of usage:") .fontWeight(.black).font(.custom("Avenir", size: 25))
+
                                 .foregroundColor(Color(hex: "00653B"))
                                 .padding(.horizontal, 35)
                                 .padding(.top, 15)

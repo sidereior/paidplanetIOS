@@ -33,14 +33,13 @@ struct ElectricStoveView: View {
                         Button(action: {
                             presentationMode.wrappedValue.dismiss()
                         }) {
-                            Text("Cancel")
-                                .font(.custom("Avenir", size: 20))
+                            Text("Cancel")                                    .font(.custom("Avenir", size: 20))
                                     .foregroundColor(.red)
                                     .fontWeight(.bold)
                                     .padding()
                                     .background(Color(hex: "C3E8AC"))
                                     .cornerRadius(14)
-                                }
+                        }
                         .padding(.top, 20)
                         .padding(.trailing, 20)
                     }
@@ -48,45 +47,42 @@ struct ElectricStoveView: View {
                         Spacer()
                             .frame(height: 25)
                         
-                        Text("So, you own an Electric Stove. First, you'll need to enter some basic information so we can pay you for using your electric stove.")
-                            .font(.custom("Avenir", size: 30))
-                            .fontWeight(.bold)
-                            .foregroundColor(Color.white)
-                            .padding(.horizontal, 15)
+                        Text("Cooking Green! 🥗 We just need a couple of things to get you paid: ")
+                             .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                                .foregroundColor(Color(hex: "00653B"))
+                                .padding(.horizontal, 35)
+                                .padding(.top, 15)
+
+                        TextField("First name", text: $firstName)         .autocapitalization(.none)
+                                .padding(.horizontal, 15)
+                                .padding(.vertical, 10)
+                                .background(Color(hex: "00653B"))
+                                .cornerRadius(14.0)
+                                .padding(.horizontal, 25)
+                                .font(.custom("Avenir", size: 20).bold())
+                                .foregroundColor(Color(hex: "F2E8CF"))
+                                .accentColor(.black)
                         
-                        TextField("First name", text: $firstName)
-                            .autocapitalization(.none)
-                            .padding(.horizontal, 15)
-                            .padding(.vertical, 10)
-                            .background(Color(hex: "D9D9D9"))
-                            .cornerRadius(14.0)
-                            .padding(.horizontal, 25)
-                            .font(.custom("Avenir", size: 20).bold())
-                            .foregroundColor(.black)
-                            .padding(.bottom, 10)
-                            .accentColor(.black)
-                        
-                        TextField("Last name", text: $lastName)
-                            .autocapitalization(.none)
-                            .padding(.horizontal, 15)
-                            .padding(.vertical, 10)
-                            .background(Color(hex: "D9D9D9"))
-                            .cornerRadius(14.0)
-                            .padding(.horizontal, 25)
-                            .font(.custom("Avenir", size: 20).bold())
-                            .foregroundColor(.black)
-                            .accentColor(.black)
-                        
+                        TextField("Last name", text: $lastName).autocapitalization(.none)
+                                .padding(.horizontal, 15)
+                                .padding(.vertical, 10)
+                                .background(Color(hex: "00653B"))
+                                .cornerRadius(14.0)
+                                .padding(.horizontal, 25)
+                                .font(.custom("Avenir", size: 20).bold())
+                                .foregroundColor(Color(hex: "F2E8CF"))
+                                .accentColor(.black)
+                                                    
                         Button(action: {
                             isShowingNextView = true
                         }) {
-                            Text("Next")
-                                .font(.custom("Avenir", size: 20))
-                                .foregroundColor(.blue)
-                                .fontWeight(.bold)
-                                .padding(7)
-                                .background(Color.white)
-                                .cornerRadius(14)
+                            Text("Next").font(.custom("Avenir", size: 20))
+                                    .foregroundColor(.blue)
+                                    .fontWeight(.bold)
+                                    .padding()
+                                    .background(Color(hex: "C3E8AC"))
+                                    .cornerRadius(14)
                         }
                         .padding(.top, 20)
                         .padding(.bottom, 30)
@@ -192,7 +188,7 @@ struct ElectricStoveUploadView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "1B463C")
+            Color(hex: "F2E8CF")
                 .ignoresSafeArea()
             
             VStack {
@@ -201,61 +197,57 @@ struct ElectricStoveUploadView: View {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
                     }) {
-                        Text("Back")
-                            .font(.custom("Avenir", size: 20))
-                            .foregroundColor(.blue)
-                            .fontWeight(.bold)
-                            .padding(7)
-                            .background(Color.white)
-                            .cornerRadius(14)
+                        Text("Back")  .font(.custom("Avenir", size: 20))
+                                .foregroundColor(.red)
+                                .fontWeight(.bold)
+                                .padding()
+                                .background(Color(hex: "C3E8AC"))
+                                .cornerRadius(14)
                     }
                     .padding(.top, 20)
                     .padding(.trailing, 20)
                 }
                 
-                Group {
-                    Text("Next, we need some proof of identification. Upload a picture of your driver's license, passport, or other form of ID so we can confirm your info. The more information you provide, the easier it will be for us to issue you payment.")
-                        .font(.custom("Avenir", size: 30))
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.white)
-                        .padding(.horizontal, 15)
-                    
+                Group {Text(verbatim: "Now for your best photo 🙂.\nUpload (one of the below):\nDriver’s License\nGov. Issued ID\nPassport")
+                            .font(.custom("Avenir", size: 25))
+                            .fontWeight(.black)
+                            .foregroundColor(Color(hex: "00653B"))
+                            .padding(.horizontal, 35)
+                            .padding(.top, 15)
+                   
                     Button(action: {
                         currentImageNumber = 1
                         isShowingImagePicker = true
                     }) {
-                        Text("Upload Identification")
-                            .font(.custom("Avenir", size: 20))
-                            .foregroundColor(.blue)
-                            .fontWeight(.bold)
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(14)
+                        Text("Upload Identification")    .font(.custom("Avenir", size: 20))
+                                .foregroundColor(.green)
+                                .fontWeight(.bold)
+                                .padding()
+                                .background(Color(hex: "00653B"))
+                                .cornerRadius(14)
                     }
                     
                     Button(action: {
                         currentImageNumber = 2
                         isShowingImagePicker = true
                     }) {
-                        Text("(Optional) Upload Identification 2")
-                            .font(.custom("Avenir", size: 20))
-                            .foregroundColor(.blue)
-                            .fontWeight(.bold)
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(14)
+                        Text("(Optional) Upload Identification 2") .font(.custom("Avenir", size: 20))
+                                .foregroundColor(.green)
+                                .fontWeight(.bold)
+                                .padding()
+                                .background(Color(hex: "00653B"))
+                                .cornerRadius(14)
                     }
                     
                     Button(action: {
                         isShowingNextView = true
                     }) {
-                        Text("Next")
-                            .font(.custom("Avenir", size: 20))
-                            .foregroundColor(.blue)
-                            .fontWeight(.bold)
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(14)
+                        Text("Next").font(.custom("Avenir", size: 20))
+                                .foregroundColor(.blue)
+                                .fontWeight(.bold)
+                                .padding()
+                                .background(Color(hex: "C3E8AC"))
+                                .cornerRadius(14)
                     }
                     .sheet(isPresented: $isShowingNextView) {
                         ElectricStovePhotoUploadView2(firstName: $firstName,
@@ -348,7 +340,7 @@ struct ElectricStovePhotoUploadView2: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "1B463C")
+            Color(hex: "F2E8CF")
                 .ignoresSafeArea()
             
             VStack {
@@ -357,74 +349,70 @@ struct ElectricStovePhotoUploadView2: View {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
                     }) {
-                        Text("Back")
-                            .font(.custom("Avenir", size: 20))
-                            .foregroundColor(.blue)
-                            .fontWeight(.bold)
-                            .padding(7)
-                            .background(Color.white)
-                            .cornerRadius(14)
+                        Text("Back").font(.custom("Avenir", size: 20))
+                                .foregroundColor(.red)
+                                .fontWeight(.bold)
+                                .padding()
+                                .background(Color(hex: "C3E8AC"))
+                                .cornerRadius(14)
                     }
                     .padding(.top, 20)
                     .padding(.trailing, 20)
                 }
                 
                 Group {
-                    Text("Now, we need proof of your ownership and usage of your Electric stove. This can be an picture of the stove, a picture of your electric bill, the invoice from when you bought the stove, or other proof of ownership/usage. The more information you provide, the easier it will be for us to issue you payment.")
-                        .font(.custom("Avenir", size: 20))
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.white)
-                        .padding(.horizontal, 15)
-                    
+                    Text("Just two more documents and then you are on your way! 1. Proof of Ownership (Picture of stove or receipt) 2. Proof of Usage (Electric Bill)")
+                    .font(.custom("Avenir", size: 25))
+                        .fontWeight(.black)
+                        .foregroundColor(Color(hex: "00653B"))
+                        .padding(.horizontal, 35)
+                        .padding(.top, 15)
+
                     Button(action: {
                         currentImageNumber = 3
                         isShowingImagePicker = true
                     }) {
-                        Text("Proof of ownership")
-                            .font(.custom("Avenir", size: 20))
-                            .foregroundColor(.blue)
-                            .fontWeight(.bold)
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(14)
+                        Text("Proof of ownership").font(.custom("Avenir", size: 20))
+                                .foregroundColor(.green)
+                                .fontWeight(.bold)
+                                .padding()
+                                .background(Color(hex: "00653B"))
+                                .cornerRadius(14)
                     }
                     
                     Button(action: {
                         currentImageNumber = 4
                         isShowingImagePicker = true
                     }) {
-                        Text("Proof of usage")
-                            .font(.custom("Avenir", size: 20))
-                            .foregroundColor(.blue)
-                            .fontWeight(.bold)
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(14)
+                        Text("Proof of usage").font(.custom("Avenir", size: 20))
+                                .foregroundColor(.green)
+                                .fontWeight(.bold)
+                                .padding()
+                                .background(Color(hex: "00653B"))
+                                .cornerRadius(14)
                     }
                     
                     Button(action: {
                         currentImageNumber = 5
                         isShowingImagePicker = true
                     }) {
-                        Text("(Optional) Proof of ownership or usage")
-                            .font(.custom("Avenir", size: 20))
-                            .foregroundColor(.blue)
-                            .fontWeight(.bold)
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(14)
+                        Text("(Optional) Proof of ownership or usage").font(.custom("Avenir", size: 20))
+                                .foregroundColor(.green)
+                                .fontWeight(.bold)
+                                .padding()
+                                .background(Color(hex: "00653B"))
+                                .cornerRadius(14)
                     }
                     
                     Button(action: {
                         isShowingNextView = true
                     }) {
-                        Text("Next")
-                            .font(.custom("Avenir", size: 20))
-                            .foregroundColor(.blue)
-                            .fontWeight(.bold)
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(14)
+                        Text("Next")                     .font(.custom("Avenir", size: 20))
+                                .foregroundColor(.blue)
+                                .fontWeight(.bold)
+                                .padding()
+                                .background(Color(hex: "C3E8AC"))
+                                .cornerRadius(14)
                     }
                     .sheet(isPresented: $isShowingNextView) {
                         ElectricStoveConfirmTransactionView(firstName: $firstName,
@@ -524,7 +512,7 @@ struct ElectricStoveConfirmTransactionView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "1B463C")
+            Color(hex: "F2E8CF")
                 .ignoresSafeArea()
 
             VStack {
@@ -533,12 +521,11 @@ struct ElectricStoveConfirmTransactionView: View {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
                     }) {
-                        Text("Back")
-                            .font(.custom("Avenir", size: 20))
-                            .foregroundColor(.blue)
+                        Text("Back").font(.custom("Avenir", size: 20))
+                            .foregroundColor(.red)
                             .fontWeight(.bold)
-                            .padding(7)
-                            .background(Color.white)
+                            .padding()
+                            .background(Color(hex: "C3E8AC"))
                             .cornerRadius(14)
                     }
                     .padding(.top, 20)
@@ -548,30 +535,29 @@ struct ElectricStoveConfirmTransactionView: View {
                 ScrollView {
                     VStack {
                         Group{
-                            Text("Finally, preview your Electric Stove transaction before confirming it.")
-                                .font(.custom("Avenir", size: 30))
-                                .fontWeight(.bold)
-                                .foregroundColor(Color.white)
-                                .padding(.horizontal, 15)
-                                .padding(.top, 30)
+                            Text("Finally, preview your Electric Stove transaction before confirming it.")  .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                                .foregroundColor(Color(hex: "00653B"))
+                                .padding(.horizontal, 35)
+                                .padding(.top, 15)
                             
-                            Text("First Name: \(firstName)")
-                                .font(.custom("Avenir", size: 20))
-                                .fontWeight(.bold)
-                                .foregroundColor(Color.white)
-                                .padding(.top, 20)
+                            Text("First Name: \(firstName)").font(.custom("Avenir", size: 25)) .fontWeight(.black)
+                                .foregroundColor(Color(hex: "00653B"))
+                                .padding(.horizontal, 35)
+                                .padding(.top, 15)
                             
                             Text("Last Name: \(lastName)")
-                                .font(.custom("Avenir", size: 20))
-                                .fontWeight(.bold)
-                                .foregroundColor(Color.white)
-                                .padding(.top, 10)
-                            
-                            Text("Proof of identification 1: ")
-                                .font(.custom("Avenir", size: 20))
-                                .fontWeight(.bold)
-                                .foregroundColor(Color.white)
-                                .padding(.top, 10)
+                                 .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                                .foregroundColor(Color(hex: "00653B"))
+                                .padding(.horizontal, 35)
+                                .padding(.top, 15)
+                                                       
+                            Text("Proof of identification 1: ").font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                                .foregroundColor(Color(hex: "00653B"))
+                                .padding(.horizontal, 35)
+                                .padding(.top, 15)
                         }
 
                         if let imageURL1 = URL(string: imagePath1 ?? ""),
@@ -583,11 +569,11 @@ struct ElectricStoveConfirmTransactionView: View {
                                 .padding(.top, 20)
                         }
 
-                        Text("(Optional) Proof of identification 2:")
-                            .font(.custom("Avenir", size: 20))
-                            .fontWeight(.bold)
-                            .foregroundColor(Color.white)
-                            .padding(.top, 10)
+                        Text("(Optional) Proof of identification 2:")        .font(.custom("Avenir", size: 25))
+                            .fontWeight(.black)
+                            .foregroundColor(Color(hex: "00653B"))
+                            .padding(.horizontal, 35)
+                            .padding(.top, 15)
                         
                         if let imageURL2 = URL(string: imagePath2 ?? ""),
                            let image2 = image2 {
@@ -598,12 +584,12 @@ struct ElectricStoveConfirmTransactionView: View {
                                 .padding(.top, 20)
                         }
 
-                        Text("Proof of ownership:")
-                            .font(.custom("Avenir", size: 20))
-                            .fontWeight(.bold)
-                            .foregroundColor(Color.white)
-                            .padding(.top, 10)
-                        
+                        Text("Proof of ownership:").font(.custom("Avenir", size: 25))
+                            .fontWeight(.black)
+                            .foregroundColor(Color(hex: "00653B"))
+                            .padding(.horizontal, 35)
+                            .padding(.top, 15)
+                       
                         if let imageURL3 = URL(string: imagePath3 ?? ""),
                            let image3 = image3 {
                             Image(uiImage: image3)
@@ -614,11 +600,11 @@ struct ElectricStoveConfirmTransactionView: View {
                         }
 
                         Group{
-                            Text("Proof of usage:")
-                                .font(.custom("Avenir", size: 20))
-                                .fontWeight(.bold)
-                                .foregroundColor(Color.white)
-                                .padding(.top, 10)
+                            Text("Proof of usage:").font(.custom("Avenir", size: 25))
+                            .fontWeight(.black)
+                            .foregroundColor(Color(hex: "00653B"))
+                            .padding(.horizontal, 35)
+                            .padding(.top, 15)
                             
                             if let imageURL4 = URL(string: imagePath4 ?? ""),
                                let image4 = image4 {
@@ -629,11 +615,11 @@ struct ElectricStoveConfirmTransactionView: View {
                                     .padding(.top, 20)
                             }
                             
-                            Text("(Optional) Proof of usage or ownership:")
-                                .font(.custom("Avenir", size: 20))
-                                .fontWeight(.bold)
-                                .foregroundColor(Color.white)
-                                .padding(.top, 10)
+                            Text("(Optional) Proof of usage or ownership:").font(.custom("Avenir", size: 25))
+                            .fontWeight(.black)
+                            .foregroundColor(Color(hex: "00653B"))
+                            .padding(.horizontal, 35)
+                            .padding(.top, 15)
                             
                             if let imageURL5 = URL(string: imagePath5 ?? ""),
                                let image5 = image5 {
@@ -649,14 +635,12 @@ struct ElectricStoveConfirmTransactionView: View {
                             uploadTransaction()
                             UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true)
                         }) {
-                            Text("Confirm Cashback")
-                                .font(.custom("Avenir", size: 20))
+                            Text("Confirm Cashback").font(.custom("Avenir", size: 20))
                                 .foregroundColor(.blue)
                                 .fontWeight(.bold)
                                 .padding()
-                                .background(Color.white)
+                                .background(Color(hex: "C3E8AC"))
                                 .cornerRadius(14)
-                                .padding(.top, 30)
                         }
                     }
                     .padding(.horizontal, 15)
@@ -725,5 +709,3 @@ struct ElectricStoveConfirmTransactionView: View {
 
     
 }
-
-

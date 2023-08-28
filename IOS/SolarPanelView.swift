@@ -120,7 +120,7 @@ struct SolarPanelView: View {
                     }
                     
                     .sheet(isPresented: $isShowingImagePicker, onDismiss: uploadImage) {
-                        ImagePicker(selectedImage: $selectedImage)
+                        CameraPicker(selectedImage: $selectedImage)
                     }
                 }
             }
@@ -284,7 +284,7 @@ struct PhotoUploadView: View {
                     Spacer()
                 }
                 .sheet(isPresented: $isShowingImagePicker, onDismiss: uploadImage) {
-                    ImagePicker(selectedImage: $selectedImage)
+                    CameraPicker(selectedImage: $selectedImage)
                 }
             }
         }
@@ -458,7 +458,7 @@ struct PhotoUploadView2: View {
                     Spacer()
                 }
                 .sheet(isPresented: $isShowingImagePicker, onDismiss: uploadImage) {
-                    ImagePicker(selectedImage: $selectedImage)
+                    CameraPicker(selectedImage: $selectedImage)
                 }
             }
         }
@@ -597,8 +597,6 @@ struct ConfirmTransactionView: View {
                             .padding()
                             .background(Color(hex: "C3E8AC"))
                             .cornerRadius(14)
-                            
-                                                       
                     }
                     .padding(.top, 20)
                     .padding(.trailing, 20)

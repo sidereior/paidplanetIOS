@@ -175,7 +175,8 @@ struct HomeTab: View {
                                     {
                                         Image(totalCO2Amount > 0.5 ? "stage3" :(totalCO2Amount > 0.1 ? "stage2" : "stage1"))
                                             .resizable()
-                                            .aspectRatio(contentMode: .fit)
+                                            .aspectRatio(contentMode: .fill)
+                                        //return to this to fix asapect ratio so that it takes up larger horizontal width
                                             .cornerRadius(14.0)
                                             .overlay(
                                                 
@@ -263,145 +264,8 @@ struct HomeTab: View {
                                     }
                                     
                                 }
-                                /*
-                                 Spacer()
-                                 .frame(height: 30)
-                                 
-                                 Text("Do you own and use:")
-                                 .font(.custom("Avenir", size: 20))
-                                 .font(.title)
-                                 .foregroundColor(Color(hex: "1B463C"))
-                                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                 .padding(.leading, 15)
-                                 */
-                                
                             }
-                            /*
-                             VStack(alignment: .center) {
-                             HStack {
-                             Button(action: {
-                             showSolarPanelView.toggle()
-                             }) {
-                             Text("Solar Panels")
-                             .font(.custom("Avenir", size: 15))
-                             .foregroundColor(Color(hex: "1B463C"))
-                             .fontWeight(.black)
-                             .padding(.leading, 5)
-                             }
-                             .frame(height: 35)
-                             .padding(.horizontal, 7)
-                             .background(Color(hex: "59DB84"))
-                             .cornerRadius(14.0)
-                             .shadow(radius: 3, x: 0, y: 3)
-                             .sheet(isPresented: $showSolarPanelView) {
-                             SolarPanelView()
-                             }
-                             
-                             Button(action: {
-                             showElectricCarView.toggle()
-                             }) {
-                             Text("Electric Cars")
-                             .font(.custom("Avenir", size: 15))
-                             .foregroundColor(Color(hex: "1B463C"))
-                             .fontWeight(.black)
-                             .padding(.leading, 5)
-                             }
-                             .frame(height: 35)
-                             .padding(.horizontal, 7)
-                             .background(Color(hex: "59DB84"))
-                             .cornerRadius(14.0)
-                             .shadow(radius: 3, x: 0, y: 3)
-                             .sheet(isPresented: $showElectricCarView) {
-                             ElectricCarView()
-                             }
-                             
-                             
-                             Button(action: {
-                             showElectricStoveView.toggle()
-                             }) {
-                             Text("Electric Stoves")
-                             .font(.custom("Avenir", size: 15))
-                             .foregroundColor(Color(hex: "1B463C"))
-                             .fontWeight(.black)
-                             .padding(.leading, 5)
-                             }
-                             .padding(.horizontal, 7)
-                             .frame(height: 35)
-                             .background(Color(hex: "59DB84"))
-                             .cornerRadius(14.0)
-                             .shadow(radius: 3, x: 0, y: 3)
-                             .sheet(isPresented: $showElectricStoveView) {
-                             ElectricStoveView()
-                             }
-                             }
-                             }
-                             .padding(.horizontal, 15)
-                             .padding(.top, -10)
-                             Group{
-                             Spacer()
-                             .frame(height: 15)
-                             }
-                             
-                             Group {
-                             Rectangle()
-                             .fill(Color(hex: "1B463C"))
-                             .frame(height: 265)
-                             .cornerRadius(14.0)
-                             .padding(.horizontal)
-                             .shadow(radius: 3, x: 0, y: 3)
-                             .overlay(
-                             VStack() {
-                             Text("Recent Cashbacks")
-                             .font(.custom("Avenir", size: 35))
-                             .font(.title)
-                             .fontWeight(.black)
-                             .foregroundColor(.white)
-                             .frame(minWidth: 0, maxWidth: .infinity)
-                             
-                             Rectangle()
-                             .fill(Color.white)
-                             .frame(height: 2)
-                             .padding(.horizontal, 35)
-                             .padding(.top, -25)
-                             
-                             VStack {
-                             List(transactions) { transaction in
-                             VStack(alignment: .leading) {
-                             
-                             Text("Transaction Date: \(transaction.transactionDate)")
-                             .font(.subheadline)
-                             
-                             Text("Progress: \(transaction.progress)")
-                             .font(.subheadline)
-                             }
-                             .listRowBackground(Color(hex: "1B463C"))
-                             }
-                             .listStyle(PlainListStyle())
-                             }
-                             .padding(.horizontal, 35)
-                             .padding(.top, -20)
-                             
-                             RoundedRectangle(cornerRadius: 14)
-                             .fill(Color.white)
-                             .frame(height: 35)
-                             .overlay(
-                             VStack(alignment: .leading) {
-                             Text("View All Cashbacks")
-                             .font(.custom("Avenir", size: 23))
-                             .fontWeight(.bold)
-                             .foregroundColor(Color(hex: "1B463C"))
-                             .padding(.top, 11)
-                             .padding(.leading, 25)
-                             Spacer()
-                             }
-                             )
-                             .padding(.horizontal, 35)
-                             }
-                             )
-                            */
                         }
-                        
-                        
                 }
             }
             .onAppear {
