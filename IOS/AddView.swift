@@ -34,6 +34,7 @@ struct AddView: View {
                                     .font(.title)
                                     .fontWeight(.black)
                                     .foregroundColor(Color(hex: "C3E8AC"))
+                                    .padding(.horizontal, 10)
                                 Spacer()
                                 Image("solar")
                                     .resizable()
@@ -67,6 +68,7 @@ struct AddView: View {
                                     .font(.title)
                                     .fontWeight(.black)
                                     .foregroundColor(Color(hex: "C3E8AC"))
+                                    .padding(.horizontal, 10)
                                 Spacer()
                                 Image("car")
                                     .resizable()
@@ -99,6 +101,7 @@ struct AddView: View {
                                     .font(.title)
                                     .fontWeight(.black)
                                     .foregroundColor(Color(hex: "C3E8AC"))
+                                    .padding(.horizontal, 10)
                                 Spacer()
                                 Image("stove")
                                     .resizable()
@@ -113,13 +116,12 @@ struct AddView: View {
                         .sheet(isPresented: $isShowingElectricStoves) {
                             ElectricStoveView()
                         }
-                    }
-                    .padding(.horizontal, 10)
+                    }.padding(.horizontal, 10)
                     .background(
                         RoundedRectangle(cornerRadius: 14)
                             .fill(Color(hex: "00653B"))
+                            .padding(.horizontal, 10)
                             .shadow(radius: 3, x: 0, y: 3)
-                            .padding(.horizontal)
                     )
                     
                     VStack {

@@ -24,6 +24,38 @@ class FirestoreService {
 
     
 struct RedeemView: View {
+    
+    @State private var totalCO2AmountDollars: Double = 0.0
+    
+    
+    private func fetchTransactions() {
+        let db = Firestore.firestore()
+        db.collection("transactions")
+            .addSnapshotListener { snapshot, error in
+                guard let documents = snapshot?.documents else {
+                    print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
+                    return
+                }
+                
+                var totalCO2: Double = 0.0
+                
+               var transactions = documents.compactMap { document in
+                    do {
+                        let transaction = try document.data(as: Transaction.self)
+                        if(transaction.progress == "Completed")
+                        {
+                            totalCO2 += transaction.amountCO
+                        }
+                        return transaction
+                    } catch {
+                        print("Error decoding transaction: \(error.localizedDescription)")
+                        return nil
+                    }
+                }
+                totalCO2AmountDollars = totalCO2
+            }
+    }
+    
     @Environment(\.presentationMode) var presentationMode
     @State private var enteredWord = ""
     private let firestoreService = FirestoreService()
@@ -61,7 +93,17 @@ struct RedeemView: View {
                         .padding(.top, 20)
                         .padding(.trailing, 20)
                     }
-                
+                    
+                    Text("You are ready to get paid! Here are your options for your payment of $ \(totalCO2AmountDollars)")
+                        .padding(.horizontal, 15)
+                        .padding(.vertical, 10)
+                        .background(Color(hex: "00653B"))
+                        .cornerRadius(14.0)
+                        .padding(.horizontal, 25)
+                        .font(.custom("Avenir", size: 20).bold())
+                        .foregroundColor(Color(hex: "F2E8CF"))
+                        .accentColor(.black)
+                    
                     TextField("Enter a word", text: $enteredWord)
                                             .textFieldStyle(RoundedBorderTextFieldStyle())
                                             .padding()
@@ -86,11 +128,12 @@ struct RedeemView: View {
                                         }
                     
                     Text("Share on socials that PaidPlanet just PaidMe! #CookingGreen! #DrivingGreen! #GreenEnergy! #GreenCreditForAll!")
-                        .font(.custom("Avenir", size: 25))
-                                .fontWeight(.black)
-                                .foregroundColor(Color(hex: "00653B"))
-                                .padding(.horizontal, 35)
-                                .padding(.top, 15)
+                           .font(.custom("Avenir", size: 25))
+                                   .fontWeight(.black)
+                                   .foregroundColor(Color(hex: "00653B"))
+                                   .padding(.horizontal, 35)
+                                   .padding(.top, 15)
+                       
                     
                 }
             }

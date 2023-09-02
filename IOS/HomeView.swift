@@ -175,10 +175,9 @@ struct HomeTab: View {
                                     {
                                         Image(totalCO2Amount > 0.5 ? "stage3" :(totalCO2Amount > 0.1 ? "stage2" : "stage1"))
                                             .resizable()
-                                            .aspectRatio(contentMode: .fill)
+                                            .aspectRatio(contentMode: .fit)
                                         //return to this to fix asapect ratio so that it takes up larger horizontal width
-                                            .cornerRadius(14.0)
-                                            .overlay(
+                                            .cornerRadius(14.0)                                    .overlay(
                                                 
                                                 VStack{
                                                     
@@ -220,49 +219,54 @@ struct HomeTab: View {
                                             isPresentingRedeemView = true
                                         })
                                         {
-                                            Image(totalCO2Amount > 0.5 ? "stage3.5" :(totalCO2Amount > 0.1 ? "stage2.5" : "stage1.5"))
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                                .cornerRadius(14.0)
-                                                .overlay(
-                                                    VStack{
-                                                        
-                                                        Text(greeting + ", \(userName)")
-                                                            .font(.custom("Avenir", size: 25) .bold())
-                                                            .font(.title)
-                                                            .foregroundColor(Color(hex: "00653B"))
-                                                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                                            .padding(.leading, 15)
-                                                            .padding(.top, 15)
-                                                        
-                                                        Text(Date(), style: .date)
-                                                            .font(.custom("Avenir", size: 20))
-                                                            .font(.title)
-                                                            .foregroundColor(Color(hex: "00653B"))
-                                                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                                            .padding(.leading, 15)
-                                                        
-                                                        Spacer()
-                                                            .frame(height: 3)
-                                                        
-                                                        Group{
-                                                            Text(String(format: "Total Offset: %.2f tons of CO2", totalCO2Amount))
-                                                                .font(.custom("Avenir", size: 20).bold())
+                                            ZStack{
+                                               
+                                                
+                                                Image(totalCO2Amount > 0.5 ? "stage3.5" :(totalCO2Amount > 0.1 ? "stage2.5" : "stage1.5"))
+                                                    .resizable()
+                                                    .shadow(color: Color.green.opacity(0.8), radius: 20)
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .cornerRadius(14.0)
+                                                    .overlay(
+                                                        VStack{
+                                                            
+                                                            Text(greeting + ", \(userName)")
+                                                                .font(.custom("Avenir", size: 25) .bold())
+                                                                .font(.title)
                                                                 .foregroundColor(Color(hex: "00653B"))
                                                                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                                                 .padding(.leading, 15)
+                                                                .padding(.top, 15)
+                                                            
+                                                            Text(Date(), style: .date)
+                                                                .font(.custom("Avenir", size: 15))
+                                                                .font(.title)
+                                                                .foregroundColor(Color(hex: "00653B"))
+                                                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                                                .padding(.leading, 15)
+                                                            
+                                                            Spacer()
+                                                                .frame(height: 3)
+                                                            
+                                                            Group{
+                                                                Text(String(format: "Total Offset: %.2f tons of CO2", totalCO2Amount))
+                                                                    .font(.custom("Avenir", size: 15).bold())
+                                                                    .foregroundColor(Color(hex: "00653B"))
+                                                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                                                    .padding(.leading, 15)
+                                                            }
+                                                            
+                                                            Spacer()
                                                         }
                                                         
-                                                        Spacer()
-                                                    }
-                                                    
-                                                )
+                                                    )
+                                            }
+                                            .sheet(isPresented: $isPresentingRedeemView) {
+                                                RedeemView()
+                                            }
                                         }
-                                        .sheet(isPresented: $isPresentingRedeemView) {
-                                            RedeemView()
-                                        }
+                                        
                                     }
-                                    
                                 }
                             }
                         }
