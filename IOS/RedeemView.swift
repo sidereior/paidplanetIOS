@@ -9,7 +9,6 @@ class FirestoreService {
     func addPayment(enteredWord: String, completion: @escaping (Result<Void, Error>) -> Void) {
         let paymentData: [String: Any] = [
             "enteredWord": enteredWord
-            // You can add more fields if needed
         ]
 
         db.collection("payments").addDocument(data: paymentData) { error in
@@ -37,8 +36,7 @@ struct RedeemView: View {
                     return
                 }
                 
-                var totalCO2: Double = 0.0
-                
+             var totalCO2: Double = 0.0
                var transactions = documents.compactMap { document in
                     do {
                         let transaction = try document.data(as: Transaction.self)
@@ -58,6 +56,10 @@ struct RedeemView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @State private var enteredWord = ""
+    
+    @State private var option1Selected = false
+    @State private var option2Selected = false
+
     private let firestoreService = FirestoreService()
     
     var body: some View {
@@ -95,19 +97,59 @@ struct RedeemView: View {
                     }
                     
                     Text("You are ready to get paid! Here are your options for your payment of $ \(totalCO2AmountDollars)")
-                        .padding(.horizontal, 15)
-                        .padding(.vertical, 10)
-                        .background(Color(hex: "00653B"))
-                        .cornerRadius(14.0)
-                        .padding(.horizontal, 25)
-                        .font(.custom("Avenir", size: 20).bold())
-                        .foregroundColor(Color(hex: "F2E8CF"))
-                        .accentColor(.black)
-                    
-                    TextField("Enter a word", text: $enteredWord)
-                                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                                            .padding()
+                             .font(.custom("Avenir", size: 25))
+                                   .fontWeight(.black)
+                                   .foregroundColor(Color(hex: "00653B"))
+                                   .padding(.horizontal, 35)
+                                   .padding(.top, 15)
+                                    
+                    HStack {
+                            Image(systemName: option1Selected ? "largecircle.fill.circle" : "circle")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(Color(hex: "00653B"))
+                                .onTapGesture {
+                                    option1Selected.toggle()
+                                    option2Selected = false
+                                }
+                            
+                            Text("Venmo")
+                                .font(.custom("Avenir", size: 20))
+                                .foregroundColor(Color(hex: "00653B"))
+                                .onTapGesture {
+                                    option1Selected.toggle()
+                                    option2Selected = false
+                                }
+                        }
+                     
+                        HStack {
+                            Image(systemName: option2Selected ? "largecircle.fill.circle" : "circle")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(Color(hex: "00653B"))
+                                .onTapGesture {
+                                    option2Selected.toggle()
+                                    option1Selected = false
+                                }
 
+                            Text("Zelle")
+                                .font(.custom("Avenir", size: 20))
+                                .foregroundColor(Color(hex: "00653B"))
+                                .onTapGesture {
+                                    option2Selected.toggle()
+                                    option1Selected = false
+                                }
+                        }
+                     
+                    
+                    TextField("Enter your Venmo or Zelle username/email", text: $enteredWord)
+                                .padding(.vertical, 10)
+                                .background(Color(hex: "00653B"))
+                                .cornerRadius(14.0)
+                                .padding(.horizontal, 25)
+                                .font(.custom("Avenir", size: 20).bold())
+                                .foregroundColor(Color(hex: "F2E8CF"))
+                                .accentColor(.black)
                                         Button(action: {
                                            firestoreService.addPayment(enteredWord: enteredWord) { result in
                                                 switch result {
@@ -126,7 +168,9 @@ struct RedeemView: View {
                                                 .background(Color(hex: "C3E8AC"))
                                                 .cornerRadius(14)
                                         }
+                                        
                     
+                   //split this into seperate buttons
                     Text("Share on socials that PaidPlanet just PaidMe! #CookingGreen! #DrivingGreen! #GreenEnergy! #GreenCreditForAll!")
                            .font(.custom("Avenir", size: 25))
                                    .fontWeight(.black)
