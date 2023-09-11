@@ -20,7 +20,6 @@ class FirestoreService {
         }
     }
 }
-
     
 struct RedeemView: View {
     
@@ -66,16 +65,7 @@ struct RedeemView: View {
         ZStack {
             Color(hex: "F2E8CF")
                 .ignoresSafeArea()
-            
-            //first fetch all transactions
-            //then display the transactions along with a checkbox next to them.
-            //the checkbox should go in and change the transaction's progress property to "Redeemed"
-            //below this list there should be a total dollar amount field that is updated
-            //as each transaction is marked as redeemed this total dollar amount should be equal to
-            //the sum of all of the redeemed transactions
-            //below the total amount there should a confirm and get paid button that opens a new sheet
-            //this new sheet should be called paymentview
-            
+                        
             ScrollView{
                 VStack {
                     HStack{
@@ -170,11 +160,9 @@ struct RedeemView: View {
                                                 .background(Color(hex: "C3E8AC"))
                                                 .cornerRadius(14)
                                         }
-                                        
                                         .sheet(isPresented: $isShowingSocialView) {
                                               RedeemView2()
                                             }
-                    
                 }
             }
         }
@@ -216,7 +204,7 @@ struct RedeemView2: View {
     
     @Environment(\.presentationMode) var presentationMode
     @State private var enteredWord = ""
-    
+    @State private var isShareSheetPresented = false
     @State private var option1Selected = false
     @State private var option2Selected = false
 
@@ -247,19 +235,43 @@ struct RedeemView2: View {
                         .padding(.trailing, 20)
                     }
                     
-                   Text("Share on socials that you just got Paid through PaidPlanet!")
+                   Text("Share on socials that you just got Paid through PaidPlanet for a chance to win our 25$ Amazon Gift Card!")
                            .font(.custom("Avenir", size: 25))
                                    .fontWeight(.black)
                                    .foregroundColor(Color(hex: "00653B"))
                                    .padding(.horizontal, 35)
                                    .padding(.top, 15)
                     
-                    
-                    
-                    
+                    Button(action: {
+                        self.isShareSheetPresented.toggle()
+                    }) {
+                        Text("Share")
+                            .font(.custom("Avenir", size: 20))
+                            .foregroundColor(.red)
+                            .fontWeight(.bold)
+                            .padding()
+                            .background(Color(hex: "C3E8AC"))
+                            .cornerRadius(14)
+                    }
+                    .padding(.top, 20)
+                    .padding(.trailing, 20)
                 }
             }
         }
     }
+    
 
+    struct ShareSheet: UIViewControllerRepresentable {
+        let activityItems: [Any]
+
+        func makeUIViewController(context: Context) -> UIActivityViewController {
+            let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+            return controller
+        }
+
+        func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
+        }
+    }
+
+    
 }
