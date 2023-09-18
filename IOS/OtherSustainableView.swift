@@ -318,38 +318,41 @@ struct OtherUploadView: View {
         }
     }
 }
+
 struct CameraPicker: UIViewControllerRepresentable {
-    @Environment(\.presentationMode) private var presentationMode
-    @Binding var image: UIImage?
+    @Binding var selectedImage: UIImage?
 
-    var sourceType: UIImagePickerController.SourceType = .photoLibrary
-
-    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
+    func makeUIViewController(context: UIViewControllerRepresentableContext<CameraPicker>) -> UIImagePickerController {
         let picker = UIImagePickerController()
-        picker.sourceType = sourceType
         picker.delegate = context.coordinator
+        picker.sourceType = .camera
         return picker
     }
 
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {}
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<CameraPicker>) {
+        // Update the view controller if needed
+    }
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
 
-    final class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-        var parent: ImagePicker
+    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+        var parent: CameraPicker
 
-        init(_ parent: ImagePicker) {
+        init(_ parent: CameraPicker) {
             self.parent = parent
         }
 
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-            if let uiImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                parent.image = uiImage
+            if let image = info[.originalImage] as? UIImage {
+                parent.selectedImage = image
             }
+            picker.dismiss(animated: true)
+        }
 
-            parent.presentationMode.wrappedValue.dismiss()
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            picker.dismiss(animated: true)
         }
     }
 }
@@ -744,5 +747,3 @@ struct OtherConfirmTransactionView: View {
 
     
 }
-
-
