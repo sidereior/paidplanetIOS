@@ -18,22 +18,25 @@ struct ProfileView: View {
                     return "Good Evening"
                 }
             }
-
+            HStack{
             Text(greeting + ", \(userManager.user?.displayName ?? "")")
-                .font(.custom("Avenir", size: 25).bold())
-                .font(.title)
-                .foregroundColor(Color(hex: "1B463C"))
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, 15)
-                .padding(.top, 25)
+                         .fontWeight(.black)
+                         .foregroundColor(Color(hex: "7D5E35"))
+                    }
+                        .font(.title)
+                        .padding()
+                        .background(Color(hex: "D1AD7D"))
+                        .cornerRadius(10)
+                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+                        .padding(.bottom, 10)
 
-            Text("Email: \(userManager.user?.email ?? "")")
-                .font(.custom("Avenir", size: 25))
-                .font(.title)
-                .foregroundColor(Color(hex: "1B463C"))
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, 15)
-                .padding(.top, 25)
+            
+            Text("Email: \(userManager.user?.email ?? "")")            .font(.title)
+                        .padding()
+                        .background(Color(hex: "D1AD7D"))
+                        .cornerRadius(10)
+                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+                        .padding(.bottom, 10)
 
             Button(action: {
                 isShowingResetPasswordAlert = true
@@ -49,7 +52,7 @@ struct ProfileView: View {
             .alert(isPresented: $isShowingResetPasswordAlert) {
                 Alert(
                     title: Text("Reset Password"),
-                    message: Text("Are you sure you want to reset your password?"),
+                    message: Text("Are you sure you want to reset your password? An email will be sent to you shortly."),
                     primaryButton: .default(Text("Reset"), action: resetPassword),
                     secondaryButton: .cancel()
                 )
