@@ -21,7 +21,7 @@ struct HomeView: View {
             selectedIconColorOverride: Color(hex: "00653B")
         ),
         .init(
-            title: "Cashbacks",
+            title: "Transactions",
             icon: .init(systemName: "archivebox.fill"),
             iconColorOverride: Color(hex: "7D5E35"),
             selectedIconColorOverride: Color(hex: "00653B")

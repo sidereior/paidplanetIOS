@@ -317,6 +317,8 @@ struct OtherUploadView: View {
             print("Upload progress for image \(currentImageNumber): \(percentComplete)%")
         }
     }
+    
+    
 }
 
 struct CameraPicker: UIViewControllerRepresentable {

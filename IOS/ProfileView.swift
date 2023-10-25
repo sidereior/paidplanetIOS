@@ -31,7 +31,8 @@ struct ProfileView: View {
                         .padding(.bottom, 10)
 
             
-            Text("Email: \(userManager.user?.email ?? "")")            .font(.title)
+            Text("Email: \(userManager.user?.email ?? "")")
+                        .font(.title)
                         .padding()
                         .background(Color(hex: "D1AD7D"))
                         .cornerRadius(10)
@@ -41,14 +42,13 @@ struct ProfileView: View {
             Button(action: {
                 isShowingResetPasswordAlert = true
             }) {
-                Text("Reset Password")
-                    .font(.custom("Avenir", size: 25))
-                    .font(.title)
-                    .foregroundColor(.blue)
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading, 15)
-                    .padding(.top, 25)
-            }
+                Text("Reset Password").font(.title)
+                        .padding()
+                        .background(Color(hex: "D1AD7D"))
+                        .cornerRadius(10)
+                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+                        .padding(.bottom, 10)
+                                }
             .alert(isPresented: $isShowingResetPasswordAlert) {
                 Alert(
                     title: Text("Reset Password"),
@@ -59,14 +59,13 @@ struct ProfileView: View {
             }
 
             Button(action: logout) {
-                Text("Logout")
-                    .font(.custom("Avenir", size: 25))
-                    .font(.title)
-                    .foregroundColor(.red)
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading, 15)
-                    .padding(.top, 25)
-            }
+                Text("Logout").font(.title)
+                        .padding()
+                        .background(Color(hex: "D1AD7D"))
+                        .cornerRadius(10)
+                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+                        .padding(.bottom, 10)
+                                }
 
             Spacer()
         }
