@@ -9,7 +9,7 @@ struct HomeView: View {
     @State var selectedTab: Int = 0
     @State var tabs: [CITTopTab] = [
         .init(
-            title: "Garden" ,
+            title: "Home" ,
             icon: .init(systemName: "house.fill"),
             iconColorOverride: Color(hex: "7D5E35"),
             selectedIconColorOverride: Color(hex: "00653B")

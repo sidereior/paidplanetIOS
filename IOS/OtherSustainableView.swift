@@ -100,7 +100,7 @@ struct OtherSustainableView: View {
                 }
                      
                 .sheet(isPresented: $isShowingImagePicker, onDismiss: uploadImage) {
-                    CameraPicker(selectedImage: $selectedImage)
+                    ImagePicker(selectedImage: $selectedImage)
                 }
             }
         }
@@ -258,7 +258,7 @@ struct OtherUploadView: View {
                 Spacer()
             }
             .sheet(isPresented: $isShowingImagePicker, onDismiss: uploadImage) {
-                CameraPicker(selectedImage: $selectedImage)
+                ImagePicker(selectedImage: $selectedImage)
             }
         }
     }
@@ -465,7 +465,7 @@ struct OtherUploadView2: View {
                 Spacer()
             }
             .sheet(isPresented: $isShowingImagePicker, onDismiss: uploadImage) {
-                CameraPicker(selectedImage: $selectedImage)
+                ImagePicker(selectedImage: $selectedImage)
             }
         }
     }
