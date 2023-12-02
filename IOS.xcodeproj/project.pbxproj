@@ -57,6 +57,7 @@
 		06C6688F2A52370300746229 /* ElectricCarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C6688E2A52370300746229 /* ElectricCarView.swift */; };
 		06C668912A52378500746229 /* ElectricStoveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C668902A52378500746229 /* ElectricStoveView.swift */; };
 		06EE8A0D2A5E465800911960 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EE8A0C2A5E465800911960 /* TransactionView.swift */; };
+		06F74C892B1B12CB0043D2AA /* OnboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = 06F74C882B1B12CB0043D2AA /* OnboardKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +118,7 @@
 				063D82E52A0C382B002449F4 /* FirebaseAnalytics in Frameworks */,
 				063D82E72A0C382B002449F4 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				063D830D2A0C382B002449F4 /* FirebaseMLModelDownloader in Frameworks */,
+				06F74C892B1B12CB0043D2AA /* OnboardKit in Frameworks */,
 				063D83012A0C382B002449F4 /* FirebaseFirestoreSwift in Frameworks */,
 				063D82ED2A0C382B002449F4 /* FirebaseAppCheck in Frameworks */,
 				063D82EB2A0C382B002449F4 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
@@ -267,6 +269,7 @@
 				06C668622A46754000746229 /* TabBar */,
 				06C668782A4BD7BD00746229 /* CITTopTabBar */,
 				0675124D2A5BA4AB000E19F5 /* SwiftUIX */,
+				06F74C882B1B12CB0043D2AA /* OnboardKit */,
 			);
 			productName = IOS;
 			productReference = 063D82B42A0AFFE4002449F4 /* IOS.app */;
@@ -345,6 +348,7 @@
 				06C668612A46754000746229 /* XCRemoteSwiftPackageReference "TabBar" */,
 				06C668772A4BD7BD00746229 /* XCRemoteSwiftPackageReference "TopTabBar-iOS-Component" */,
 				0675124C2A5BA4AB000E19F5 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				06F74C872B1B12CB0043D2AA /* XCRemoteSwiftPackageReference "OnboardKit" */,
 			);
 			productRefGroup = 063D82B52A0AFFE4002449F4 /* Products */;
 			projectDirPath = "";
@@ -560,7 +564,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.0;
 				DEVELOPMENT_ASSET_PATHS = "\"IOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 8QH9YSPT6R;
 				ENABLE_PREVIEWS = YES;
@@ -580,7 +584,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = PaidPlanet.IOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -596,7 +600,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.0;
 				DEVELOPMENT_ASSET_PATHS = "\"IOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 8QH9YSPT6R;
 				ENABLE_PREVIEWS = YES;
@@ -616,7 +620,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = PaidPlanet.IOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -771,6 +775,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		06F74C872B1B12CB0043D2AA /* XCRemoteSwiftPackageReference "OnboardKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/NikolaKirev/OnboardKit";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -923,6 +935,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 06C668772A4BD7BD00746229 /* XCRemoteSwiftPackageReference "TopTabBar-iOS-Component" */;
 			productName = CITTopTabBar;
+		};
+		06F74C882B1B12CB0043D2AA /* OnboardKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 06F74C872B1B12CB0043D2AA /* XCRemoteSwiftPackageReference "OnboardKit" */;
+			productName = OnboardKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
