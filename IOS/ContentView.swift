@@ -13,7 +13,7 @@ struct LoginPage: View {
        @State private var shake = false
        @State private var confirmEmail = ""
        @State private var confirmPassword = ""
-       @State private var isShowingWelcomeSheet = true
+    @State private var isShowingWelcomeSheet = true
        @AppStorage("rememberMe") private var rememberMe = true
        @State private var isSignUpMode = false
     
@@ -103,10 +103,11 @@ struct LoginPage: View {
         .sheet(isPresented: $isShowingWelcomeSheet) {
                     WelcomeFrameView()
                 }
-                .onAppear {
-                    isShowingWelcomeSheet = true // Show the WelcomeFrameView as a sheet when the LoginPage appears
-                }
+        .onDisappear()
+        {
+            isShowingWelcomeSheet = false
         }
+    }
     
 
     var unLogged: some View {

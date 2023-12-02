@@ -1,113 +1,103 @@
-import Foundation
-import AuthenticationServices
-import Firebase
-import FirebaseDatabase
-import FirebaseFirestore
-import FirebaseFirestoreSwift
 import SwiftUI
 
 struct WelcomeFrameView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var currentCarMPG: Double = 25
-       @State private var currentDriveEst: Double = 1000
-       @State private var carbonCreditPrice: Double = 20
-       @State private var fee: Double = 0.1
-       @State private var emissionsEstimate: Double = 0
-       @State private var carbonCreditPayout: Double = 0
+    @State private var currentDriveEst: Double = 1000
+    @State private var carbonCreditPrice: Double = 20
+    @State private var fee: Double = 0.1
+    @State private var emissionsEstimate: Double = 0
+    @State private var carbonCreditPayout: Double = 0
+    @State private var selectedTab = 0
+
     var body: some View {
         ZStack {
-            Image("background")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .opacity(0.5)
+            Color(hex: "F2E8CF")
                 .ignoresSafeArea()
-            
-            VStack(spacing: 20) {
-                
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("Back")
-                        .font(.custom("Avenir", size: 20))
-                        .foregroundColor(.blue)
-                        .fontWeight(.bold)
-                        .padding(7)
-                        .background(Color.white)
-                        .cornerRadius(14)
+
+            VStack {
+                HStack {
+                    Spacer()
+                    if selectedTab == 3 {
+                        Button(action: {
+                            presentationMode.wrappedValue.dismiss()
+                        }) {
+                            Text("Exit")
+                                .font(.custom("Avenir", size: 20))
+                                .foregroundColor(.red)
+                                .fontWeight(.bold)
+                                .padding()
+                                .background(Color(hex: "C3E8AC"))
+                                .cornerRadius(14)
+                        }
+                        .padding(.top, 20)
+                        .padding(.trailing, 20)
+                        .transition(.opacity)
+                    }
                 }
-                
-                Text(("Welcome to"))
-                    .font(.custom("Avenir", size: 32))
-                    .fontWeight(.black)
-                    .foregroundColor(Color(hex: "D9D9D9"))
-                    .overlay(
-                        Text(("Welcome to"))
-                            .font(.custom("Avenir", size: 32))
-                            .fontWeight(.black)
-                            .foregroundColor(.black)
-                            .offset(x: 1, y: 1)
-                    )
-                Text(("PaidPlanet"))
-                    .font(.custom("Avenir-Oblique", size: 32))
-                    .fontWeight(.black)
-                    .foregroundColor(Color(hex: "1B463C"))
-                
-                Text("Electric Cars Function:")
-                                    .font(.custom("Avenir", size: 20))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.black)
-                Group{
-                    
-                    
-                    Slider(value: $currentCarMPG, in: 10...100, step: 1) {
-                    }
-                    
-                    Text("Current Car MPG: \(Int(currentCarMPG))")
-                        .padding(.horizontal, 10)
-                    
-                    Slider(value: $currentDriveEst, in: 100...300000, step: 100) {
-                    }
-                    Text("Current Drive Estimate (miles): \(Int(currentDriveEst))")
-                        .padding(.horizontal, 10)
-                    
-                    Slider(value: $carbonCreditPrice, in: 0...100, step: 1) {
-                    }
-                    Text("Carbon Credit Price: $\(Int(carbonCreditPrice))")
-                        .padding(.horizontal, 10)
-                    
-                    Slider(value: $fee, in: 0...1, step: 0.01) {
-                    }
-                    Text("Fee: \(fee, specifier: "%.2f")")
-                        .padding(.horizontal, 10)
-                }
-                                Button(action: {
-                                    let result = electricCars(currentCarMPG: Int(currentCarMPG),
-                                                              currentDriveEst: Int(currentDriveEst),
-                                                              carbonCreditPrice: Int(carbonCreditPrice),
-                                                              fee: fee)
-                                    emissionsEstimate = result.currentEmissionsEstimate
-                                    carbonCreditPayout = result.carbonCreditPayout
-                                }) {
-                                    Text("Calculate")
-                                        .font(.custom("Avenir", size: 20))
-                                        .foregroundColor(.white)
-                                        .fontWeight(.bold)
-                                        .padding(10)
-                                        .background(Color.blue)
-                                        .cornerRadius(14)
-                                }
-                Group{
-                    Text("Emissions Estimate: \(emissionsEstimate, specifier: "%.2f") lbs")
-                    Text("Carbon Credit Payout: $\(carbonCreditPayout, specifier: "%.2f")")
-                    
-                }
-                
+
+                TabView(selection: $selectedTab) {
+                    Text("Welcome to PaidPlanet, the first app that pays for you to be sustainable. ")
+                        .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                                .foregroundColor(Color(hex: "00653B"))
+                                .padding(.horizontal, 35)
+                                .padding(.top, 15)
+
+                        .tag(0)
+                    Text("How We Work")
+                        .tag(1)
+                    Text("home screen/Payment")
+                        .tag(2)
+                    calculatorView
+                        .tag(3)
+                                    }
+                .tabViewStyle(.page)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.white)
+        .ignoresSafeArea()
     }
-    
+
+    var calculatorView: some View {
+        VStack {
+            Slider(value: $currentCarMPG, in: 10...100, step: 1)
+                .accentColor(Color(hex: "00653B"))
+            Text("Current Car MPG: \(Int(currentCarMPG))")
+
+            Slider(value: $currentDriveEst, in: 100...300000, step: 100)
+                .accentColor(Color(hex: "00653B"))
+            Text("Current Drive Estimate (miles): \(Int(currentDriveEst))")
+
+            Slider(value: $carbonCreditPrice, in: 0...100, step: 1)
+                .accentColor(Color(hex: "00653B"))
+            Text("Carbon Credit Price: $\(Int(carbonCreditPrice))")
+
+            Slider(value: $fee, in: 0...1, step: 0.01)
+                .accentColor(Color(hex: "00653B"))
+            Text("Fee: \(fee, specifier: "%.2f")")
+
+            Button(action: {
+                let result = electricCars(currentCarMPG: Int(currentCarMPG),
+                                          currentDriveEst: Int(currentDriveEst),
+                                          carbonCreditPrice: Int(carbonCreditPrice),
+                                          fee: fee)
+                emissionsEstimate = result.currentEmissionsEstimate
+                carbonCreditPayout = result.carbonCreditPayout
+            }) {
+                Text("Calculate")
+            }
+           
+            VStack{
+                Text("Emissions Estimate: \(emissionsEstimate, specifier: "%.2f") lbs")
+                Text("Carbon Credit Payout: \(carbonCreditPayout, specifier: "%.2f") dollars")
+            }
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(12)
+    }
+
     func electricCars(currentCarMPG: Int, currentDriveEst: Int, carbonCreditPrice: Int, fee: Double) -> (currentEmissionsEstimate: Double, carbonCreditPayout: Double) {
         let gallonsGasConsumed = Double(currentDriveEst) / Double(currentCarMPG)
         let co2Gallon = 8887.0
