@@ -46,7 +46,6 @@
 		0680A60A2A62F2B30005A8BC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0680A6092A62F2B30005A8BC /* ProfileView.swift */; };
 		0680A60C2A6B17A80005A8BC /* OtherSustainableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0680A60B2A6B17A80005A8BC /* OtherSustainableView.swift */; };
 		06858B632A3F491700B2D5C1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06858B622A3F491700B2D5C1 /* HomeView.swift */; };
-		06AFF8482A3FF7F300914586 /* AddTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AFF8472A3FF7F300914586 /* AddTabView.swift */; };
 		06C09E892A71D2DC00D8F5D6 /* WelcomeFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C09E882A71D2DC00D8F5D6 /* WelcomeFrameView.swift */; };
 		06C09F082A7759DC00D8F5D6 /* RedeemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C09F072A7759DC00D8F5D6 /* RedeemView.swift */; };
 		06C09F0A2A906E2100D8F5D6 /* IOSTests in Resources */ = {isa = PBXBuildFile; fileRef = 06C09F092A906E2100D8F5D6 /* IOSTests */; };
@@ -92,7 +91,6 @@
 		0680A6092A62F2B30005A8BC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		0680A60B2A6B17A80005A8BC /* OtherSustainableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherSustainableView.swift; sourceTree = "<group>"; };
 		06858B622A3F491700B2D5C1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		06AFF8472A3FF7F300914586 /* AddTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTabView.swift; sourceTree = "<group>"; };
 		06C09E882A71D2DC00D8F5D6 /* WelcomeFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFrameView.swift; sourceTree = "<group>"; };
 		06C09F072A7759DC00D8F5D6 /* RedeemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemView.swift; sourceTree = "<group>"; };
 		06C09F092A906E2100D8F5D6 /* IOSTests */ = {isa = PBXFileReference; lastKnownFileType = folder; name = IOSTests; path = ../../.Trash/IOSTests; sourceTree = "<group>"; };
@@ -101,6 +99,7 @@
 		06C6688C2A52364C00746229 /* SolarPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarPanelView.swift; sourceTree = "<group>"; };
 		06C6688E2A52370300746229 /* ElectricCarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectricCarView.swift; sourceTree = "<group>"; };
 		06C668902A52378500746229 /* ElectricStoveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectricStoveView.swift; sourceTree = "<group>"; };
+		06EBDE592ACFC01800EA034F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		06EE8A0C2A5E465800911960 /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,6 +181,7 @@
 		063D82B62A0AFFE4002449F4 /* IOS */ = {
 			isa = PBXGroup;
 			children = (
+				06EBDE592ACFC01800EA034F /* Info.plist */,
 				063D831A2A0F455C002449F4 /* GoogleService-Info.plist */,
 				063D82B72A0AFFE4002449F4 /* IOSApp.swift */,
 				063D82B92A0AFFE4002449F4 /* ContentView.swift */,
@@ -195,7 +195,6 @@
 				06C6688C2A52364C00746229 /* SolarPanelView.swift */,
 				06C668902A52378500746229 /* ElectricStoveView.swift */,
 				0680A60B2A6B17A80005A8BC /* OtherSustainableView.swift */,
-				06AFF8472A3FF7F300914586 /* AddTabView.swift */,
 				063D82E12A0B02E4002449F4 /* fontviewer.swift */,
 				0680A6092A62F2B30005A8BC /* ProfileView.swift */,
 				063D82BB2A0AFFE5002449F4 /* Assets.xcassets */,
@@ -391,7 +390,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06AFF8482A3FF7F300914586 /* AddTabView.swift in Sources */,
 				06C09F0C2A9C4B6200D8F5D6 /* GlowModifier.swift in Sources */,
 				063D82BA2A0AFFE4002449F4 /* ContentView.swift in Sources */,
 				06C09F082A7759DC00D8F5D6 /* RedeemView.swift in Sources */,
@@ -567,13 +565,16 @@
 				DEVELOPMENT_TEAM = 8QH9YSPT6R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = IOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PaidPlanet;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -600,13 +601,16 @@
 				DEVELOPMENT_TEAM = 8QH9YSPT6R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = IOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PaidPlanet;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

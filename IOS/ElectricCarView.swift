@@ -104,7 +104,7 @@ struct ElectricCarView: View {
                 }
                      
                 .sheet(isPresented: $isShowingImagePicker, onDismiss: uploadImage) {
-                    CameraPicker(selectedImage: $selectedImage)
+                    ImagePicker(selectedImage: $selectedImage)
                 }
             }
         }
@@ -267,7 +267,7 @@ struct ElectricPhotoUploadView: View {
                 Spacer()
             }
             .sheet(isPresented: $isShowingImagePicker, onDismiss: uploadImage) {
-                CameraPicker(selectedImage: $selectedImage)
+                ImagePicker(selectedImage: $selectedImage)
             }
         }
     }
@@ -439,7 +439,7 @@ struct ElectricPhotoUploadView2: View {
                 Spacer()
             }
             .sheet(isPresented: $isShowingImagePicker, onDismiss: uploadImage) {
-                CameraPicker(selectedImage: $selectedImage)
+                ImagePicker(selectedImage: $selectedImage)
             }
         }
     }

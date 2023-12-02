@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import Firebase
+import FirebaseAuth
 import FirebaseFirestore
 
 class FirestoreService {
@@ -26,12 +27,12 @@ struct RedeemView: View {
     @State private var totalCO2AmountDollars: Double = 0.0
     
        @State private var isShowingSocialView = false
-    private func fetchTransactions() {
+    private func fetchPayment() {
         let db = Firestore.firestore()
         db.collection("transactions")
             .addSnapshotListener { snapshot, error in
                 guard let documents = snapshot?.documents else {
-                    print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
+                    print("PAYMENT Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
                     return
                 }
                 
@@ -41,7 +42,7 @@ struct RedeemView: View {
                         let transaction = try document.data(as: Transaction.self)
                         if(transaction.progress == "Completed")
                         {
-                            totalCO2 += transaction.amountCO
+                            totalCO2 += transaction.dollarAmount
                         }
                         return transaction
                     } catch {
@@ -65,7 +66,6 @@ struct RedeemView: View {
         ZStack {
             Color(hex: "F2E8CF")
                 .ignoresSafeArea()
-                        
             ScrollView{
                 VStack {
                     HStack{
@@ -87,121 +87,139 @@ struct RedeemView: View {
                     }
                     
                     Text("You are ready to get paid! Here are your options for your payment of $ \(totalCO2AmountDollars)")
-                             .font(.custom("Avenir", size: 25))
-                                   .fontWeight(.black)
-                                   .foregroundColor(Color(hex: "00653B"))
-                                   .padding(.horizontal, 35)
-                                   .padding(.top, 15)
-                                    
+                        .font(.custom("Avenir", size: 25))
+                        .fontWeight(.black)
+                        .foregroundColor(Color(hex: "00653B"))
+                        .padding(.horizontal, 35)
+                        .padding(.top, 15)
+                    
                     HStack {
-                            Image(systemName: option1Selected ? "largecircle.fill.circle" : "circle")
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .foregroundColor(Color(hex: "00653B"))
-                                .onTapGesture {
-                                    option1Selected.toggle()
-                                    option2Selected = false
-                                }
-                            
-                            Text("Venmo")
-                                .font(.custom("Avenir", size: 20))
-                                .foregroundColor(Color(hex: "00653B"))
-                                .onTapGesture {
-                                    option1Selected.toggle()
-                                    option2Selected = false
-                                }
-                        }
-                     
-                        HStack {
-                            Image(systemName: option2Selected ? "largecircle.fill.circle" : "circle")
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .foregroundColor(Color(hex: "00653B"))
-                                .onTapGesture {
-                                    option2Selected.toggle()
-                                    option1Selected = false
-                                }
-
-                            Text("Zelle")
-                                .font(.custom("Avenir", size: 20))
-                                .foregroundColor(Color(hex: "00653B"))
-                                .onTapGesture {
-                                    option2Selected.toggle()
-                                    option1Selected = false
-                                }
-                        }
-                     
+                        Image(systemName: option1Selected ? "largecircle.fill.circle" : "circle")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .foregroundColor(Color(hex: "00653B"))
+                            .onTapGesture {
+                                option1Selected.toggle()
+                                option2Selected = false
+                            }
+                        
+                        Text("Venmo")
+                            .fontWeight(.black)
+                            .font(.custom("Avenir", size: 20))
+                            .foregroundColor(Color(hex: "00653B"))
+                            .onTapGesture {
+                                option1Selected.toggle()
+                                option2Selected = false
+                            }
+                    }
+                    
+                    HStack {
+                        Image(systemName: option2Selected ? "largecircle.fill.circle" : "circle")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .foregroundColor(Color(hex: "00653B"))
+                            .onTapGesture {
+                                option2Selected.toggle()
+                                option1Selected = false
+                            }
+                        
+                        Text("Zelle")
+                            .fontWeight(.black)
+                            .font(.custom("Avenir", size: 20))
+                            .foregroundColor(Color(hex: "00653B"))
+                            .onTapGesture {
+                                option2Selected.toggle()
+                                option1Selected = false
+                            }
+                    }
+                    
                     
                     TextField("Enter your Venmo or Zelle username", text: $enteredWord)
-                                .padding(.vertical, 10)
-                                .background(Color(hex: "00653B"))
-                                .cornerRadius(14.0)
-                                .padding(.horizontal, 25)
-                                .font(.custom("Avenir", size: 12).bold())
-                                .foregroundColor(Color(hex: "F2E8CF"))
-                                .accentColor(.black)
-                                Button(action: {
-                                           firestoreService.addPayment(enteredWord: enteredWord) { result in
-                                                switch result {
-                                                case .success:
-                                                    print("Payment added to Firestore")
-                                                case .failure(let error):
-                                                    print("Error adding payment: \(error.localizedDescription)")
-                                                }
-                                            }
-                                            isShowingSocialView = true
-                                            
-                                        }) {
-                                            Text("Submit Payment")
-                                                .font(.custom("Avenir", size: 20))
-                                                .foregroundColor(.blue)
-                                                .fontWeight(.bold)
-                                                .padding()
-                                                .background(Color(hex: "C3E8AC"))
-                                                .cornerRadius(14)
-                                        }
-                                        .sheet(isPresented: $isShowingSocialView) {
-                                              RedeemView2()
-                                            }
+                        .padding(.vertical, 10)
+                        .autocapitalization(.none)
+                        .background(Color(hex: "00653B"))
+                        .cornerRadius(14.0)
+                        .padding(.horizontal, 25)
+                        .font(.custom("Avenir", size: 16).bold())
+                        .foregroundColor(Color(hex: "F2E8CF"))
+                        .accentColor(.black)
+                    Button(action: {
+                        firestoreService.addPayment(enteredWord: enteredWord) { result in
+                            switch result {
+                            case .success:
+                                print("Payment added to Firestore")
+                            case .failure(let error):
+                                print("Error adding payment: \(error.localizedDescription)")
+                            }
+                        }
+                        isShowingSocialView = true
+                        
+                    }) {
+                        Text("Submit Payment")
+                            //reset all completed transactions to redeemed
+                            .font(.custom("Avenir", size: 20))
+                            .foregroundColor(.blue)
+                            .fontWeight(.bold)
+                            .padding()
+                            .background(Color(hex: "C3E8AC"))
+                            .cornerRadius(14)
+                    }
+                    .sheet(isPresented: $isShowingSocialView) {
+                        RedeemView2()
+                    }
                 }
+            }
+            .onAppear {
+                fetchPayment()
             }
         }
     }
-
 }
 
 
 struct RedeemView2: View {
     
     @State private var totalCO2AmountDollars: Double = 0.0
-    
     private func fetchTransactions() {
         let db = Firestore.firestore()
+
+        // Get the current user's email
+        guard let userEmail = Auth.auth().currentUser?.email else {
+            print("Error: User is not logged in or email not available")
+            return
+        }
+
         db.collection("transactions")
             .addSnapshotListener { snapshot, error in
                 guard let documents = snapshot?.documents else {
                     print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
                     return
                 }
-                
-             var totalCO2: Double = 0.0
-               var transactions = documents.compactMap { document in
+
+                var totalCO2: Double = 0.0
+                var filteredTransactions: [Transaction] = []
+
+                for document in documents {
                     do {
                         let transaction = try document.data(as: Transaction.self)
-                        if(transaction.progress == "Completed")
-                        {
-                            totalCO2 += transaction.amountCO
+
+                        // Check if the transaction's email matches the current user's email
+                        if transaction.email == userEmail {
+                            if transaction.progress == "Completed" {
+                                totalCO2 += transaction.amountCO
+                            }
+                            filteredTransactions.append(transaction)
                         }
-                        return transaction
                     } catch {
                         print("Error decoding transaction: \(error.localizedDescription)")
-                        return nil
                     }
                 }
-                totalCO2AmountDollars = totalCO2
+
+                //self.transactions = filteredTransactions
+                self.totalCO2AmountDollars = totalCO2
             }
     }
-    
+   
     @Environment(\.presentationMode) var presentationMode
     @State private var enteredWord = ""
     @State private var isShareSheetPresented = false
@@ -235,7 +253,7 @@ struct RedeemView2: View {
                         .padding(.trailing, 20)
                     }
                     
-                   Text("Share on socials that you just got Paid through PaidPlanet for a chance to win our 25$ Amazon Gift Card!")
+                   Text("Share on socials that you just got Paid through PaidPlanet for a chance to win our monthly 25$ Amazon Gift Card giveaway!")
                            .font(.custom("Avenir", size: 25))
                                    .fontWeight(.black)
                                    .foregroundColor(Color(hex: "00653B"))
@@ -247,7 +265,7 @@ struct RedeemView2: View {
                     }) {
                         Text("Share")
                             .font(.custom("Avenir", size: 20))
-                            .foregroundColor(.red)
+                            .foregroundColor(.green)
                             .fontWeight(.bold)
                             .padding()
                             .background(Color(hex: "C3E8AC"))
@@ -255,8 +273,16 @@ struct RedeemView2: View {
                     }
                     .padding(.top, 20)
                     .padding(.trailing, 20)
+                    .sheet(isPresented: $isShareSheetPresented){
+                        ShareSheet(activityItems: ["I just got paid for being sustainable using #PaidPlanet Join now at paidplanet.com"])
+                    }
                 }
             }
+            /*
+            .onAppear {
+            fetchPayment()
+            }
+             */
         }
     }
     

@@ -3,7 +3,6 @@ import Firebase
 
 @main
 struct IOSApp: App {
-
     init() {
         FirebaseApp.configure()
     }
