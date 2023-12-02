@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import Firebase
+import FirebaseAuth
 import FirebaseFirestore
 
 class FirestoreService {
@@ -65,7 +66,6 @@ struct RedeemView: View {
         ZStack {
             Color(hex: "F2E8CF")
                 .ignoresSafeArea()
-            
             ScrollView{
                 VStack {
                     HStack{
@@ -156,6 +156,7 @@ struct RedeemView: View {
                         
                     }) {
                         Text("Submit Payment")
+                            //reset all completed transactions to redeemed
                             .font(.custom("Avenir", size: 20))
                             .foregroundColor(.blue)
                             .fontWeight(.bold)
@@ -168,6 +169,9 @@ struct RedeemView: View {
                     }
                 }
             }
+            .onAppear {
+                fetchPayment()
+            }
         }
     }
 }
@@ -176,34 +180,46 @@ struct RedeemView: View {
 struct RedeemView2: View {
     
     @State private var totalCO2AmountDollars: Double = 0.0
-    
     private func fetchTransactions() {
         let db = Firestore.firestore()
+
+        // Get the current user's email
+        guard let userEmail = Auth.auth().currentUser?.email else {
+            print("Error: User is not logged in or email not available")
+            return
+        }
+
         db.collection("transactions")
             .addSnapshotListener { snapshot, error in
                 guard let documents = snapshot?.documents else {
                     print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
                     return
                 }
-                
-             var totalCO2: Double = 0.0
-               var transactions = documents.compactMap { document in
+
+                var totalCO2: Double = 0.0
+                var filteredTransactions: [Transaction] = []
+
+                for document in documents {
                     do {
                         let transaction = try document.data(as: Transaction.self)
-                        if(transaction.progress == "Completed")
-                        {
-                            totalCO2 += transaction.amountCO
+
+                        // Check if the transaction's email matches the current user's email
+                        if transaction.email == userEmail {
+                            if transaction.progress == "Completed" {
+                                totalCO2 += transaction.amountCO
+                            }
+                            filteredTransactions.append(transaction)
                         }
-                        return transaction
                     } catch {
                         print("Error decoding transaction: \(error.localizedDescription)")
-                        return nil
                     }
                 }
-                totalCO2AmountDollars = totalCO2
+
+                //self.transactions = filteredTransactions
+                self.totalCO2AmountDollars = totalCO2
             }
     }
-    
+   
     @Environment(\.presentationMode) var presentationMode
     @State private var enteredWord = ""
     @State private var isShareSheetPresented = false
@@ -262,6 +278,11 @@ struct RedeemView2: View {
                     }
                 }
             }
+            /*
+            .onAppear {
+            fetchPayment()
+            }
+             */
         }
     }
     

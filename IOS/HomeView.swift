@@ -87,21 +87,33 @@ struct HomeTab: View {
     @State private var isPresentingRedeemView = false
     private func fetchTransactions() {
         let db = Firestore.firestore()
+
+        // Get the current user's email
+        guard let userEmail = Auth.auth().currentUser?.email else {
+            print("Error: User is not logged in or email not available")
+            return
+        }
+
         db.collection("transactions")
             .addSnapshotListener { snapshot, error in
                 guard let documents = snapshot?.documents else {
                     print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
                     return
                 }
-                
+
                 var totalCO2: Double = 0.0
-                
+
                 transactions = documents.compactMap { document in
                     do {
                         let transaction = try document.data(as: Transaction.self)
+
+                        // Check if the transaction's email matches the current user's email
+                        guard transaction.email == userEmail else {
+                            return nil
+                        }
+
                         totalCO2 += transaction.amountCO
-                        if(transaction.progress == "Completed")
-                        {
+                        if transaction.progress == "Completed" {
                             transactionChanged = true
                         }
                         return transaction
@@ -110,10 +122,11 @@ struct HomeTab: View {
                         return nil
                     }
                 }
-                
+
                 totalCO2Amount = totalCO2
             }
     }
+
     
     var greeting: String {
         let hour = Calendar.current.component(.hour, from: Date())
