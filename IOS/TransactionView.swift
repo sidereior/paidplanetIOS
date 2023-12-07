@@ -6,9 +6,60 @@ import FirebaseFirestoreSwift
 struct TransactionsView: View {
     @State private var transactions: [Transaction] = []
     @State private var totalCO2Amount: Double = 0.0
+    
     @State private var transactionChanged: Bool = false
     @State private var totalDollarAmount: Double = 0.0
-
+    private func fetchTransactions() {
+        let db = Firestore.firestore()
+        
+        guard let userEmail = Auth.auth().currentUser?.email else {
+            print("Error: User is not logged in or email not available")
+            return
+        }
+        
+        db.collection("transactions")
+            .addSnapshotListener { snapshot, error in
+                guard let documents = snapshot?.documents else {
+                    print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
+                    return
+                }
+                
+                var totalCO2: Double = 0.0
+                var totalMoney: Double = 0.0
+                
+                transactions = documents.compactMap { document in
+                    do {
+                        let transaction = try document.data(as: Transaction.self)
+                        
+                        // Check if the transaction's email matches the current user's email
+                        
+                        guard transaction.email == userEmail else {
+                            print("no no not it")
+                            return nil
+                        }
+                        
+                        totalCO2 += transaction.amountCO
+                        totalMoney += transaction.dollarAmount
+                        
+                        if transaction.progress == "Completed" {
+                            transactionChanged = true
+                            print("this is it sers")
+                        }
+                        return transaction
+                        
+                    } catch {
+                        print("Error decoding transaction: \(error.localizedDescription)")
+                        return nil
+                    }
+                }
+                
+                totalCO2Amount = totalCO2
+                totalDollarAmount = totalMoney
+            }
+        
+    }
+    
+    
     var body: some View {
         ZStack {
             Color(hex: "F2E8CF").edgesIgnoringSafeArea(.all)
@@ -73,46 +124,7 @@ struct TransactionsView: View {
         }
     }
 
-    private func fetchTransactions() {
-        let db = Firestore.firestore()
-
-        guard let userEmail = Auth.auth().currentUser?.email else {
-            print("Error: User is not logged in or email not available")
-            return
-        }
-
-        db.collection("transactions")
-            .addSnapshotListener { snapshot, error in
-                guard let documents = snapshot?.documents else {
-                    print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
-                    return
-                }
-
-                var totalCO2: Double = 0.0
-
-                transactions = documents.compactMap { document in
-                    do {
-                        let transaction = try document.data(as: Transaction.self)
-
-                        
-                        guard transaction.email == userEmail else {
-                            return nil
-                        }
-
-                        if transaction.progress == "Completed" {
-                            totalCO2 += transaction.amountCO
-                            transactionChanged = true
-                        }
-                        return transaction
-                    } catch {
-                        print("Error decoding transaction: \(error.localizedDescription)")
-                        return nil
-                    }
-                }
-
-                totalCO2Amount = totalCO2
-            }
-    }
+    
 }
 
 struct TransactionCardView: View {

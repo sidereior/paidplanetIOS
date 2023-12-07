@@ -7,11 +7,11 @@ import FirebaseFirestore
 class FirestoreService {
     private let db = Firestore.firestore()
 
-    func addPayment(enteredWord: String, completion: @escaping (Result<Void, Error>) -> Void) {
+    func addPayment(enteredWord: String, totalCO2AmountDollars: Double, transactionDates: [String], completion: @escaping (Result<Void, Error>) -> Void) {
         let paymentData: [String: Any] = [
-            "enteredWord": enteredWord
-            //ALSO STORE TOTALCO2AMOUNTDOLLARS
-            //AND ALSO STORE A LIST THAT HAS ALL OF THE TRANSACTION DATES
+            "enteredWord": enteredWord,
+            "totalCO2AmountDollars": totalCO2AmountDollars,
+            "transactionDates": transactionDates
         ]
 
         db.collection("payments").addDocument(data: paymentData) { error in
@@ -23,12 +23,15 @@ class FirestoreService {
         }
     }
 }
+
+
     
 struct RedeemView: View {
-    
     @State private var totalCO2AmountDollars: Double = 0.0
-    
-       @State private var isShowingSocialView = false
+    @State private var alltransactionUTC: [String] = []
+    @State private var isShowingSocialView = false
+    private let firestoreService = FirestoreService()
+
     private func fetchPayment() {
         let db = Firestore.firestore()
         db.collection("transactions")
@@ -38,109 +41,65 @@ struct RedeemView: View {
                     return
                 }
                 
-             var totalCO2: Double = 0.0
-                var transactions = documents.compactMap { document -> Transaction? in
+                var totalCO2: Double = 0.0
+                for document in documents {
                     do {
                         let transaction = try document.data(as: Transaction.self)
-                        
-                        guard transaction.email == Auth.auth().currentUser?.email  else {
-                            return nil
+                        guard transaction.email == Auth.auth().currentUser?.email, transaction.progress == "Completed" else {
+                            continue
                         }
-                        
-                        if(transaction.progress == "Completed")
-                        {
-                            totalCO2 += transaction.dollarAmount
-                        }
-                        return transaction
+
+                        totalCO2 += transaction.dollarAmount
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                        let dateString = dateFormatter.string(from: transaction.transactionDate)
+                        alltransactionUTC.append(dateString)
                     } catch {
                         print("Error decoding transaction: \(error.localizedDescription)")
-                        return nil
                     }
                 }
                 totalCO2AmountDollars = totalCO2
             }
     }
-    
+
     @Environment(\.presentationMode) var presentationMode
     @State private var enteredWord = ""
-    
     @State private var option1Selected = false
     @State private var option2Selected = false
 
-    private let firestoreService = FirestoreService()
-    
     var body: some View {
         ZStack {
-            Color(hex: "F2E8CF")
-                .ignoresSafeArea()
-            ScrollView{
+            Color(hex: "F2E8CF").ignoresSafeArea()
+            ScrollView {
                 VStack {
-                    HStack{
+                    // Cancel Button
+                    HStack {
                         Spacer()
-                        
-                        Button(action: {
+                        Button("Cancel") {
                             presentationMode.wrappedValue.dismiss()
-                        }) {
-                            Text("Cancel")
-                                .font(.custom("Avenir", size: 20))
-                                .foregroundColor(.red)
-                                .fontWeight(.bold)
-                                .padding()
-                                .background(Color(hex: "C3E8AC"))
-                                .cornerRadius(14)
                         }
+                        .font(.custom("Avenir", size: 20).bold())
+                        .foregroundColor(.red)
+                        .padding()
+                        .background(Color(hex: "C3E8AC"))
+                        .cornerRadius(14)
                         .padding(.top, 20)
                         .padding(.trailing, 20)
                     }
-                    
-                    Text("You are ready to get paid! Here are your options for your payment of $ \(totalCO2AmountDollars)")
+
+                    // Payment Info Text
+                    Text("You are ready to get paid! Here are your options for your payment of $ \(totalCO2AmountDollars, specifier: "%.2f")")
                         .font(.custom("Avenir", size: 25))
                         .fontWeight(.black)
                         .foregroundColor(Color(hex: "00653B"))
                         .padding(.horizontal, 35)
                         .padding(.top, 15)
-                    
-                    HStack {
-                        Image(systemName: option1Selected ? "largecircle.fill.circle" : "circle")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .foregroundColor(Color(hex: "00653B"))
-                            .onTapGesture {
-                                option1Selected.toggle()
-                                option2Selected = false
-                            }
-                        
-                        Text("Venmo")
-                            .fontWeight(.black)
-                            .font(.custom("Avenir", size: 20))
-                            .foregroundColor(Color(hex: "00653B"))
-                            .onTapGesture {
-                                option1Selected.toggle()
-                                option2Selected = false
-                            }
-                    }
-                    
-                    HStack {
-                        Image(systemName: option2Selected ? "largecircle.fill.circle" : "circle")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .foregroundColor(Color(hex: "00653B"))
-                            .onTapGesture {
-                                option2Selected.toggle()
-                                option1Selected = false
-                            }
-                        
-                        Text("Zelle")
-                            .fontWeight(.black)
-                            .font(.custom("Avenir", size: 20))
-                            .foregroundColor(Color(hex: "00653B"))
-                            .onTapGesture {
-                                option2Selected.toggle()
-                                option1Selected = false
-                            }
-                    }
-                    
-                    
+
+                    // Payment Options
+                    OptionView(optionSelected: $option1Selected, otherOption: $option2Selected, text: "Venmo")
+                    OptionView(optionSelected: $option2Selected, otherOption: $option1Selected, text: "Zelle")
+
+                    // Username TextField
                     TextField("Enter your Venmo or Zelle username", text: $enteredWord)
                         .padding(.vertical, 10)
                         .autocapitalization(.none)
@@ -150,20 +109,10 @@ struct RedeemView: View {
                         .font(.custom("Avenir", size: 16).bold())
                         .foregroundColor(Color(hex: "F2E8CF"))
                         .accentColor(.black)
-                    Button(action: {
-                        firestoreService.addPayment(enteredWord: enteredWord) { result in
-                            switch result {
-                            case .success:
-                                print("Payment added to Firestore")
-                            case .failure(let error):
-                                print("Error adding payment: \(error.localizedDescription)")
-                            }
-                        }
-                        isShowingSocialView = true
-                        
-                    }) {
+
+                    // Submit Payment Button
+                    Button(action: submitPayment) {
                         Text("Submit Payment")
-                            //reset all completed transactions to redeemed
                             .font(.custom("Avenir", size: 20))
                             .foregroundColor(.blue)
                             .fontWeight(.bold)
@@ -176,12 +125,51 @@ struct RedeemView: View {
                     }
                 }
             }
-            .onAppear {
-                fetchPayment()
+            .onAppear(perform: fetchPayment)
+        }
+    }
+
+    private func submitPayment() {
+        firestoreService.addPayment(enteredWord: enteredWord, totalCO2AmountDollars: totalCO2AmountDollars, transactionDates: alltransactionUTC) { result in
+            switch result {
+            case .success:
+                print("Payment added to Firestore")
+            case .failure(let error):
+                print("Error adding payment: \(error.localizedDescription)")
             }
+        }
+        isShowingSocialView = true
+    }
+}
+
+struct OptionView: View {
+    @Binding var optionSelected: Bool
+    @Binding var otherOption: Bool
+    var text: String
+
+    var body: some View {
+        HStack {
+            Image(systemName: optionSelected ? "largecircle.fill.circle" : "circle")
+                .resizable()
+                .frame(width: 24, height: 24)
+                .foregroundColor(Color(hex: "00653B"))
+                .onTapGesture {
+                    optionSelected.toggle()
+                    otherOption = false
+                }
+
+            Text(text)
+                .fontWeight(.black)
+                .font(.custom("Avenir", size: 20))
+                .foregroundColor(Color(hex: "00653B"))
+                .onTapGesture {
+                    optionSelected.toggle()
+                    otherOption = false
+                }
         }
     }
 }
+
 
 
 struct RedeemView2: View {

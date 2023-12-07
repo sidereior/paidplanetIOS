@@ -19,7 +19,7 @@ struct ProfileView: View {
                 }
             }
             HStack{
-            Text(greeting + ", \(userManager.user?.displayName ?? "")")
+            Text(greeting)
                          .fontWeight(.black)
                          .foregroundColor(Color(hex: "7D5E35"))
                     }
@@ -32,14 +32,14 @@ struct ProfileView: View {
 
             
             Text("Email: \(userManager.user?.email ?? "")")
-             .font(.title)
+                .font(.headline)
              .fontWeight(.bold)
                 .foregroundColor(Color(hex: "C3E8AC"))
                         .padding()
                         .background(Color(hex: "00653B"))
                         .cornerRadius(10)
                         .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
-                        .padding(.bottom, 10)
+                        .padding(10)
            
             Button(action: {
                 isShowingResetPasswordAlert = true
