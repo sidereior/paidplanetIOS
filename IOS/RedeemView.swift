@@ -10,6 +10,8 @@ class FirestoreService {
     func addPayment(enteredWord: String, completion: @escaping (Result<Void, Error>) -> Void) {
         let paymentData: [String: Any] = [
             "enteredWord": enteredWord
+            //ALSO STORE TOTALCO2AMOUNTDOLLARS
+            //AND ALSO STORE A LIST THAT HAS ALL OF THE TRANSACTION DATES
         ]
 
         db.collection("payments").addDocument(data: paymentData) { error in
@@ -37,9 +39,14 @@ struct RedeemView: View {
                 }
                 
              var totalCO2: Double = 0.0
-               var transactions = documents.compactMap { document in
+                var transactions = documents.compactMap { document -> Transaction? in
                     do {
                         let transaction = try document.data(as: Transaction.self)
+                        
+                        guard transaction.email == Auth.auth().currentUser?.email  else {
+                            return nil
+                        }
+                        
                         if(transaction.progress == "Completed")
                         {
                             totalCO2 += transaction.dollarAmount

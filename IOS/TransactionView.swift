@@ -94,6 +94,7 @@ struct TransactionsView: View {
                     do {
                         let transaction = try document.data(as: Transaction.self)
 
+                        
                         guard transaction.email == userEmail else {
                             return nil
                         }

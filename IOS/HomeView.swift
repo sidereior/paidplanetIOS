@@ -108,9 +108,13 @@ struct HomeTab: View {
                         let transaction = try document.data(as: Transaction.self)
 
                         // Check if the transaction's email matches the current user's email
+                       
+                        /*
                         guard transaction.email == userEmail else {
+                            print("this isn't the user's doc")
                             return nil
                         }
+                         */
 
                         totalCO2 += transaction.amountCO
                         if transaction.progress == "Completed" {
