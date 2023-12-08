@@ -712,7 +712,7 @@ struct ConfirmTransactionView: View {
                             uploadTransaction()
                             UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true)
                         }) {
-                            Text("Confirm Cashback")
+                            Text("Confirm Transaction")
                                 .font(.custom("Avenir", size: 20))
                                 .foregroundColor(.blue)
                                 .fontWeight(.bold)

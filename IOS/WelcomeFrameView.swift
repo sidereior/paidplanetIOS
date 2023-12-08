@@ -37,12 +37,13 @@ struct WelcomeFrameView: View {
                 }
 
                 TabView(selection: $selectedTab) {
-                    Text("Welcome to PaidPlanet, the first app that pays for you to be sustainable. ")
+                    Text("Welcome to PaidPlanet, the first app that pays you for being sustainable.")
                         .font(.custom("Avenir", size: 25))
                                 .fontWeight(.black)
                                 .foregroundColor(Color(hex: "00653B"))
                                 .padding(.horizontal, 35)
                                 .padding(.top, 15)
+                    
 
                         .tag(0)
                     Text("How We Work")
