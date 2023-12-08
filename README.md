@@ -1,3 +1,3 @@
 
-# paidplanet IOS app frontend
-check out [paidplanet.com](https://paidplanet.com)
+# PaidPlanet's IOS App. Get paid to be sustainable.
+Check out [paidplanet.com](https://paidplanet.com) or check us out on the App Store.
