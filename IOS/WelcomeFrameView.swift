@@ -16,15 +16,171 @@ struct WelcomeFrameView: View {
                 .ignoresSafeArea()
 
             VStack {
-                HStack {
-                    Spacer()
-                    if selectedTab == 3 {
+                
+
+                TabView(selection: $selectedTab) {
+                    VStack{
+                        Spacer()
+                        HStack{
+                            Text("Welcome to ")
+                                .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                        .foregroundColor(Color(hex: "00653B"))
+                            Text("PaidPlanet,")
+                                .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                                .foregroundColor(.green)
+                        }
+                        Text("the first app that pays you for being sustainable.")
+                                .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                        .foregroundColor(Color(hex: "00653B"))
+                                .padding(.horizontal, 35)
+                                .padding(.bottom, 10)
+                        
+                        Image("wel0")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .cornerRadius(15)
+                            .frame(width: 200)
+
+                       Spacer()
+                        
+                       Text("Swipe -->")
+                                .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                        .foregroundColor(Color(hex: "00653B"))
+                                .padding(.horizontal, 35)
+ 
+                    }
+                        .tag(0)
+                    VStack{
+                            Text("How We Work:")
+                                .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                        .foregroundColor(Color(hex: "00653B"))
+                                .padding(.top, 20)
+                       
+                        Text("Grow your digital garden. As you offset more carbon, your digital garden will grow and tell you when payment is ready 😀.")
+                            .font(.custom("Avenir", size: 20))
+                                .fontWeight(.black)
+                        .foregroundColor(Color(hex: "00653B"))
+                                .padding(.horizontal, 25)
+
+                        Image("wel1")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .cornerRadius(15)
+                            .frame(width: 600)
+
+                                                
+                       Text("Swipe -->")
+                                .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                        .foregroundColor(Color(hex: "00653B"))
+                                .padding(.horizontal, 35)
+ 
+                    }
+                        .tag(1)
+                    VStack{
+                            Text("How We Work:")
+                                .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                        .foregroundColor(Color(hex: "00653B"))
+                                .padding(.top, 20)
+                       
+                        Text("Upload sustainable activity. Show proof of sustainable activity through selecting which type of action you have completed in order to get paid 🌎.")
+                                .font(.custom("Avenir", size: 20))
+                                .fontWeight(.black)
+                        .foregroundColor(Color(hex: "00653B"))
+                                .padding(.horizontal, 25)
+
+                        Image("wel2")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .cornerRadius(15)
+                            .frame(width: 600)
+
+                                                
+                       Text("Swipe -->")
+                                .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                        .foregroundColor(Color(hex: "00653B"))
+                                .padding(.horizontal, 35)
+ 
+                    }
+                        .tag(2)
+                    
+                    VStack{
+                            Text("How We Work:")
+                                .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                        .foregroundColor(Color(hex: "00653B"))
+                                .padding(.top, 20)
+                       
+                        Text("View the status of your transactions. See the progress of your transactions as we process them into Carbon Offsets to see how much you get paid ♻️.")
+                                .font(.custom("Avenir", size: 20))
+                                .fontWeight(.black)
+                                .foregroundColor(Color(hex: "00653B"))
+                                .padding(.horizontal, 25)
+
+                        Image("wel3")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .cornerRadius(15)
+                            .frame(width: 600)
+
+                                                
+                       Text("Swipe -->")
+                                .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                                .foregroundColor(Color(hex: "00653B"))
+                                .padding(.horizontal, 35)
+                    }
+                        .tag(3)
+                    
+                    VStack{
+                            Text("How We Work:")
+                                .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                        .foregroundColor(Color(hex: "00653B"))
+                                .padding(.top, 20)
+                       
+                        Text("Get paid! Your garden will update when your payment is ready. Return to the garden to redeem it 💰!")
+                                .font(.custom("Avenir", size: 20))
+                                .fontWeight(.black)
+                                .foregroundColor(Color(hex: "00653B"))
+                                .padding(.horizontal, 25)
+
+                        Image("wel4")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .cornerRadius(15)
+                            .frame(width: 600)
+
+                                                
+                       Text("Swipe -->")
+                                .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                                .foregroundColor(Color(hex: "00653B"))
+                                .padding(.horizontal, 35)
+                    }
+                        .tag(4)
+                    
+                  
+                     VStack{
+                            Text("Ready to get paid to save our planet?")
+                                .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                        .foregroundColor(Color(hex: "00653B"))
+                                .padding(.top, 20)
+                       
                         Button(action: {
                             presentationMode.wrappedValue.dismiss()
                         }) {
-                            Text("Exit")
+                            Text("Let's go💚!")
                                 .font(.custom("Avenir", size: 20))
-                                .foregroundColor(.red)
+                                .foregroundColor(.green)
                                 .fontWeight(.bold)
                                 .padding()
                                 .background(Color(hex: "C3E8AC"))
@@ -34,61 +190,9 @@ struct WelcomeFrameView: View {
                         .padding(.trailing, 20)
                         .transition(.opacity)
                     }
-                }
-
-                TabView(selection: $selectedTab) {
-                    VStack{
-                        Spacer()
-                        HStack{
-                            Text("Welcome to ")
-                                .font(.custom("Avenir", size: 25))
-                                .fontWeight(.black)
-                                .foregroundColor(Color(hex: "ff9ac4"))
-                            Text("PaidPlanet,")
-                                .font(.custom("Avenir", size: 25))
-                                .fontWeight(.black)
-                                .foregroundColor(Color(hex:"ff00ff"))
-                        }
-                        Text("the first app that pays you for being sustainable.")
-                                .font(.custom("Avenir", size: 25))
-                                .fontWeight(.black)
-                                .foregroundColor(Color(hex: "ff9ac4"))
-                                .padding(.horizontal, 35)
-                        
-                       Spacer()
-                        
-                       Text("Swipe -->")
-                                .font(.custom("Avenir", size: 25))
-                                .fontWeight(.black)
-                                .foregroundColor(Color(hex: "ff9ac4"))
-                                .padding(.horizontal, 35)
- 
-                    }
-                        .tag(0)
-                    VStack{
-                            Text("How We Work:")
-                                .font(.custom("Avenir", size: 25))
-                                .fontWeight(.black)
-                                .foregroundColor(Color(hex: "ff9ac4"))
-                                .padding(.top, 100)
-                       
-                                                
-                       Text("Swipe -->")
-                                .font(.custom("Avenir", size: 25))
-                                .fontWeight(.black)
-                                .foregroundColor(Color(hex: "ff9ac4"))
-                                .padding(.horizontal, 35)
- 
-                    }
-
-                        .tag(1)
-                    Text("home screen/Payment")
-                        .tag(2)
-                    calculatorView
-                        .tag(3)
+                        .tag(5)
                                     }
                 .tabViewStyle(.page)
-                .colorInvert()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }

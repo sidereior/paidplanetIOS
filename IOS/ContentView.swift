@@ -15,6 +15,7 @@ struct LoginPage: View {
        @State private var confirmPassword = ""
     @State private var isShowingWelcomeSheet = true
        @AppStorage("rememberMe") private var rememberMe = true
+    @AppStorage("hasShownWelcomeSheet") private var hasShownWelcomeSheet = false
        @State private var isSignUpMode = false
     
     func loginUser() {
@@ -100,13 +101,19 @@ struct LoginPage: View {
                     }
             }
         }
-        .sheet(isPresented: $isShowingWelcomeSheet) {
-                    WelcomeFrameView()
+        .sheet(isPresented: $isShowingWelcomeSheet, onDismiss: {
+                    hasShownWelcomeSheet = true
+                }) {
+                    if !hasShownWelcomeSheet {
+                        WelcomeFrameView()
+                    }
                 }
-        .onDisappear()
-        {
-            isShowingWelcomeSheet = false
-        }
+                .onAppear {
+                    if hasShownWelcomeSheet {
+                        isShowingWelcomeSheet = false
+                    }
+                }
+        
     }
     
 
