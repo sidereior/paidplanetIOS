@@ -5,6 +5,7 @@ struct ProfileView: View {
     @StateObject private var userManager = UserManager()
     @State private var isShowingResetPasswordAlert = false
     @State private var isShowingFeedbackView = false
+    @State private var showWelcomeFrameView = false
 
     var body: some View {
         VStack {
@@ -68,7 +69,26 @@ struct ProfileView: View {
             .sheet(isPresented: $isShowingFeedbackView) {
                 FeedbackView(isPresented: $isShowingFeedbackView)
             }
-
+               
+            Button(action: {
+                        showWelcomeFrameView = true
+            }) {
+                Text("Replay Tutorial")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.green)
+                    .padding()
+                    .background(Color(hex: "00653B"))
+                    .cornerRadius(10)
+                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+                    .padding(.bottom, 10)
+                    }
+                    .sheet(isPresented: $showWelcomeFrameView) {
+                        WelcomeFrameView()
+                    }
+            
+           
+            
             Button(action: logout) {
                 Text("Logout")
                     .font(.title)
@@ -187,6 +207,9 @@ struct FeedbackView: View {
             .cornerRadius(10)
             .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
             .padding(.bottom, 10)
+            
+           
+
 
             Spacer()
         }
