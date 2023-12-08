@@ -112,7 +112,7 @@ struct RedeemView: View {
 
                     // Submit Payment Button
                     Button(action: submitPayment) {
-                        Text("Submit Payment")
+                        Text("Submit Payment Info")
                             .font(.custom("Avenir", size: 20))
                             .foregroundColor(.blue)
                             .fontWeight(.bold)
@@ -230,15 +230,21 @@ struct RedeemView2: View {
                         
             ScrollView{
                 VStack {
-                    HStack{
-                        Spacer()
-                        
-                        Button(action: {
+                    Spacer().frame(height: 15)
+                    
+                   Text("Your payment will be send over shortly 😀 💵 and your transaction will be marked as \"Redeemed\" when we have sent it!")
+                     .font(.custom("Avenir", size: 20))
+                                   .fontWeight(.black)
+                                   .foregroundColor(Color(hex: "00653B"))
+                                   .padding(.horizontal, 35)
+                                   .padding(.top, 50)
+
+                     Button(action: {
                             presentationMode.wrappedValue.dismiss()
                         }) {
-                            Text("Cancel")
+                            Text("Ok")
                                 .font(.custom("Avenir", size: 20))
-                                .foregroundColor(.red)
+                                .foregroundColor(.blue)
                                 .fontWeight(.bold)
                                 .padding()
                                 .background(Color(hex: "C3E8AC"))
@@ -246,10 +252,10 @@ struct RedeemView2: View {
                         }
                         .padding(.top, 20)
                         .padding(.trailing, 20)
-                    }
+
                     
-                   Text("Share on socials that you just got Paid through PaidPlanet for a chance to win our monthly 25$ Amazon Gift Card giveaway!")
-                           .font(.custom("Avenir", size: 25))
+                    Text("Share on socials that you just got $$$ using #PaidPlanet for a chance to win our monthly $25 Amazon Gift Card giveaway!")
+                           .font(.custom("Avenir", size: 20))
                                    .fontWeight(.black)
                                    .foregroundColor(Color(hex: "00653B"))
                                    .padding(.horizontal, 35)
@@ -269,7 +275,7 @@ struct RedeemView2: View {
                     .padding(.top, 20)
                     .padding(.trailing, 20)
                     .sheet(isPresented: $isShareSheetPresented){
-                        ShareSheet(activityItems: ["I just got paid for being sustainable using #PaidPlanet Join now at paidplanet.com"])
+                        ShareSheet(activityItems: ["I just got paid for being sustainable using #PaidPlanet. Join now at paidplanet.com or search PaidPlanet on the App Store!"])
                     }
                 }
             }

@@ -285,7 +285,7 @@ struct HomeTab: View {
                                                                 .foregroundColor(.yellow)
                                                                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
                                                                 
-                                                                .padding(.bottom, 30)
+                                                                .padding(.bottom, 40)
                                                         }
                                                         
                                                     )
