@@ -271,7 +271,21 @@ struct HomeTab: View {
                                                                     .padding(.leading, 15)
                                                             }
                                                             
+                                                          
+                                                            
                                                             Spacer()
+                                                                .frame(height: 3)
+
+                                                            
+                                                            Spacer()
+                                                              Text("Click to redeem payment!")
+                                                                .font(.custom("Avenir", size: 25).bold())
+                                                            
+                                                                .font(.title)
+                                                                .foregroundColor(.yellow)
+                                                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+                                                                
+                                                                .padding(.bottom, 30)
                                                         }
                                                         
                                                     )
