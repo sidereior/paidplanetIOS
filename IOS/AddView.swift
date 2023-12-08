@@ -128,7 +128,7 @@ struct AddView: View {
                         Button(action: {
                             isShowingOtherView = true
                         }) {
-                            Text("Other Activity")
+                            Text("Other Sustainable Activity")
                                 .font(.title)
                                 .fontWeight(.black)
                                 .foregroundColor(Color(hex: "C3E8AC"))

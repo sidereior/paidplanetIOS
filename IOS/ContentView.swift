@@ -135,56 +135,69 @@ struct LoginPage: View {
                     .fontWeight(.black)
                     .foregroundColor(Color(hex: "1B463C"))
                 
+                
                 TextField("Email", text: $email)
                     .autocapitalization(.none)
                     .padding(.horizontal, 15)
                     .padding(.vertical, 10)
-                    .background(Color(hex: "D9D9D9"))
+                    .background(Color(hex: "000000"))
+                    .foregroundColor(Color(hex: "FFFFFF"))
                     .cornerRadius(14.0)
                     .padding(.horizontal, 25)
+                    .colorInvert()
                     .font(.custom("Avenir", size: 15).bold())
                 
                 if isSignUpMode {
                     TextField("Confirm Email", text: $confirmEmail)
-                        .autocapitalization(.none)
-                        .padding(.horizontal, 15)
-                        .padding(.vertical, 10)
-                        .background(Color(hex: "D9D9D9"))
-                        .cornerRadius(14.0)
-                        .padding(.horizontal, 25)
-                        .font(.custom("Avenir", size: 15).bold())
+                       .autocapitalization(.none)
+                    .padding(.horizontal, 15)
+                    .padding(.vertical, 10)
+                    .background(Color(hex: "000000"))
+                    .foregroundColor(Color(hex: "FFFFFF"))
+                    .cornerRadius(14.0)
+                    .padding(.horizontal, 25)
+                    .colorInvert()
+                    .font(.custom("Avenir", size: 15).bold())
                 }
                 
                 SecureField("Password", text: $password)
-                    .autocapitalization(.none)
+                      .autocapitalization(.none)
                     .padding(.horizontal, 15)
                     .padding(.vertical, 10)
-                    .background(Color(hex: "D9D9D9"))
+                    .background(Color(hex: "000000"))
+                    .foregroundColor(Color(hex: "FFFFFF"))
                     .cornerRadius(14.0)
                     .padding(.horizontal, 25)
+                    .colorInvert()
                     .font(.custom("Avenir", size: 15).bold())
-                
+
+                                    
                 if isSignUpMode {
                     SecureField("Confirm Password", text: $confirmPassword)
-                        .autocapitalization(.none)
-                        .padding(.vertical, 10)
-                        .padding(.horizontal, 15)
-                        .background(Color(hex: "D9D9D9"))
-                        .cornerRadius(14.0)
-                        .padding(.horizontal, 25)
-                        .font(.custom("Avenir", size: 15).bold())
+                      .autocapitalization(.none)
+                    .padding(.horizontal, 15)
+                    .padding(.vertical, 10)
+                    .background(Color(hex: "000000"))
+                    .foregroundColor(Color(hex: "FFFFFF"))
+                    .cornerRadius(14.0)
+                    .padding(.horizontal, 25)
+                    .colorInvert()
+                    .font(.custom("Avenir", size: 15).bold())
                 }
                 
                 if isSignUpMode {
                     TextField("What would you like to be called?", text: $name)
-                        .autocapitalization(.none)
-                        .padding(.horizontal, 15)
-                        .padding(.vertical, 10)
-                        .background(Color(hex: "D9D9D9"))
-                        .cornerRadius(14.0)
-                        .padding(.horizontal, 25)
-                        .font(.custom("Avenir", size: 15).bold())
-                }
+                                              .autocapitalization(.none)
+                    .padding(.horizontal, 15)
+                    .padding(.vertical, 10)
+                    .background(Color(hex: "000000"))
+                    .foregroundColor(Color(hex: "FFFFFF"))
+                    .cornerRadius(14.0)
+                    .padding(.horizontal, 25)
+                    .colorInvert()
+                    .font(.custom("Avenir", size: 15).bold())
+
+                                       }
                         
                 Toggle("Remember Me", isOn: $rememberMe)
                     .toggleStyle(SwitchToggleStyle(tint: Color(hex: "1B463C")))
@@ -203,11 +216,13 @@ struct LoginPage: View {
                                 } else {
                                     // Show password mismatch error
                                     //come back to this later!
+                                    Text("Your passwords do not match.")
                                     print("Your passwords do not match.")
                                 }
                             } else {
                                 // Show email mismatch error
-                                print("Your email do not match.")
+                                Text("Your emails do not match.")
+                                Text("Your emails do not match.")
                             }
                         } else {
                             // Login user

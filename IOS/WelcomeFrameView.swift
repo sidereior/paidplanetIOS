@@ -43,6 +43,7 @@ struct WelcomeFrameView: View {
                                 .foregroundColor(Color(hex: "00653B"))
                                 .padding(.horizontal, 35)
                                 .padding(.top, 15)
+                    
 
                         .tag(0)
                     Text("How We Work")
