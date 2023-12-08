@@ -70,16 +70,19 @@ struct ProfileView: View {
                 FeedbackView(isPresented: $isShowingFeedbackView)
             }
                
-            Button("Replay Tutorial") {
+            Button(action: {
                         showWelcomeFrameView = true
-                    }
-                    .font(.headline)
-                    .foregroundColor(Color(hex: "72cff7"))
+            }) {
+                Text("Replay Tutorial")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.green)
                     .padding()
                     .background(Color(hex: "00653B"))
                     .cornerRadius(10)
                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
                     .padding(.bottom, 10)
+                    }
                     .sheet(isPresented: $showWelcomeFrameView) {
                         WelcomeFrameView()
                     }
