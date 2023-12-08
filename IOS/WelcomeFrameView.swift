@@ -37,16 +37,50 @@ struct WelcomeFrameView: View {
                 }
 
                 TabView(selection: $selectedTab) {
-                    Text("Welcome to PaidPlanet, the first app that pays you for being sustainable.")
-                        .font(.custom("Avenir", size: 25))
+                    VStack{
+                        Spacer()
+                        HStack{
+                            Text("Welcome to ")
+                                .font(.custom("Avenir", size: 25))
                                 .fontWeight(.black)
-                                .foregroundColor(Color(hex: "00653B"))
+                                .foregroundColor(Color(hex: "ff9ac4"))
+                            Text("PaidPlanet,")
+                                .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                                .foregroundColor(Color(hex:"ff00ff"))
+                        }
+                        Text("the first app that pays you for being sustainable.")
+                                .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                                .foregroundColor(Color(hex: "ff9ac4"))
                                 .padding(.horizontal, 35)
-                                .padding(.top, 15)
-                    
-
+                        
+                       Spacer()
+                        
+                       Text("Swipe -->")
+                                .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                                .foregroundColor(Color(hex: "ff9ac4"))
+                                .padding(.horizontal, 35)
+ 
+                    }
                         .tag(0)
-                    Text("How We Work")
+                    VStack{
+                            Text("How We Work:")
+                                .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                                .foregroundColor(Color(hex: "ff9ac4"))
+                                .padding(.top, 100)
+                       
+                                                
+                       Text("Swipe -->")
+                                .font(.custom("Avenir", size: 25))
+                                .fontWeight(.black)
+                                .foregroundColor(Color(hex: "ff9ac4"))
+                                .padding(.horizontal, 35)
+ 
+                    }
+
                         .tag(1)
                     Text("home screen/Payment")
                         .tag(2)
@@ -54,6 +88,7 @@ struct WelcomeFrameView: View {
                         .tag(3)
                                     }
                 .tabViewStyle(.page)
+                .colorInvert()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }

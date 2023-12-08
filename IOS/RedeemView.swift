@@ -242,7 +242,7 @@ struct RedeemView2: View {
                                    .padding(.top, 50)
 
                      Button(action: {
-                            presentationMode.wrappedValue.dismiss()
+                         UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true)
                         }) {
                             Text("Ok")
                                 .font(.custom("Avenir", size: 20))
