@@ -6,6 +6,7 @@ struct ProfileView: View {
     @State private var isShowingResetPasswordAlert = false
     @State private var isShowingFeedbackView = false
     @State private var showWelcomeFrameView = false
+    @State private var isShowingDeleteView = false
 
     var body: some View {
         VStack {
@@ -87,7 +88,23 @@ struct ProfileView: View {
                         WelcomeFrameView()
                     }
             
-           
+           Button(action: {
+                isShowingDeleteView = true
+            }) {
+                Text("Delete your account")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.red)
+                    .padding()
+                    .background(Color(hex: "00653B"))
+                    .cornerRadius(10)
+                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+                    .padding(.bottom, 10)
+            }
+            .sheet(isPresented: $isShowingDeleteView) {
+                DeleteView(isPresented: $isShowingDeleteView)
+            }
+            
             
             Button(action: logout) {
                 Text("Logout")
@@ -100,8 +117,10 @@ struct ProfileView: View {
                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
                     .padding(.bottom, 10)
             }
-
-            Spacer()
+            
+           Spacer()
+            
+             
         }
         .navigationBarTitle("Profile")
         .onAppear {
@@ -232,6 +251,8 @@ struct FeedbackView: View {
     }
 }
 
+
+
 class UserManager: ObservableObject {
     @Published var user: User?
 
@@ -259,4 +280,103 @@ class FirestoreService2 {
             }
         }
     }
+    
+    func submitDelete(feedbackText: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let feedbackData: [String: Any] = [
+            "feedbackText": feedbackText,
+            "timestamp": FieldValue.serverTimestamp(),
+            "userEmail": Auth.auth().currentUser?.email ?? "Unknown User"
+        ]
+
+        db.collection("todelete").addDocument(data: feedbackData) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
 }
+
+
+struct DeleteView: View {
+    @Binding  var isPresented: Bool
+    @State  var feedbackText: String = ""
+    var firestoreService = FirestoreService2()
+
+    var body: some View {
+        VStack {
+            
+             HStack {
+                        Spacer()
+                        Button("Cancel") {
+                            isPresented = false;
+                        }
+                        .font(.custom("Avenir", size: 20).bold())
+                        .foregroundColor(.red)
+                        .padding()
+                        .background(Color(hex: "C3E8AC"))
+                        .cornerRadius(14)
+                        .padding(.top, 20)
+                        .padding(.trailing, 20)
+                    }
+          
+            Text("We are sorry to see you go ☹️. ")
+                .font(.custom("Avenir", size: 20))
+                              .fontWeight(.black)
+                              .foregroundColor(Color(hex: "00653B"))
+                              .padding(.horizontal, 35)
+                              .padding(.top, 50)
+
+                
+            Text("Please share why you are leaving PaidPlanet. We value your feedback.")
+                .font(.custom("Avenir", size: 20))
+                              .fontWeight(.black)
+                              .foregroundColor(Color(hex: "7D5E35"))
+                              .padding(.horizontal, 35)
+                              .padding(.top, 5)
+            
+            TextField("Submit your feedback here", text: $feedbackText)
+                        .padding(.vertical, 10)
+                        .autocapitalization(.none)
+                        .background(Color(hex: "00653B"))
+                        .cornerRadius(14.0)
+                        .padding(.horizontal, 25)
+                        .font(.custom("Avenir", size: 16).bold())
+                        .foregroundColor(Color(hex: "F2E8CF"))
+                        .accentColor(.black)
+                        .multilineTextAlignment(.center)
+                
+          
+            Button("Yes, I'm sure I want to delete my account. I understand this action is irreversible and all data pertaining to my account will be deleted in ~1 hour.") {
+                submitDelete()
+            }
+            .font(.headline)
+            .foregroundColor(.red)
+            .padding()
+            .background(Color(hex: "00653B"))
+            .cornerRadius(10)
+            .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+            .padding(.bottom, 10)
+
+            Spacer()
+        }
+        .padding()
+        .background(Color(hex: "F2E8CF"))
+        .cornerRadius(20)
+        .shadow(radius: 10)
+    }
+
+    private func submitDelete() {
+        firestoreService.submitDelete(feedbackText: feedbackText) { result in
+            switch result {
+            case .success:
+                print("Feedback submitted successfully")
+            case .failure(let error):
+                print("Error submitting feedback: \(error.localizedDescription)")
+            }
+            isPresented = false
+        }
+    }
+}
+
