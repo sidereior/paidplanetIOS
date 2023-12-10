@@ -129,7 +129,7 @@ struct LoginPage: View {
                 Text(("Welcome to"))
                     .font(.custom("Avenir", size: 32))
                     .fontWeight(.black)
-                    .foregroundColor(Color(hex: "D9D9D9"))
+                    .foregroundColor(.black)
                     
                 Text(("PaidPlanet"))
                     .font(.custom("Avenir-Oblique", size: 32))
@@ -140,62 +140,59 @@ struct LoginPage: View {
                 TextField("Email", text: $email)  .autocapitalization(.none)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                    .background(Color(hex: "000000"))
-                    .foregroundColor(Color(hex: "FFFFFF"))
+                    .background(Color(hex: "D9D9D9"))
+                    .foregroundColor(.black)
                     .cornerRadius(14.0)
                     .padding(.horizontal, 35)
-                    .colorInvert()
                     .font(.custom("Avenir", size: 15).bold())
-                
                 if isSignUpMode {
                     TextField("Confirm Email", text: $confirmEmail)
-                       .autocapitalization(.none)
+                     .autocapitalization(.none)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                    .background(Color(hex: "000000"))
-                    .foregroundColor(Color(hex: "FFFFFF"))
+                    .background(Color(hex: "D9D9D9"))
+                    .foregroundColor(.black)
                     .cornerRadius(14.0)
                     .padding(.horizontal, 35)
-                    .colorInvert()
                     .font(.custom("Avenir", size: 15).bold())
+                   
                 }
                 
                 SecureField("Password", text: $password)
                       .autocapitalization(.none)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                    .background(Color(hex: "000000"))
-                    .foregroundColor(Color(hex: "FFFFFF"))
+                    .background(Color(hex: "D9D9D9"))
+                    .foregroundColor(.black)
                     .cornerRadius(14.0)
                     .padding(.horizontal, 35)
-                    .colorInvert()
                     .font(.custom("Avenir", size: 15).bold())
 
                                     
                 if isSignUpMode {
                     SecureField("Confirm Password", text: $confirmPassword)
-                      .autocapitalization(.none)
+                    .autocapitalization(.none)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                    .background(Color(hex: "000000"))
-                    .foregroundColor(Color(hex: "FFFFFF"))
+                    .background(Color(hex: "D9D9D9"))
+                    .foregroundColor(.black)
                     .cornerRadius(14.0)
                     .padding(.horizontal, 35)
-                    .colorInvert()
                     .font(.custom("Avenir", size: 15).bold())
                 }
                 
                 if isSignUpMode {
                     TextField("What would you like to be called?", text: $name)
-                                              .autocapitalization(.none)
+                    
+                    .autocapitalization(.none)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                    .background(Color(hex: "000000"))
-                    .foregroundColor(Color(hex: "FFFFFF"))
+                    .background(Color(hex: "D9D9D9"))
+                    .foregroundColor(.black)
                     .cornerRadius(14.0)
                     .padding(.horizontal, 35)
-                    .colorInvert()
                     .font(.custom("Avenir", size: 15).bold())
+                                              
 
                                        }
                         
@@ -244,7 +241,7 @@ struct LoginPage: View {
                         Text(isSignUpMode ? "Already have an account? Log in" : "New to PaidPlanet? Sign up here")
                             .font(.custom("Avenir", size: 20))
                             .fontWeight(.black)
-                            .foregroundColor(Color(hex: "D9D9D9"))
+                            .foregroundColor(.black)
                             .cornerRadius(14.0)
                     })
                     
