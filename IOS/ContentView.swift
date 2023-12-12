@@ -140,18 +140,24 @@ struct LoginPage: View {
                 TextField("Email", text: $email)  .autocapitalization(.none)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                    .background(Color(hex: "D9D9D9"))
-                    .foregroundColor(.black)
                     .cornerRadius(14.0)
-                    .padding(.horizontal, 35)
+                
+                    .background(RoundedRectangle(cornerRadius: 50).fill(Color.white))
+                            
+                            .foregroundColor(.black)
+                            .padding(.horizontal, 35)
                     .font(.custom("Avenir", size: 15).bold())
+                
+                
                 if isSignUpMode {
                     TextField("Confirm Email", text: $confirmEmail)
                      .autocapitalization(.none)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                    .background(Color(hex: "D9D9D9"))
-                    .foregroundColor(.black)
+                    .background(RoundedRectangle(cornerRadius: 50).fill(Color.white))
+                            
+                            .foregroundColor(.black)
+                   
                     .cornerRadius(14.0)
                     .padding(.horizontal, 35)
                     .font(.custom("Avenir", size: 15).bold())
@@ -160,10 +166,12 @@ struct LoginPage: View {
                 
                 SecureField("Password", text: $password)
                       .autocapitalization(.none)
+                      
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                    .background(Color(hex: "D9D9D9"))
-                    .foregroundColor(.black)
+                .background(RoundedRectangle(cornerRadius: 50).fill(Color.white))
+                              
+                              .foregroundColor(.black)
                     .cornerRadius(14.0)
                     .padding(.horizontal, 35)
                     .font(.custom("Avenir", size: 15).bold())
@@ -174,8 +182,9 @@ struct LoginPage: View {
                     .autocapitalization(.none)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                    .background(Color(hex: "D9D9D9"))
-                    .foregroundColor(.black)
+                    .background(RoundedRectangle(cornerRadius: 50).fill(Color.white))
+                            
+                            .foregroundColor(.black)
                     .cornerRadius(14.0)
                     .padding(.horizontal, 35)
                     .font(.custom("Avenir", size: 15).bold())
@@ -187,8 +196,10 @@ struct LoginPage: View {
                     .autocapitalization(.none)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                    .background(Color(hex: "D9D9D9"))
-                    .foregroundColor(.black)
+                    .background(RoundedRectangle(cornerRadius: 50).fill(Color.white))
+                            
+                            .foregroundColor(.black)
+                    
                     .cornerRadius(14.0)
                     .padding(.horizontal, 35)
                     .font(.custom("Avenir", size: 15).bold())
